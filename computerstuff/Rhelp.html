@@ -1,0 +1,244 @@
+<html>
+<head>
+<a name="top"></a>
+<link rel= stylesheet type="text/css" href="../style.css" media="screen">
+
+<title>R help</title>
+<style>
+a:link{color:teal}
+a:visited{color:teal}
+a:hover{color:lightblue}
+</style>
+<style>
+tt{color:silver}
+</style>
+
+</head>
+<body bgcolor="003700" text="gray" link="silver" vlink="silver">
+
+<FONT FACE="Arial, Helvetica, Sans Serif" COLOR="gray">
+<FONT COLOR="#A52A2A">
+<h1>R help...</h1></font>
+<BR>
+
+&nbsp&nbsp<FONT FACE="Times New Roman, Times, Serif" COLOR="0099CC">You are here: </FONT>&nbsp
+<a class="yah" href="../Welcome.html">Home</a>
+<FONT COLOR="#FF0000">&#149</FONT>
+<a class="yah" href="../computerstuff.html">computer stuff</a>
+<FONT COLOR="#FF0000">&#149</FONT>
+<a class="yah" href="../computerhelp.html">computer help</a>
+<FONT COLOR="#FF0000">&#149</FONT>
+<FONT FACE="Courier New, Courier", color="orange">R help</FONT>
+<br><br><BR>
+
+
+<blockquote>
+
+I started learning R a while ago, and so have encountered problems with it along the way, mainly due to a mixture of a) me not really having a programming brain, and b) R being a tempramental entity.  Sometimes I think it has a mind of its own and is trying to annoy me deliberately.  However, use it I must, and below is a pool of information and advice for any novice user like me. Again, thanks to <a href="htpp://www.maths.bris.ac.uk/~db0797">Dan Bailey</a>, who somehow seems to find new R intricacies to play with.  Also, <a href="http://www.maths.bris.ac.uk/~maman/FormEmail/FormEmail.html">email me</a> to correct me if anything here is wrong.<br><br>
+
+<center>
+<table cellspacing="5" cellpadding="5">
+<tr>
+<td><font color="orange">&#149</font></td>
+<td><a href="#gen"><b>basic R</b></a></td>
+<td><font color="orange">&#149</font></td>
+<td><a href="#io"><b>data input/output</b></a></td>
+<td><font color="orange">&#149</font></td>
+<td><a href="#packages"><b>R packages</b></a></td>
+<td><font color="orange">&#149</font></td>
+<td><a href="#plot"><b>plotting/graphics</b></a></td>
+<td><font color="orange">&#149</font></td>
+<td><a href="#scripts"><b>R scripts</b></a></td>
+<td><font color="orange">&#149</font></td>
+<td><a href="#seeds"><b>using seeds</b></a>
+<td><font color="orange">&#149</font></td>
+<td><a href="#links"><b>more info</b></a>
+<td><font color="orange">&#149</font></td>
+</tr>
+</table>
+</center>
+
+<BR><BR><BR>
+
+<a name="gen"></a>
+<table width="95%">
+<tr>
+<td align="left"><FONT COLOR="A52A2A"><font size="+3">Basic R</font size></td>
+<td align="right"><font size="+1"><A HREF="#top">[top]</a></font></a></td>
+</tr>
+</table>
+<BR>
+
+If you are in Unix/Linux, R uses directory-specific workspaces (unlike S-Plus, for example, which will load the same global workspace, no matter from where you start it).<BR><BR>
+
+Here are some basic <a href="Rhelp/Rfunctions.html">R commands</a> to get you started.<BR><BR><BR>
+
+<a name="io"></a>
+<table width="95%">
+<tr>
+<td align="left"><FONT COLOR="A52A2A"><font size="+3">R I/O</font size></td>
+<td align="right"><font size="+1"><A HREF="#top">[top]</a></font></a></td>
+</tr>
+</table>
+<br>
+
+<table class="deft" cellspacing="5" cellpadding="5" rules="groups" frame="hsides">
+<COL width="50%">
+
+<tr><td><tt>dump("variable",file="variable.R")</tt></td>	<td>dumps a given variable out into a file (to be read in by <tt>source</tt> or <tt>scan</tt>)</td></tr>
+<tr><td><tt>load(&#060<i>R file</i>&#062)</tt></td>	<td>loads an R object saved with <tt>save</tt></td></tr>
+<tr><td><tt>save("variable", file="variable.R")</tt></td>	<td>saves an R object (to be loaded with <tt>load</tt>).  This is supposed to be "safer" than eg <tt>dump</tt>.</td></tr>
+<tr><td><tt>scan("file.R")</tt></td>	<td>reads an external input file into a variable (eg double data from Matlab)</tt></td></tr>
+<tr><td><tt>sink()</tt></td>	<td>writes R console text (to eg a file)</td></tr>
+<tr><td><tt>source("file.R")</tt></td>	<td>load functions/R code into the workspace</td></tr>
+</table>
+<BR><BR><BR>
+
+<a name="packages"></a>
+<table width="95%">
+<tr>
+<td align="left"><FONT COLOR="A52A2A"><font size="+3">R Packages</font size></td>
+<td align="right"><font size="+1"><A HREF="#top">[top]</a></font></a></td>
+</tr>
+</table>
+<br>
+
+<img src="../images/dot2.gif" hspace="10"> I have co-written a semi-successful help page for creating and installing <a href="Rhelp/Rpackages.html">R packages</a>.<BR><BR>
+<img src="../images/dot2.gif" hspace="10"> Many thanks to Christian Stamm who has <a href="http://www.mathematik.uni-marburg.de/~stammi/wiki/index.php/R/Pakete_erstellen">summarized and translated</a> our guide for the German speaker</a>.<BR><BR>
+<img src="../images/dot2.gif" hspace="10"> If you are Italian, then there is a guide by Fabio Frascati on <a href="http://cran.dsmirror.nl/other-docs.html">CRAN</a>.
+<BR><BR><BR>
+
+<a name="plot"></a>
+<table width="95%">
+<tr>
+<td align="left"><FONT COLOR="A52A2A"><font size="+3">Plotting/graphics</font size></td>
+<td align="right"><font size="+1"><A HREF="#top">[top]</a></font></a></td>
+</tr>
+</table>
+<BR>
+<font color="A52A2A" size="+2">Devices</font>
+
+<table class="deft" cellspacing="5" cellpadding="5" rules="groups" frame="hsides">
+<COL width="50%">
+
+<TBODY>
+<tr><td><tt>dev.copy(device=X11)</tt></td>	<td>makes an exact (X11) copy of the current device</td></tr>
+<tr><td><tt>dev.copy2eps(file="<i>copy.eps</i>")</tt></td>	<td>copies the current device to an external file (<tt><i>copy.eps</i></tt>)</td></tr>
+<tr><td><tt>dev.cur()</tt></td>	<td>contains value of the current device</td></tr>
+<tr><td><tt>dev.list()</tt></td>	<td>lists all open devices</td></tr>
+<tr><td><tt>dev.off(<i>a</i>)</tt></td>	<td>closes device number <tt><i>a</i></tt></td></tr>
+<tr><td><tt>dev.set(<i>a</i>)</tt></td>	<td>changes current (working) device to device number <tt><i>a</i></tt></td></tr>
+<TBODY>
+<tr><td><tt>graphics.off()</tt></td>	<td>closes all open (graphics) devices</td></tr>
+<TBODY>
+<tr><td><tt>get(getOption("device"))()</tt></td>	<td>opens a graphics device (not platform-specific)</td></tr>
+<tr><td><tt>motif()</tt></td>	<td>open a graphics device</td></tr>
+<tr><td><tt>X11()</tt></td>	<td>open a graphics device</td></tr>
+<TBODY>
+<tr><td><tt>postscript("file.ps",horizontal=FALSE,width=8, height=6.25)</tt><BR><BR><BR><BR><BR></td>	<td>creates an "external" postscript file of specified width and height (cm) [listed dimensions are "good" for journal figures].  Device should be closed with <tt>dev.off</tt>.<BR><BR>The commands <tt>png</tt> and <tt>pdf</tt> *should* work as well for graphics creation.</td></tr>
+</table>
+<BR><br>
+
+<font color="A52A2A" size="+2">Plotting</font>
+
+<table class="deft" cellspacing="5" cellpadding="5" rules="groups" frame="hsides">
+<COL width="50%">
+<TBODY>
+<tr><td><tt>legend(x,y,legend,fill=v)</tt></td>	<td>adds legend to plot with top left corner at (<tt>x</tt>,<tt>y</tt>) according to axes with key vector <tt>legend</tt> and colour description <tt>v</tt></td></tr>
+<TBODY>
+<tr><td><tt>par(cex=0.5)</tt></td>	<td>changes size of graphical text/symbols (globally)</td></tr>
+<tr><td><tt>par(mfg=c(a,b,c,d))</tt></td>	<td>sets current device to position (<tt>a</tt>,<tt>b</tt>) in a (<tt>c</tt>,<tt>d</tt>) multiple figure environment</td></tr>
+<tr><td><tt>par(mfcol=c(a,b))</tt></td>	<td>opens an empty multiple figure environment (<tt>a</tt>x<tt>b</tt>,filled column by column)</td></tr>
+<tr><td><tt>par(mfrow=c(a,b))</tt></td>	<td>opens an empty multiple figure environment (<tt>a</tt>x<tt>b</tt>,filled row by row)</td></tr>
+<tr><td><tt>par(xpd=NA)</tt></td>	<td>enables writing in plot margins</td></tr>
+<TBODY>
+<tr><td><tt>plot(...,cex=0.5)</tt></td><td> changes size of graphical text/symbols (for current plot)
+</table>
+<br><br>
+<img src="../images/dot2.gif" hspace="10">For more detailed information about graphics and plotting techniques in R, there is a very good book, cunningly titled <a href="http://www.stat.auckland.ac.nz/~paul/RGraphics/rgraphics.html"><i>R Graphics</i></a> by <a href="http://www.stat.auckland.ac.nz/~paul/">Paul Murrell</a>.
+
+
+<BR><BR><BR>
+<a name="scripts"></a>
+<table width="95%">
+<tr>
+<td align="left"><FONT COLOR="A52A2A"><font size="+3">R scripts</font size></td>
+<td align="right"><font size="+1"><A HREF="#top">[top]</a></font></a></td>
+</tr>
+</table>
+<BR>
+A script is a useful way in Linux of running e.g. R simulations in the background.  The form of the executable is like any other <a href="unix.html#scripts">shell script</a>.  Here are some script argument calls for R:<BR><br>
+ 
+<table class="deft" cellspacing="5" cellpadding="5">
+<tr><td><tt>R</tt></td> <td><tt>--save</tt>*</td>	<td>saves workspace at end of a script</td></tr>
+<tr><td></td>           <td><tt>--no-save</tt>*</td> 	<td>doesn't save workspace at end of script</td></tr>
+<tr><td></td> 		<td><tt>--restore</tt></td> 	<td>restores previously stored workspace</td></tr>
+<tr><td></td> 		<td><tt>--no-restore</tt></td><td>doesn't restore previously stored workspace</td></tr>
+<tr><td></td> 		<td><tt>--q</tt></td> 		<td>no introductory information (version etc)</td></tr>
+</table>
+
+<BR><BR>
+<font color="brown">*</font> to be able to dump data out from a workspace into a directory from an R script (e.g. using <tt>dump</tt>), you <i>need to have</i> either <tt>--save</tt> or <tt>--no-save</tt> (see the example below).<br><BR>
+
+The input file to R (named <i>inscone</i> in the <a href="unix.html#scripts">shell script example</a>) in a script is just a list of R commands.  Here is an example:<BR><BR>
+
+<pre>
+<table class="deft1" width="90%">
+<tr><td><tt>date()</tt></td>				<td></td><td></td></tr>
+<tr><td><tt>library(roots)</tt></td>		<td></td><td></td></tr>
+<tr><td><tt>x<-abs(runif(10))</tt></td>		<td></td><td></td></tr>
+<tr><td><tt>ans<-fifthroot(x)</tt></td>		<td></td><td></td></tr>
+<tr><td><tt>dump("ans",file="ans.txt")</tt></td><td></td><td></td></tr>
+<tr><td><tt>date()</tt></td>				<td></td><td></td></tr>
+<tr><td valign="top"><tt>q("yes")</tt></td>	<td valign="top">&larr</td>	<td>If you have a <tt>q("yes")</tt> or <tt>q("no")</tt> included at the end of your R script, this will override the specification of <tt>--save</tt> or <tt>--no-save</tt></td></tr>
+</table>
+</pre>
+
+If you are running the script using <a href="unix.html#condor">Condor</a>, then it seems that you also need the line <tt>source("/home/maman/.Rprofile")</tt> at the start of a script to be able to use <i>locally installed</i> <a href="#packages">R packages</a>.<BR><BR><BR>
+
+
+<a name="seeds"></a>
+<table width="95%">
+<tr>
+<td align="left"><FONT COLOR="A52A2A"><font size="+3">Using seeds</font size></td>
+<td align="right"><font size="+1"><A HREF="#top">[top]</a></font></a></td>
+</tr>
+</table>
+<BR>
+
+R is strange, and sometimes produces the same "random" numbers if asked, for example when using <tt>rnorm</tt> or <tt>runif</tt>.  To avoid pesky duplicate sets of random numbers, you could do something similar to the following (for example, for use in <a href="#scripts">R scripts</a> and simulations):<BR><BR>
+
+<pre>
+<table class="deft1" width="90%">
+<COLGROUP>
+<COL width="40%">
+</COLGROUP>
+<tr><td valign="top"><tt>s<-system("date '+%s'",TRUE)</tt></td>	<td valign="top">&larr</td>
+<td rowspan="3" valign="top">sets the seed according to a numeric interpretation of the current date/time (in seconds).  Although this is strictly a Linux command, it should also work in R for windows as well.  The <tt>TRUE</tt> argument makes <tt>s</tt> usable by R.</td></tr>
+
+<tr><td valign="top"><tt>s<-as.integer(s)</tt></td>		<td></td><td></td></tr>
+<tr><td valign="top"><tt>set.seed(s)</tt></td>			<td></td><td></td></tr>
+</table>
+</pre>
+
+<BR><BR><BR>
+
+<a name="links"></a>
+<table width="95%">
+<tr>
+<td align="left"><FONT COLOR="A52A2A"><font size="+3">More info...</font size></td>
+<td align="right"><font size="+1"><A HREF="#top">[top]</a></font></a></td>
+</tr>
+</table>
+<BR>
+<img src="../images/dot2.gif" hspace="10"> More information about R can be found on <a href="http://www.stats.bris.ac.uk/R/">CRAN</a> and the <a href="http://www.r-project.org/mail.html">R help mailing lists</a>.
+
+<BR><BR><BR>
+
+</blockquote>
+
+
+</BODY>
+
+</HTML>
+ 

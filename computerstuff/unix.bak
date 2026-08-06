@@ -1,0 +1,237 @@
+<html>
+<head>
+<a name="top"></a>
+<link rel= stylesheet type="text/css" href="../style.css" media="screen">
+
+<title>UNIX help</title>
+<style>
+a:link{color:teal}
+a:visited{color:teal}
+a:hover{color:lightblue}
+</style>
+<style>
+tt{color:silver}
+</style>
+
+</head>
+<body bgcolor="003700" text="gray" link="silver" vlink="silver">
+
+<FONT FACE="Arial, Helvetica, Sans Serif" COLOR="gray">
+<FONT COLOR="#A52A2A">
+<h1>UNIX help...</h1></font>
+<BR>
+
+&nbsp&nbsp<FONT FACE="Times New Roman, Times, Serif" COLOR="0099CC">You are here: </FONT>&nbsp
+<a class="yah" href="../Welcome.html">Home</a>
+<FONT COLOR="#FF0000">&#149</FONT>
+<a class="yah" href="../computerstuff.html">computer stuff</a>
+<FONT COLOR="#FF0000">&#149</FONT>
+<a class="yah" href="../computerhelp.html">computer help</a>
+<FONT COLOR="#FF0000">&#149</FONT>
+<FONT FACE="Courier New, Courier", color="orange">UNIX help</FONT>
+<br><br><BR>
+
+
+<blockquote>
+
+This page is mainly to remind myself of a few things to do with UNIX.  Pick from one of the following:<br><BR>
+<center>
+<table cellspacing="5" cellpadding="5">
+<tr>
+<td><font color="orange">&#149</font></td>
+<td><a href="#gen"><b>basic commands</b></a></td>
+<td><font color="orange">&#149</font></td>
+<td><a href="#condor"><b>using Condor</b></a></td>
+<td><font color="orange">&#149</font></td>
+<td><a href="#jobs"><b>managing jobs</b></a></td>
+<td><font color="orange">&#149</font></td>
+<td><a href="#scripts"><b>shell scripts</b></a></td>
+<td><font color="orange">&#149</font></td>
+<td><a href="#links"><b>more info</b></a>
+<td><font color="orange">&#149</font></td>
+</tr>
+</table>
+</center>
+
+<BR><BR><BR>
+
+<a name="gen"></a>
+<table width="95%">
+<tr>
+<td align="left"><FONT COLOR="A52A2A"><font size="+3">Basic commands</font size></td>
+<td align="right"><font size="+1"><A HREF="#top">[top]</a></font></a></td>
+</tr>
+</table>
+<BR>
+
+<table class="deft" cellspacing="5" cellpadding="5" rules="groups" frame="hsides">
+<COLGROUP span="2" >
+<COL width="10%">
+<COL width="40%">
+</COLGROUP>
+<TBODY>
+<tr><td><tt>cd</tt></td><td><tt>&#060<i>path</i>&#062</tt></td>	<td>changes directory to <tt><i>path</i></tt></td></tr>
+<tr><td></td>           <td><tt>..</tt></td> 	<td>changes to parent directory</td></tr>
+<tr><td></td> 		<td><tt>~</tt></td> 	<td>changes to home directory</td></tr>
+<TBODY>
+<tr><td><tt>(s)cp</tt></td><td><tt>&#060<i>source path</i>&#062&nbsp&#060<i>destination path</i>&#062</tt></td><td>(secure) copies from <tt><i>source path</i></tt> to <tt><i>destination path</i></tt></td></tr>
+<TBODY>
+<tr><td><tt>du</tt></td><td></td> 			<td>find disk usage (in directory)</td></tr>
+<tr><td></td><td><tt>-hs</tt></td> 			<td>find disk usage (in "human-readable" form)</td></tr>
+<tr><td></td><td><tt>-a &nbsp&nbsp&#060<i>path</i>&#062&nbsp&nbsp|sed -n '$= '</tt></td><td>count number of files in <tt><i>path</i></tt></td></tr>
+<TBODY>
+<tr><td><tt>find</tt></td><td><tt>&#060<i>path</i>&#062&nbsp&nbsp;\*&#060<i>string</i>&#062\*</tt></td><td>find all files below <tt><i>path</i></tt></td></tr>
+<TBODY>
+<tr><td><tt>finger</tt></td><td><tt>&#060<i>username</i>&#062</tt></td>	<td>shows login information about <tt><i>username</i></tt></td></tr>
+<TBODY>
+<tr><td><tt>grep</tt></td><td><tt>&#060<i>pattern</i>&#062&nbsp&nbsp&#060<i>file</i>&#062</tt></td> <td>scans <tt><i>file</i></tt> for instances of <tt><i>pattern</i></tt>and prints the relevant lines</td></tr>
+<tr><td></td><td><tt>-c &nbsp&nbsp&#060<i>pattern</i>&#062&nbsp&nbsp&#060<i>file</i>&#062</tt></td> <td>counts instances of <tt><i>pattern</i></tt> in <tt><i>file</i></tt></td></tr>
+<TBODY>
+<tr><td><tt>hostname</tt></td><td></td>	<td>displays name of current machine (in a cluster)</td></tr>
+<tr><td></td>           <td><tt>-i &nbsp &#060<i>machine name</i>&#062</tt></td> 	<td>displays IP address of a machine (in a cluster)</td></tr>
+<TBODY>
+<tr><td><tt>ls</tt></td><td></td>	<td>lists all files and directories in current location</td></tr>
+<tr><td></td>           <td><tt>&#060<i>path</i>&#062</tt></td> 	<td>lists files in <tt><i>path</i></tt></td></tr>
+<tr><td></td> 		<td><tt>-a</tt></td> 	<td>lists all files (including "hidden" files)</td></tr>
+<tr><td></td> 		<td><tt>-l</tt></td> 	<td>lists files, showing file info (permissions, dates)</td></tr>
+<tr><td></td> 		<td><tt>| &nbsp more</tt></td> 	<td>lists files one page at a time (advanced by <i>space</i>)</td></tr>
+<TBODY>
+<tr><td><tt>mkdir</tt></td><td><tt>&#060<i>directory name</i>&#062</tt></td>	<td>creates a directory <tt><i>directory name</i></tt></td></tr>
+<TBODY>
+<tr><td><tt>mv</tt></td><td><tt>&#060<i>original path</i>&#062&nbsp&#060<i>destination path</i>&#062</tt></td><td>moves/renames file(s) from <tt><i>original path</i></tt> to <tt><i>destination path</i></tt></td></tr>
+<TBODY>
+<tr><td><tt>pssh</tt></td><td></td>	<td>executes a command on all machines in a cluster</td></tr>
+<tr><td></td>           <td><tt>"ps -fu maman"</tt></td> 	<td>shows all processes of user <i>maman</i></td></tr>
+<tr><td></td> 		<td><tt>w</tt></td> 	<td>shows who is logged in on each machine (individually)</td></tr>
+<tr><td></td> 		<td><tt>"top -n 1 -b"</tt></td> 	<td>shows top 4 processes on each machine (individually)</td></tr>
+<tr><td></td> 		<td><tt>&#060<i>command</i>&#062 &nbsp&nbsp&#060<i>file</i>&#062</tt></td> 	<td>executes <tt><i>command</i></tt> for cluster machines listed in <tt><i>file</i></tt> (each machine on a separate line)</td></tr>
+<TBODY>
+<tr><td><tt>rm</tt></td><td><tt>&#060<i>path</i>&#062</tt></td>	<td>removes (deletes) a file with specified <tt><i>path</i></tt></td></tr>
+<tr><td></td><td><tt>-R &nbsp &#060<i>directory name</i>&#062</tt></td>	<td>removes (deletes) a directory and all files contained within it</td></tr>
+<TBODY>
+<tr><td><tt>rmdir</tt></td><td><tt>&#060<i>directory name</i>&#062</tt></td>	<td>removes a directory specified by <tt><i>directory name</i></tt> (must be empty)</td></tr>
+<TBODY>
+<tr><td><tt>who</tt></td><td></td>	<td>lists all usernames logged into a system</td></tr>
+</table>
+
+<BR><BR><br>
+
+<a name="condor"></a>
+<table width="95%">
+<tr>
+<td align="left"><FONT COLOR="A52A2A"><font size="+3">Using Condor</font size></td>
+<td align="right"><font size="+1"><A HREF="#top">[top]</a></font></a></td>
+</tr>
+</table>
+<BR>
+Condor is a job submission and queue management system for computer clusters.  Here are a few basic commands:<BR><BR>
+
+<table class="deft" cellspacing="5" cellpadding="5" rules="groups" frame="hsides">
+<COLGROUP span="2">
+<COL width="15%">
+<COL width="35%">
+</COLGROUP>
+<TBODY>
+<tr><td><tt>condor_prio</tt></td><td><tt>-p &nbsp &#060<i>value</i>&#062 &nbsp &#060<i>jobno</i>&#062</tt></td>	<td>changes priority of <tt><i>jobno</i></tt> within user to <i>value</i> (values range from -20 to +20, with +20 being best priority)</td></tr>
+<TBODY>
+<tr><td><tt>condor_q</tt></td><td></td>	<td>shows the condor queue, including job status and runtime</td></tr>
+<tr><td></td>           <td><tt>-run</tt></td> 	<td>shows only the running jobs, with host machine information</td></tr>
+<tr><td></td> 		<td><tt>-submitter &#060<i>username</i>&#062</tt></td> 	<td>shows the job info for a specific user</td></tr>
+<TBODY>
+<tr><td><tt>condor_rm</tt></td><td><tt>&#060<i>jobno</i>&#062</tt></td>	<td>removes the job <tt><i>jobno</i></tt> from the queue</td></tr>
+<TBODY>
+<tr><td><tt>condor_status</tt></td><td></td>	<td>shows the status of the cluster, including activity and job runtime</td></tr>
+<tr><td></td>           <td><tt>-run</tt></td> 	<td>shows the machines in the cluster with running jobs, including user allocation</td></tr>
+<TBODY>
+<tr><td><tt>condor_submit</tt></td><td><tt>&#060<i>command file</i>&#062</tt></td>	<td>submits jobs described within <tt><i>command file</i></tt> to the condor queue</td></tr>
+<TBODY>
+<tr><td><tt>condor_userprio</tt></td><td></td>	<td>shows (active) user queue priorities</td></tr>
+<tr><td></td><td><tt>-all</tt></td>	<td>shows full user queue priority info (effective and real priorities, resources used...)</td></tr>
+<tr><td></td><td><tt>-setprio &nbsp &#060<i>username</i>&#062 &nbsp &#060<i>value</i>&#062</tt></td>	<td>changes queue priority of <tt><i>username</i></tt> to <i>value</i></td></tr>
+<tr><td></td><td><tt>-setfactor &nbsp &#060<i>username</i>&#062 &nbsp &#060<i>value</i>&#062</tt></td>	<td>changes queue priority factor of <tt><i>username</i></tt> to <i>value</i></td></tr>
+</table>
+<BR><BR>
+
+<img src="../images/dot2.gif" hspace="10">Examples of some of these commands and <font color="silver"> Condor command files </font> are <a href="http://www.maths.bris.ac.uk/admin/computer/HPC/">here</a> and more fully <a href="http://www.maths.bris.ac.uk/admin/computer/scone/">here</a> (departmental documents). <BR><BR>
+
+<img src="../images/dot2.gif" hspace="10">The official <a href="http://www.cs.wisc.edu/condor/manual/v6.6.10/index.html">Condor manual</a> is useful for setup and extra commands. 
+<BR><BR><BR>
+
+<a name="jobs"></a>
+<table width="95%">
+<tr>
+<td align="left"><FONT COLOR="A52A2A"><font size="+3">Managing jobs</font size></td>
+<td align="right"><font size="+1"><A HREF="#top">[top]</a></font></a></td>
+</tr>
+</table>
+<BR>
+
+<table class="deft" cellspacing="5" cellpadding="5" rules="groups" frame="hsides">
+<col width="50%">
+<tr><td><tt>kill &nbsp -&#060<i>value</i>&#062 &nbsp &#060<i>pid</i>&#062</tt></td>	<td>kills process with pid <tt><i>pid</i></tt> with option flag <i>value</i> (eg. <tt>kill -9 &#060<i>pid</i>&#062</tt> will hard kill the job)</td></tr>
+<tr><td><tt>ps &nbsp ux</tt></td>	<td>finds (user-)running processes on a terminal</td></tr>
+<tr><td><tt>top</tt></td>	<td>shows all processes running on a machine (incl. info about memory/cpu usage, pid etc)</td></tr>
+<tr><td><tt>renice &nbsp &#060<i>value</i>&#062 &nbsp &#060<i>pid</i>&#062</tt></td>	<td>changes priority of process with pid <tt><i>pid</i></tt> to nice value <i>value</i> (eg. <tt>renice -19 &#060<i>pid</i>&#062</tt> will set the job to priority 19)</td></tr>
+</table>
+<BR><BR><BR>
+
+<a name="scripts"></a>
+<table width="95%">
+<tr>
+<td align="left"><FONT COLOR="A52A2A"><font size="+3">Shell scripts</font size></td>
+<td align="right"><font size="+1"><A HREF="#top">[top]</a></font></a></td>
+</tr>
+</table><br>
+
+A bit of information about running scripts...<br><br>
+
+<table class="deft1" cellspacing="5" cellpadding="5" width="90%">
+<tr><td><tt>at now -f &#060file&#062</td><td> &larr runs an executable file from the shell prompt</td></tr>
+</table>
+<br><BR>
+Example of a simple executable file:<BR><BR>
+<table class="deft1" cellspacing="5" cellpadding="5" width="60%">
+
+<tr align="center"><td><tt>nice -19</tt><td><tt>R</tt></td><td><tt>--save -q</tt></td><td><tt>&#060 inscone</tt></td><td><tt>&#062 outscone.out</td></tr>
+<tr align="center"><td>&uarr<td>&uarr</td><td>&uarr</td><td>&uarr</td><td>&uarr</td></tr>
+<tr align="center"><td>set priority of job<td>application</td><td>arguments to application</td><td>input file (eg R commands)</td><td>output file (screen output)</td></tr>
+</table>
+<br><BR>
+You can use a "master" file to e.g. run different scripts depending on specific machines (in a cluster):<br><br>
+
+<pre>
+<table class="deft1" width="95%">
+<col width="35%">
+<tr><td><tt>#!/bin/csh</tt></td>				<td></td><td></td></tr><tr>
+<tr><td><tt>setenv HOSTNAME `hostname -s`</tt></td>		<td valign="top">&larr</td>	<td>sets HOSTNAME variable to short hostname (without domain)</td></tr></tr>
+<tr><td><tt>cd /home/maman/mydir</tt></td>		<td valign="top">&larr</td>	<td>sets directory containing executable</td></tr><tr>
+<tr><td><tt>if ($HOSTNAME == "zeppo") then</tt></td><td></td><td></td></tr>
+<tr><td valign="top"><tt>at now -f runscone1</tt></td>	<td valign="top">&larr</td>	<td>runs executable</td></tr>
+<tr><td><tt>else if ($HOSTNAME == "chico") then</tt></td>				<td></td><td></td></tr>
+<tr><td valign="top"><tt>at now -f runscone2</tt></td>	<td><td></tr>
+<tr><td><tt>...</tt></td>				<td></td><td></td></tr>
+<tr><td><tt>else</tt></td>				<td></td><td></td></tr>
+<tr><td><tt>echo "Unknown host"</tt></td>				<td></td><td></td></tr>
+<tr><td><tt>endif</tt></td>				<td></td><td></td></tr>
+</table>
+</pre>
+
+To run the masterfile executable, do eg. <tt>~/MASTER</tt> or <tt>./MASTER</tt>.  Make sure that the <a href="permissions.html">permissions</a> for the masterfile are set properly
+
+<BR><BR><BR>
+
+<a name="links"></a>
+<table width="95%">
+<tr>
+<td align="left"><FONT COLOR="A52A2A"><font size="+3">More info...</font size></td>
+<td align="right"><font size="+1"><A HREF="#top">[top]</a></font></a></td>
+</tr>
+</table>
+<BR><BR><BR>
+
+</blockquote>
+
+</BODY>
+
+</HTML>
+ 

@@ -1,0 +1,663 @@
+\documentclass{beamer}
+
+ \usepackage{graphicx}
+ \usepackage{color}
+ \usepackage{xcolor}
+%\usepackage{caption}
+% \usepackage{pstricks}
+%\usepackage{amsfonts}
+
+
+\definecolor{uob}{cmyk}{0,0.91,0.72,0.23}
+\newcommand{\reals}{{\mathbb R}}
+
+% This file is a solution template for:
+
+% - Talk at a conference/colloquium.
+% - Talk length is about 20min.
+% - Style is ornate.
+
+
+
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice.
+
+
+\mode<presentation> {
+  \usetheme{Warsaw}
+  % or ...
+  \setbeamercolor{structure}{fg=uob}
+
+%to add the increasing slide numbering: either page number (increments for pauses)
+%or frame number (increments for slides only)
+  \setbeamertemplate{footline}[frame number]
+
+  %\usecolortheme{albatross}
+
+%albatross - dark blue, light blue
+%beetle - dark blue, grey
+%crane  - orange, white
+%default - dark blue, white
+%dolphin - light blue, white
+%dove - white, white
+%fly - grey, grey
+%lily - dark blue, white
+%orchid - dark blue, white
+%rose - - dark blue, white
+%seagull - light grey, dark grey
+%seahorse - v. light blue, white
+%sidebartab - dark blue, white
+%structure  !doesn't work unless used as above
+%whale - dark blue, white
+
+%\usefonttheme{serif}
+
+%%%some of these can be combined...
+%default - default
+%professionalfonts - slightly curly
+%serif - slightly straighter
+%structurebold - uses bold in headings and titles
+%structureitalicserif - uses italic in titles
+%structuresmallcapsserif - uses small caps in titles
+
+\useinnertheme{circles}
+
+%circles - "flat" circles as bullets instead of "balls"
+%default - balls
+%inmargin - adds a coloured margin on left, and has small bullets
+%rectangles - squares as bullets
+%rounded - default (balls)
+
+\useoutertheme{default}
+%\useoutertheme{infolines}
+
+%default - top: section, subsection in a menu style; bottom: minimal
+%infolines - top: section, subsection; bottom: date, institution, numbering
+%miniframes - like default, but has a moving circle as progress, stacked (top)
+%shadow - default
+%sidebar - switches from top outline to sidebar outline
+%smoothbars - like miniframes, but progress indicator as one line, sectioned
+%smoothtree - default, but with sectioned top bar
+%split - default
+%tree - shows tree in top bar
+
+
+
+
+
+
+  %\setbeamercolor{normal text}{fg=red}
+  %\setbeamercolor{structure}{fg=yellow}
+  \setbeamercovered{highly dynamic}
+  % or whatever (possibly just delete it)
+}
+
+\usepackage[english]{babel}
+% or whatever
+
+\usepackage[latin1]{inputenc}
+% or whatever
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+
+
+\def\C{{\mathbb C}}
+\def\E{{\mathbb E}}
+\def\G{{\mathcal G}}
+%\def\H{{\mathbb H}}
+\def\H{{\mathcal H}}
+\def\I{{\mathcal I}}
+\def\J{{\mathcal J}}
+%\def\K{{\mathbb K}}
+\def\K{{\mathcal K}}
+\def\L{{\mathcal L}}
+\def\M{{\mathcal M}}
+\def\N{{\mathbb N}}
+\def\P{{\mathbb P}}
+\def\Q{{\mathbb Q}}
+\def\R{{\mathbb R}}
+\def\Z{{\mathbb Z}}
+
+\def\ep{\varepsilon}
+\def\ph{\varphi}
+\def\de{\delta}
+\def\La{\Lambda}
+\def\la{\lambda}
+\def\ga{\gamma}
+\def\im{{\Rightarrow}}
+\def\av{{\arrowvert}}
+\def\Av{{\Arrowvert}}
+\def\siff{{\Leftrightarrow}}
+\def\om{{\omega}}
+\def\ci{{\mathrm i}}
+
+\def\cond{{\Big{|}}}
+
+\def\th{\theta}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\wh}{\widehat}
+
+\newcommand{\var}{\operatorname{var}}
+\newcommand{\cov}{\operatorname{cov}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\mean}{\operatorname{mean}}
+\newcommand{\median}{\operatorname{median}}
+\newcommand{\Var}{\operatorname{var}}
+\newcommand{\Cov}{\operatorname{cov}}
+\newcommand{\dwt}{\operatorname{DWT}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\old}{\operatorname{\, old}}
+\newcommand{\Merge}{\operatorname{Merge}}
+\newcommand{\Split}{\operatorname{Split}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\sure}{\operatorname{SURE}}
+\newcommand{\argmin}{\operatorname{argmin}}
+\newcommand{\mad}{\operatorname{MAD}}
+\newcommand{\ISE}{\operatorname{ISE}}
+\newcommand{\amse}{\operatorname{AMSE}}
+\newcommand{\bumps}{{\em Bumps}}
+\newcommand{\blocks}{{\em Blocks}}
+\newcommand{\heavisine}{{\em HeaviSine}}
+\newcommand{\doppler}{{\em Doppler}}
+\newcommand{\ppoly}{{\em Ppoly}}
+
+\newcommand{\eprf}{\begin{flushright}\qedsymbol\end{flushright}}
+%\def\rmk{{\underline{Remark}  }}
+
+\def\beq{\begin{equation}}
+\def\eeq{\end{equation}}
+\def\beqa{\begin{eqnarray}}
+\def\eeqa{\end{eqnarray}}
+\def\beqann{\begin{eqnarray*}}
+\def\eeqann{\end{eqnarray*}}
+
+\renewcommand{\exp}{\mathrm{e}}
+
+\newcommand{\todo}[1]{$\mapsto$ {\footnotesize #1}}
+
+
+
+
+
+
+\title[Variance-stabilisation for Binomial data] % (optional, use only with long paper titles)
+{A Variance-stabilising algorithm for Binomial intensity estimation}
+
+\subtitle {}
+
+\author[] % (optional, use only with lots of authors)
+{Dr. Matt Nunes\\
+with Prof. Guy Nason}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[University of Bristol] % (optional, but mostly needed)
+{
+  %
+  Department of Mathematics\\
+  University of Bristol}
+
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date[April 2007] % (optional, should be abbreviation of conference name)
+{YSM 2007}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+\subject{Variance-stabilisation for Binomial data}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+
+
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+%\pgfdeclareimage[height=0.5cm]{university-logo}{logo}
+%\logo{\pgfuseimage{university-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSubsection[] {
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command:
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+
+% Structuring a talk is a difficult task and the following structure
+% may not be suitable. Here are some rules that apply for this
+% solution:
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+% - A conference audience is likely to know very little of what you
+%   are going to talk about. So *simplify*!
+% - In a 20min talk, getting the main ideas across is hard
+%   enough. Leave out details, even if it means being less precise than
+%   you think necessary.
+% - If you omit details that are vital to the proof/implementation,
+%   just say so once. Everybody will be happy with that.
+
+\section{Background Material}
+
+\subsection{Curve estimation}
+
+\begin{frame}
+\frametitle{Problem setup and Gaussian case}
+\begin{itemize}
+\item General problem:
+$$X_i \sim f(x|\th_i) \qquad {\mbox{for}} \quad i=1,...,n$$
+where we want to estimate $\th_i$ from $X_i$.   \pause
+\item  Gaussian case is "usual" regression: \beq X_i = g(t_i) +
+\ep_i \eeq
+ with $g(t)$ is to be estimated and $\ep_i \sim N(0, \sigma^2)$.   \pause
+\item Typically we assume some smoothness on $g$. \pause
+\item Key point: variance of $X_i$ is {\bf{constant}} over $i$. \pause
+\item Many methods for this case: kernels, wavelets, local polynomials, splines...
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Our case: binomial mean/intensity estimation}
+\begin{itemize}
+\item We want to estimate the mean $\th_i=m_i$ (or equivalently the intensity $p_i$) from observations $X_i \sim Bin(N,p_i)$.\pause
+\vspace{.5cm}
+\item In practice, this is a difficult problem (especially for low binomial size
+$N$):   \pause
+%\begin{itemize}
+\vspace{.5cm}
+\item Noise is not Gaussian    \pause
+\vspace{.5cm}
+\item Noise variance is non-stable as $p_i$ varies.
+%\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+\begin{figure}
+\centering
+\begin{minipage}[b]{0.49 \linewidth}
+\resizebox{!}{0.7\textheight}{\includegraphics{ysm/bin1points.ps}}
+\end{minipage}
+\centering
+\begin{minipage}[b]{0.49 \linewidth}
+\resizebox{!}{0.7\textheight}{\includegraphics{ysm/bin64points.ps}}
+\end{minipage}
+\caption{Samples from a Bernoulli distribution and a Binomial
+distribution, $N=64$.}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+\begin{figure}
+\centering
+\begin{minipage}[b]{0.49 \linewidth}
+\resizebox{!}{0.7\textheight}{\includegraphics{ysm/bin1.ps}}
+\end{minipage}
+\centering
+\begin{minipage}[b]{0.49 \linewidth}
+\resizebox{!}{0.7\textheight}{\includegraphics{ysm/bin64.ps}}
+\end{minipage}
+\caption{Samples from a Bernoulli distribution and a Binomial
+distribution, $N=64$ (with intensity and "error bars").}
+\end{figure}
+\end{frame}
+
+\subsection{Traditional variance stabilisation}
+\begin{frame}
+\frametitle{Anscombe's transformation}
+\begin{itemize}
+\item For $X \sim Bin(N,p)$ Anscombe (1948) proposes the transformation
+\beq \label{anscbin} \mathcal{A}X=\sin^{-1}\sqrt{\left(
+\frac{X+\frac{3}{8}}{N+\frac{3}{4}}\right)} \eeq   \pause
+\item For large $N$ and p not too near 0 or 1, the variance stabilises around
+$$\frac{1}{4}\left(N+\frac{1}{2}\right)^{-1}.$$\pause
+\item {\bf{Note}}: this is now independent of $p$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Variance stabilising methods}
+\begin{itemize}
+\item  Variance stabilising methods like Anscombe are
+ diagonal, i.e. one transformed value for each $X_i$.\pause
+\item Such methods often also have a Gaussianising effect.\pause
+\item Recall that we assume some smoothness on $\th(t)$.\pause
+\vspace{.5cm}
+Question: can we use this to exploit local
+information? i.e. can $X_{i+1}$ inform about $\th_{i}$?
+\end{itemize}
+\end{frame}
+
+\section{Multiscale transforms and motivation}
+\subsection{Wavelet transforms}
+\begin{frame}
+\frametitle{wavelet transforms}
+
+\begin{itemize}
+\item Wavelets are localised in time and frequency... \pause
+\end{itemize}
+\vspace{.3cm}
+\begin{list}{$\im$}{\setlength{\itemsep}{.25cm}}
+\item detail coefficients ($d_{j,k}$) contain information about $f$ around location
+$2^{-j}k$ and scale $2^{-j}$.\pause
+\item Algorithm is multiscale and represents local information.\pause
+\item Wavelet representations are often sparse so wavelets are useful for compression and statistical
+estimation problems.
+\end{list}
+\end{frame}
+
+\begin{frame}
+\frametitle{Discrete Haar wavelet transform}
+
+Define $c_{J,k}:=x_k \sim f(x) $.\\
+\begin{itemize}
+\item Then for each $j=J-1,...,0$ and $k=0,...,2^{j}-1$, set  \pause
+\beqann c_{j,k}&:=&\frac{1}{2}(c_{j+1,2k}+c_{j+1,2k+1}) \qquad
+{\mbox{and}}\\
+d_{j,k}&:=&\frac{1}{2}(c_{j+1,2k}-c_{j+1,2k+1}).\pause \eeqann
+
+i.e. ${\bf{x}} \mapsto (d_{J-1},d_{J-2},...,d_{0},c_{0})$.    \pause
+
+\item These equations can be easily inverted with
+\beqann c_{j+1,2k}&=&c_{j,k}+d_{j,k}\\
+c_{j+1,2k+1}&=&c_{j,k}-d_{j,k}. \eeqann
+\end{itemize}
+\end{frame}
+
+\subsection{Fisz theorem}
+\begin{frame}
+\frametitle{Fisz (1955) theorem}
+
+Let $X_{1}(\la_{1})$ and $X_{2}(\la_{2})$ be two independent
+non-negative random variables based on distributions with respective
+parameters $\la_{r}$. \pause Denote, for $r=1,2$, \beq \nonumber
+\label{fisznot} m_{r}=\E (X_{r}), \ \sigma_{r}^{2}=\Var(X_{r}), \
+{\mbox{and}}\ \psi=\sqrt{\sigma_{1}^{2}+\sigma_{2}^{2}}, \eeq\pause
+ and let \beq \nonumber
+\zeta^{\alpha}(\la_{1},\la_{2})=\frac{X_{2}-X_{1}}{(X_{2}+X_{1})^{\alpha}},
+\eeq
+%\bigskip
+%\vspace{.5cm}
+ where $\alpha$ is an arbitrary positive number.
+\end{frame}
+
+\begin{frame}
+\frametitle{Fisz (1955) theorem  -- conditions}
+If
+\begin{itemize}
+\item the variable $X_r(\la_r)/m_r(\la_r)$ converges in probability to the number 1,  \pause
+\item the variable $X_r(\la_r)$ is asymptotically normal
+$N(m_r(\la_r),\sigma_r(\la_r))$,  \pause
+\item the variables $X_{1}$ and $X_{2}$ are independent and \beq
+\nonumber \lim_{ \la_{1}, \la_{2} \to \infty} \frac{m_{1}}{m_{2}}=1,
+\eeq
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Fisz (1955) theorem -- statement}
+
+Then the variable $\zeta^{\alpha}$ is asymptotically normal
+
+\vspace{.5cm}
+
+\beq{\label{fiszasym}} N
+\left(\frac{m_{2}-m_{1}}{(m_{1}+m_{2})^{\alpha}},\frac{\psi^2}{(m_{1}+m_{2})^{2\alpha}}\right)
+\eeq
+
+as $\la_{1}, \la_{2} \to \infty$.\pause
+
+\vspace{.5cm}
+\begin{itemize}
+\item We adopt the convention that if $X_{1}=X_{2}=0$, then
+$\zeta^{\alpha}=0$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Fisz for Poisson}
+
+Assume $X_r \sim Poi(\la_r)$. Then $m_r=\sigma_r^2=\la_r$.\\
+\pause Let $\alpha=\frac{1}{2}$.\pause
+\begin{itemize}
+\item If $\la_1=\la_2$, Fisz $\im \ \zeta^{\frac{1}{2}}$ is
+asymptotically $N(0,1)$. \pause
+\item If $\la_1\neq\la_2$, then $\zeta^{\frac{1}{2}}$ is
+asymptotically normal with variance 1.\pause
+\vspace{.5cm}
+\item Key point: we have {\bf{constant}} variance and approximate normality (since we have finite
+$\la_r$).\pause
+\end{itemize}
+\vspace{.2cm} $\im$ Better situation!
+\end{frame}
+
+\subsection{Haar-Fisz transform}
+\begin{frame}
+\frametitle{Haar-Fisz for Poisson}
+\begin{itemize}
+\item Recall the form of
+$\zeta^{\frac{1}{2}}=\frac{X_{2}-X_{1}}{(X_{2}+X_{1})^{\frac{1}{2}}}$\pause
+\vspace{.5cm}
+\item numerator is like Haar detail coefficient\pause
+\item denominator is like (square root of) Haar scaling coefficient\pause
+\item For the Poisson case, $X_1+X_2\sim Poi(\la_1+\la_2)$, so all
+Haar scaling coefficients are Poisson.\pause
+\item Hence Fisz applies to all levels in the wavelet decomposition.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Haar-Fisz for Poisson (preprocessing procedure)} For
+$X_1,...,X_n\sim Poi(\la_i)$,
+\begin{enumerate}
+\item Take Haar wavelet transform of data\pause
+\item Perform Fisz transform with Haar coefficients on all scales \pause
+\item Take inverse Haar wavelet transform \pause
+\end{enumerate}
+
+\begin{itemize}
+\item data now has constant variance (with approximate normality) \pause
+\vspace{.3cm}
+\item Hence can use {\emph{any}} denoising/estimation method suitable for
+Gaussian noise\pause \vspace{.3cm}
+\item Reverse transforms 1-3 to recover estimate.
+\end{itemize}
+\end{frame}
+
+\section{Binomial data}
+\subsection{(Haar-)NN transform}
+\begin{frame}
+\frametitle{Fisz theorem for binomial data}
+\begin{itemize}
+\item If $X_r\sim Bin(N_r,p_r)$, then Fisz doesn't help us:\\ \pause
+\vspace{.2cm}
+with $N_1=N_2$, $p_1=p_2$, the asymptotic variance of
+$\zeta^\alpha$ is $\frac{(1-p)}{(2n)^{2\alpha-1}}p^{1-2\alpha}$
+  \pause
+  \vspace{.2cm}
+  \item Bad news: no choice of $\alpha$ will give us a stable (constant)
+  variance.\pause
+  \vspace{.2cm}
+\item Question: Is there a transform similar to (Haar-)Fisz to stabilise variance for binomial data? \pause
+\vspace{.5cm}
+\item Good news, yes there is!
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{NN transform (Nunes-Nason)} Let
+$\zeta_{B}=\frac{X_{2}-X_{1}}{\left(\frac{X_{1}+X_{2}}{N_{1}+N_{2}}(N_{1}+N_{2}-(X_{1}+X_{2}))\right)^{1/2}}$.\pause
+\vspace{.3cm}
+\begin{itemize}
+\item If $p_1=p_2$, $\zeta_B$ has asymptotic variance of 1. \pause
+\vspace{.3cm}
+\item If in addition, $N_1=N_2$, $\zeta_B$ is asymptotic
+$N(0,1)$.\pause \vspace{.3cm}
+\item Motivation: denominator is like s.d. of numerator using
+scaling coefficient as estimate for common mean.\pause
+\item We can combine Haar wavelet with NN transform to form Haar-NN preprocessor.
+\end{itemize}
+\end{frame}
+
+\subsection{simulated performance of NN}
+\begin{frame}
+\frametitle{NN performance: variance simulation}
+\begin{figure}
+\centering
+\begin{minipage}[b]{0.49\linewidth}
+\resizebox{\textwidth}{!}{\includegraphics{ysm/varplot1b.ps}}
+%\caption{N=1}
+\end{minipage}
+\centering
+\begin{minipage}[b]{0.49\linewidth}
+\resizebox{\textwidth}{!}{\includegraphics{ysm/varplot32b.ps}}
+%\caption{N=32}
+\end{minipage}
+\caption{{\label{varplotsb}}  Contour plots showing the sample
+variance of $\zeta_{B}$ across the binomial probability lattice for
+different binomial sizes $N=1$ and $N=32$.}
+\end{figure}
+\end{frame}
+
+\subsection{simulated performance of Haar-NN}
+%\begin{frame}
+%\frametitle{Haar-NN for binomial data}
+%\begin{itemize}
+%\item something
+%\end{itemize}
+%\end{frame}
+
+\begin{frame}
+\frametitle{Haar-NN performance: normality comparison} \centering
+\begin{figure}
+\resizebox{.7\textwidth}{!}{\includegraphics{ysm/qqplot2+.ps}}
+%\vspace{.5cm}
+\caption{Q-Q plot: {\emph{Blocks}} intensity, length 1024, N=2,100
+paths.}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Haar-NN performance: variance comparison}
+\begin{figure}
+%\centering
+\begin{minipage}[b]{0.49\linewidth}
+\centering
+\resizebox{\textwidth}{!}{\includegraphics{ysm/Aresplot2.ps}}
+%\caption{N=1}
+\end{minipage}
+\begin{minipage}[b]{0.49\linewidth}
+\centering
+\resizebox{\textwidth}{!}{\includegraphics{ysm/Bresplot2.ps}}
+%\caption{N=32}
+\end{minipage}
+\caption{Squared residuals for Blocks intensity, averaged over 1000
+sample paths from binomial variables with size $N=2$.}
+\end{figure}
+\end{frame}
+
+%\begin{frame}
+%\frametitle{binomial intensity estimation}
+%\begin{itemize}
+%\item procedure\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{binomial intensity estimation:sim results}
+%\begin{itemize}
+%\item procedure\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{binomial intensity estimation:example1 }
+%\begin{itemize}
+%\item procedure\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{binomial intensity estimation:example 2}
+%\begin{itemize}
+%\item procedure\end{itemize}
+%\end{frame}
+
+\section{Wrap up}
+\subsection{Conclusions}
+\begin{frame}
+\frametitle{Conclusions and Further work}
+\begin{itemize}
+\item We have introduced a new transform, $\zeta_B$, based on theoretical asymptotic properties (proved).\pause
+\item The NN transform has been shown to possess good variance-stabilising and Gaussianising
+properties.\pause
+\item This has been combined with wavelets into an diagonal preprocessing algorithm, again having good variance-stabilising and
+Gaussianising properties. \pause
+\item  Further work involves implementing the method to applications and real
+data.
+\end{itemize}
+\end{frame}
+
+\subsection{credits}
+\begin{frame}
+\frametitle{credits} Thanks for listening.  Any questions?\\
+\vspace{.5cm}
+Software and technical report available soon from:\\
+\vspace{.4cm} \centering
+{\it{www.maths.bris.ac.uk/$\sim$maman}}\\
+\vspace{.6cm} \centering {\it{matt.nunes@bris.ac.uk}}\\
+%\begin{itemize}
+%\item procedure\end{itemize}
+\end{frame}
+
+
+
+\end{document}

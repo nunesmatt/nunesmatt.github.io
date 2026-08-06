@@ -1,0 +1,95 @@
+<html>
+<head>
+<a name="top"></a>
+<link rel= stylesheet type="text/css" href="../style.css" media="screen">
+
+<title>file permissions</title>
+<style>
+a:link{color:teal}
+a:visited{color:teal}
+a:hover{color:lightblue}
+</style>
+<style>
+tt{color:silver}
+</style>
+
+</head>
+<body bgcolor="003700" text="gray" link="silver" vlink="silver">
+
+<FONT FACE="Arial, Helvetica, Sans Serif" COLOR="gray">
+<FONT COLOR="#A52A2A">
+<h1>File permissions stuff...</h1></font>
+<BR>
+
+&nbsp&nbsp<FONT FACE="Times New Roman, Times, Serif" COLOR="0099CC">You are here: </FONT>&nbsp
+<a class="yah" href="../Welcome.html">Home</a>
+<FONT COLOR="#FF0000">&#149</FONT>
+<a class="yah" href="../computerstuff.html">computer stuff</a>
+<FONT COLOR="#FF0000">&#149</FONT>
+<a class="yah" href="../computerhelp.html">computer help</a>
+<FONT COLOR="#FF0000">&#149</FONT>
+<a class="yah" href="../computerstuff/unix.html">UNIX help</a>
+<FONT COLOR="#FF0000">&#149</FONT>
+<FONT FACE="Courier New, Courier", color="orange">file permissions</FONT>
+<br><br><BR>
+
+<blockquote>
+
+In Linux/Unix, every file has an string of letters associated with it which tells you who is allowed to view it/use it.  If you type <tt>ll</tt> (short form of <tt>ls -l</tt>) in any directory in your filespace, you should get a list of files and directories contained in the present directory, like this:<br><br> 
+<pre>
+-rw-r--r--    1 maman    stats         997 Jun  2  2003 testfile.txt
+-rw-r--r--    1 maman    stats        5215 Jun  5  2003 functions.R
+-rw-r--r--    1 maman    stats         647 May 21  2003 helpfile.html
+-rw-r--r--    1 maman    stats        1318 Jun  3  2003 package.zip
+-rw-r--r--    1 maman    stats         860 May 22  2003 tune.mp3
+-rw-r--r--    1 maman    stats        1356 Jun  4  2003 anotherfile.tex
+drwxr-xr-x    2 maman    stats        4096 Jul 16 14:33 mynewfiles
+</pre>
+
+The list tells you all the information about the files you have: the permissions, who owns it, the group they belong to, the file size, date and time created, and the name.<br><br>
+<font color="#A52A2A">
+<h2>Changing Permissions</h2>
+</font>
+the command to change file permissions is <tt>chmod</tt>.  On the lefthand column, there are some letters against each file or directory.  What the letters mean... <br><br>
+
+d: directory<br>
+r: readable<br>
+w: writeable<br>
+x: executable<br><br>
+
+The character string spaces tell you the file permissions: the first is whether it is a directory, the next three give the permissions of the user (you), the three after that give the permissions of the group, and the last three give the permissions of other users.  So the maximum character string would be <tt>drwxrwxrwx</tt>, indicating that the object is a directory, and all the users can read, write and execute it.<br><br>
+
+To change the permissions, we use <tt>chmod [who]=[permissions] [file]</tt> or <tt>chmod [who] +/- [permissions] [file]</tt>.  Substitute a combination of the letters <tt>u</tt> (user),<tt>g</tt> (group) and <tt>o</tt> (others) or <tt>a</tt> (all) in the place of [who] and a combination of the letters <tt>r</tt>, <tt>w</tt> and <tt>x</tt> in the place of [permissions]. I realize that this make no sense, so here is an example.  Suppose I wanted to change the permissions of <tt>functions.R</tt> so that other people could execute and read it.  Then I would type <tt>chmod o=rw functions.R</tt>.  Or if I wanted to make it so that only I could read it, I would do <tt>chmod go-r functions.R</tt>, which says,<i>"take away readable permissions for the group and other users from the file functions.R"</i>.  Then a <tt>ls -l</tt> command would show the information:<br><br>
+
+<pre>
+-rw-r--r--    1 maman    stats         997 Jun  2  2003 testfile.txt
+-rw-------    1 maman    stats        5215 Jun  5  2003 functions.R
+-rw-r--r--    1 maman    stats         647 May 21  2003 helpfile.html
+-rw-r--r--    1 maman    stats        1318 Jun  3  2003 package.zip
+-rw-r--r--    1 maman    stats         860 May 22  2003 tune.mp3
+-rw-r--r--    1 maman    stats        1356 Jun  4  2003 anotherfile.tex
+drwxr-xr-x    2 maman    stats        4096 Jul 16 14:33 mynewfiles
+</pre>
+
+So now, I can read and write to the file <tt>functions.R</tt>, but no-one else can do anything.  If I then wanted to give writeable and executable permissions to the members of the stats group,  I would issue the command <tt>chmod g=wx functions.R</tt> or <tt>chmod g+wx functions.R</tt>.  And then the information would be: <br><br>
+<pre>
+-rw--wx-wx    1 maman    stats        5215 Jun  5  2003 functions.R
+</pre>
+<font color="#A52A2A">
+<h3>Another way of setting permissions...adding up!</h3>
+</font>
+Making the connections r=4, w=2 and x=1, we can set the permissions with arithmetic.  4+2+1=7 and 4+2=6 (surprisingly!!) so if we wanted to set the permissions of eg <tt>anotherfile.tex</tt> to <tt>rwxrw-rw-</tt> (readable and writeable for everyone and executable for just the user (me)), we could say <tt>chmod 766 anotherfile.tex</tt>.  Good, eh?  Another example... <tt>chmod 444 *</tt> tells the computer to make all files in the directory readable (to all users), but to have no files executable or writeable.<br><br>
+
+<font color="#A52A2A">
+Still stuck?</font><br><br>
+Try typing <tt>man chmod</tt> or <tt>info chmod</tt> at your Linux prompt.<br><br>
+
+
+<P ALIGN="right" hspace="10"><A HREF="#top">[top]</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</P>
+</blockquote>
+</FONT>
+<br>
+</BODY>
+
+</HTML>
+ 
