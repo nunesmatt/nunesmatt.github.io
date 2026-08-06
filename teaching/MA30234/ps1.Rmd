@@ -1,0 +1,383 @@
+---
+date: "Academic Year 2021/22"
+output:
+  pdf_document:
+    includes:
+      in_header: ["mypreamble2.tex", "columns.tex"]
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+solution<-FALSE
+if(solution){
+        soltxt = "(Solutions)"
+}else{
+        soltxt = ""
+}
+#library(crayon)
+```
+
+---
+title: "MA30234: Problem Sheet 1 `r soltxt`"
+---
+
+If there are any particular problems with any of the problem sheets, please e-mail me (`m.a.nunes@bath.ac.uk`) highlighting the areas of difficulty, and I will try to cover them in future problem classes.
+
+1. The following table lists the values of $\{x_1, x_2, x_3\}$, $\{y_1, y_2, y_3\}$ and $\{z_1, z_2, z_3\}$.
+
+ $i$    x    y    z
+----  ---  ---  ---
+   1    6   -2   10
+   2    8   -3   15
+   3   11    4    5
+
+Using a calculator, find: 
+
+(i) $\sum_{i=1}^{3}  x_i$ \qquad (v) $\sum_{i=1}^{3}  x_i y_i z_i$ \newline
+
+(ii) $\sum_{i=1}^{3}  y_i$  \qquad (vi) $\sum_{i=1}^{3} x^2_i$  \newline
+
+(iii) $\sum_{i=1}^{3}  z_i$ \qquad (vii) $\sum_{i=1}^{3}  (x_i - y_i)^2$ \newline
+
+(iv) $\sum_{i=1}^{3}  y_i z_i$ \qquad (viii) $\sum_{i=1}^{3}  (z_i - \frac{1}{3} \sum_{j=1}^3 z_j)^2$ 
+
+Check your answers with *R*. 
+
+```{r, include = solution, eval = solution, results = "asis", echo = F}
+cat("\\soln\\newline
+1. $\\sum_{i=1}^{3} x_i= 6+8+11 = 25$
+2. $\\sum_{i=1}^{3} y_i = -2 -3 +4 = -1$
+3. $\\sum_{i=1}^{3}  z_i = 10 + 15 +5 = 30$
+4. $\\sum_{i=1}^{3}  y_i \\times z_i = -20-45+20=-45$
+5. $\\sum_{i=1}^{3}  x_i \\times y_i \\times z_i = -120 -360 +220 = -260$ 
+6. $\\sum_{i=1}^{3}  x^2_i = 36+64+121=221$
+7. $\\sum_{i=1}^{3} (x_i - y_i)^2 = 8^2 + 11^2+7^2 = 234$ 
+8. $\\frac{1}{3} \\sum_{j=1}^3 z_j = 10$, $\\sum_{i=1}^{3} (z_i - 10)^2 = 0 + 5^2 + (-5)^2 = 50$
+")
+```
+```{r, include = solution, eval = solution}
+# R solutions:
+
+x = c(6, 8, 11)
+y = c(-2, -3, 4)
+z = c(10, 15, 5)
+
+# (i), (ii), (iii)
+sum(x)
+sum(y)
+sum(z)
+
+# (iv), (v), (vi)
+sum(y * z)
+sum(x * y * z)
+sum(x ^ 2)
+
+# (vii), (viii)
+sum((x-y)^2)
+
+sum((z - mean(z))^2)
+
+# should be same as 
+2 * var(z)
+```
+\vsps
+
+2. The following lists a sample of 10 points from an assumed normal distribution with mean $\mu$ and variance $\sigma^2$. 
+\[ x = {11,16,17,22,10,13,17,15,19,24} \]
+Find the 95\% and 99\% confidence intervals for $\mu$ using $\bar{x}$ and $s$.
+
+```{r, include = solution, eval = solution, results = "asis", echo = F}
+cat("\\soln\\newline
+First we find the sample mean and standard deviation:
+\\[ \\bar{x} = \\hat{\\mu} = \\frac{1}{10}  \\sum_{i=1}^{10} x_i = 16.4 \\quad \\quad s^2= \\frac{1}{9} \\sum_{i=1}^{10} (x_i - \\bar{x})^2 = 20.0444 \\]
+Since we are estimating the sample standard deviation, we use the t-distribution with 9 degrees of freedom ($T_{9}$), so 95\\% confidence intervals are
+\\[
+16.4 + t_{0.025,9} \\times \\sqrt{20.0444/10} <    \\mu < 16.4 + t_{0.975,9} \\times \\sqrt{20.0444/10} \\]
+\\[16.4 - 2.262 \\times 1.415782 <    \\mu < 16.4 + 2.262 \\times 1.415782 \\]
+\\[13.1975 <    \\mu < 19.6025
+\\]
+The 99\\% confidence intervals are
+\\[16.4 + t_{0.005,9} \\times \\sqrt{20.0444/10} <    \\mu < 16.4 + t_{0.995,9} \\times \\sqrt{20.0444/10} \\]
+\\[16.4 - 3. 25 \\times 1.415782 <    \\mu < 16.4 + 3. 25 \\times 1.415782 \\]
+\\[11.7987 <    \\mu < 21.0013
+\\]
+")
+```
+\begin{comment}
+```{r, include = solution, eval = solution}
+# R solutions:
+
+x = c(11, 16, 17, 22, 10, 13, 17, 15, 19, 24)
+
+xbar = mean(x)
+s = sd(x)
+
+# 95% CI
+xbar - qt(.975, 9) * s / sqrt(10)
+xbar + qt(.975, 9) * s / sqrt(10)
+
+# 99% CI
+xbar - qt(.995, 9) * s / sqrt(10)
+xbar + qt(.995, 9) * s / sqrt(10)
+```
+\end{comment}
+
+\vsps
+\emphu{Bonus exercise.} Based on the confidence intervals, can you say something about the following hypothesis test: 
+\[ H_0: \mu = 20 \quad vs. \quad H_1: \mu \neq 20\]
+
+```{r, include = solution, eval = solution, results = "asis", echo = F}
+cat("\\soln\\newline
+The 95\\% confidence interval does not contain the value 20, so a two-sided test on $H_0: \\mu = 20$ would not be accepted at a 95\\% confidence interval in a hypothesis 
+testing setting.
+On the other hand the 99\\% confidence interval \\textbf{does} contain the value 20, so a two-sided test on $H_0: \\mu = 20$ would be accepted at a 99\\% confidence interval 
+in a hypothesis testing setting.
+")
+```
+\begin{comment}
+```{r, include = solution, eval = solution}
+# In R, the hypothesis test could be done by
+t.test(x, mu = 20, conf.level = 0.95, alternative = "two.sided")
+```
+\end{comment}
+
+\vsps
+
+3. A financial adviser suggested I invest in 14 funds in 2020. 
+The percentage increase/decrease in the value of the funds over the year (compared with the benchmark index) are detailed below
+
+\begin{tabular}{l|cccccccccccccc}
+Fund & 1&2&3&4&5&6&7&8&9&10&11&12&13&14\\
+Change& 3.1&2.7&4.6&3.5&-1.7&2.9&4.4&3.8&-0.6&0.8&1.3&-1.9&2.4&3.1\\
+\end{tabular} 
+
+Assume the percentage increase/decrease is normally distributed.
+Using a 5\% significance level:
+
+(a) Test the hypothesis that the financial advisor produced results different 
+from the benchmark index
+
+```{r, include = solution, eval = solution, results = "asis", echo = F}
+cat("\\soln\\newline
+\\[ H_0: \\mu = 0 \\quad  vs.  \\quad H_1: \\mu \\neq 0\\]
+Our test statistics is
+\\[t_{obs} = \\frac{\\bar{x} - 0}{s/\\sqrt{n}} =  \\frac{2.0286}{2.1388/\\sqrt{14}} \\approx 3.55 \\]
+This is a two-tailed test, and we need to compare the observed test statistic $t_{obs}$ against the quantile of a t-distribution $t_{0.975,13} = 2.16$.
+Since $t_{obs} >t_{0.975,13}$ we reject the null hypothesis $H_0$ at the 5\\% significance level.
+")
+```
+\begin{comment}
+```{r, include = solution, eval = solution}
+#In R:
+
+# H_0: mu =  0 
+# H_1: mu != 0
+
+fund = c(3.1, 2.7, 4.6, 3.5, -1.7, 2.9, 4.4, 3.8, -0.6, 0.8, 1.3, -1.9, 2.4, 3.1)
+n = length(fund)
+
+tstat = ( mean(fund) - 0 ) / (sd(fund) / sqrt(n))
+tstat
+
+# get quantile
+qt(0.975, n - 1)
+
+# since the test statistic is greater than quantile, we reject the null.
+
+# or 
+t.test(fund, mu = 0, conf.level = 0.95, alternative = "two.sided")
+```
+\end{comment}
+
+(b) Test the hypothesis that the financial advisor produced results better than the benchmark index
+
+```{r, include = solution, eval = solution, results = "asis", echo = F}
+cat("\\soln\\newline
+Testing whether the financial adviser produced results better than the benchmark index corresponds to
+\\[ H_0: \\mu = 0 \\quad vs.  \\quad H_1: \\mu > 0\\]
+This is a one-tailed test, and we need to compare the observed test statistic $t_{obs}$ against the quantile of a t-distribution $t_{0.95,13} = 1.771$.
+Since $t_{obs} > t_{0.95,13}$ we reject the null hypothesis $H_0$ at the 5\\% significance level.
+")
+```
+\begin{comment}
+```{r, include = solution, eval = solution}
+#In R:
+
+# H_0: mu =  0 
+# H_1: mu >  0
+
+tstat
+
+# get quantile
+qt(0.95, n - 1)
+
+# since the test statistic is greater than quantile, we reject the null.
+
+# or 
+t.test(fund, mu = 0, conf.level = 0.95, alternative = "greater")
+```
+\end{comment}
+
+(c) The financial adviser charges 1\% of your investment in fees. Test the hypothesis that it is worth employing the adviser (i.e. he produces  returns more than 1\% above the benchmark index).
+
+```{r, include = solution, eval = solution, results = "asis", echo = F}
+cat("\\soln\\newline
+Testing whether it is worth employing the adviser (i.e. he produces
+returns more than 1\\% above the benchmark index) corresponds to
+\\[ H_0: \\mu = 1 \\quad vs.  \\quad H_1: \\mu >1 \\]
+Our test statistics is
+\\[t_{obs} = \\frac{\\bar{x} - 1}{s/\\sqrt{n}} =  \\frac{1.0286}{2.1388/\\sqrt{14}} \\approx 1.80 \\]
+This is a one-tailed test, and we need to compare the observed test statistic $t_{obs}$ against the quantile of a t-distribution $t_{0.95,13} = 1.771$.
+Since $t_{obs} > t_{0.95,13}$ we reject the null hypothesis $H_0$ at the 5\\% significance level.
+")
+```
+\begin{comment}
+```{r, include = solution, eval = solution}
+
+#In R:
+
+# H_0: mu =  1 
+# H_1: mu >  1
+
+tstat = ( mean(fund) - 1 ) / (sd(fund) / sqrt(n))
+tstat
+
+# get quantile (same as before)
+qt(0.95, n - 1)
+
+# since the test statistic is greater than quantile, we reject the null.
+
+# or 
+t.test(fund, mu = 1, conf.level = 0.95, alternative = "greater")
+```
+\end{comment}
+
+\vsps
+
+4.  Load the `data1.rda` *R* object. The file contains a sample of 20 observations from 2 variables, X and Y.
+
+(a) Use *R* to calculate $X^2$, $Y^2$, $XY$
+
+(b) Use *R* to calculate $\sum X$, $\sum Y$ (and hence $\bar{X}$ and $\bar{Y}$), $\sum X^2$, $\sum Y^2$ and $\sum X Y$
+
+(c) Use the `sd` function to calculate the standard deviation of $X$ and of $Y$
+
+(d) Use *R* to calculate $(X-\bar{X})$ and $(X-\bar{X})^2$
+
+(e) Use *R* to calculate $X/\bar{X}$
+
+(f) Use the `cor` function to estimate the correlation between $X$ and $Y$
+
+(g) Plot $X$ and $Y$ on a scatter plot. Experiment with the axes, data points, title to produce a plot ``template'' you like.
+
+```{r, include = solution, eval = solution, results = "asis", echo = F}
+cat("\\soln\\newline")
+```
+
+```{r, include = solution, eval = solution, out.width='70%', fig.align='center', fig.pos='h'}
+load("data1.rda")
+
+# (a), (b)
+X = data1$X
+Y = data1$Y
+
+X^2
+Y^2
+X*Y
+sum(X); sum(X) / 20; mean(X)
+sum(Y); sum(Y) / 20; mean(Y)
+sum(X^2)
+sum(Y^2)
+sum(X*Y)
+
+# (c) - (e)
+sd(X)
+sd(Y)
+
+X - mean(X)
+
+(X - mean(X))^2
+
+X / mean(X)
+
+# (f)
+cor(X, Y)
+
+# (g) 
+plot(X, Y, pch = 17, col = 5, xlab = "X", ylab = "Y")
+
+```
+\vsps
+
+5. Download the worksheet `PS1Worksheet.xlsx` from the Moodle page.  You can load the data into *R* using the `read.xlsx` command from the `xlsx` package (you may need to install it first using `install.packages`, and then load the package using `library(xlsx)`).  Specify the second argument of the function as `1`, to indicate the first sheet of the file.
+
+Using the 5 columns of data in sheet 2, use the `cor` command to find the correlations between each pair of the 5 variables $X1$, $X2$, $X3$, $X4$, $X5$. Now find: 
+
+(a) which pair of variables has the highest positive correlation?
+
+(b) which pair of variables have the greatest negative correlation?
+
+(c) which pair of variables are least correlated?
+
+
+```{r, include = solution, eval = solution, results = "asis", echo = F}
+
+library(xlsx)
+data = read.xlsx("PS1Worksheet.xlsx", 1)
+
+correlations = cor(data)
+
+cat("\\soln\\newline\n")
+cat("The correlation matrix should look like this:\n")
+knitr::kable(correlations)
+```
+
+```{r, include = solution, eval = solution}
+library(xlsx)
+data = read.xlsx("PS1Worksheet.xlsx", 1)
+
+correlations = cor(data)
+
+# can look at the matrix directly, or e.g.
+
+# greatest negative correlation same as lowest correlation
+which(correlations == min(correlations), arr.ind = TRUE)
+
+# least correlated, use absolute value
+which(abs(correlations) == min(abs(correlations)), arr.ind = TRUE)
+```
+
+\begin{comment}
+(b) Use the `nlminb` command to find the value of x and y, both in the range [3,4], that gives the minimum value for the function $(0.3 x^2 - 0.7  xy + 0.5 y^2)$.  *Hint*: Create a **function** for the equation with `x` and `y` as arguments and check `args(nlminb)` to discover how to put the limits of the optimisation in.  `?nlminb` will help you!!
+
+(c) Use the `optim` function to find the value of x and y, both in the range [3,4], which solves the equation $(0.3 x^2 - 0.7  xy + 0.5 y^2) = 1.4$. *Hint*: The `optim` function will try to find a solution to `f(x)=0`, so you will have to modify your function from b) accordingly.
+
+```{r, include = solution, eval = solution, results = "asis", echo = F}
+cat("\\soln\\newline")
+```
+
+```{r, include = solution, eval = solution}
+
+# (b)
+myfun = function(vals){
+	x = vals[1]
+	y = vals[2]
+
+	0.3*x^2 - 0.7*x*y + 0.5 * y^2
+}
+
+# use a sensible vector of starting values
+nlminb(c(3, 3), myfun, lower = c(3, 3), upper = c(4, 4))
+
+
+# (c)
+myfun2 = function(vals){
+	# square to ensure that the objective doesn't go negative
+	(myfun(vals) - 1.4) ^ 2
+}
+
+optim(c(3, 3), myfun2, lower = c(3, 3), upper = c(4, 4)) 
+```
+\end{comment}

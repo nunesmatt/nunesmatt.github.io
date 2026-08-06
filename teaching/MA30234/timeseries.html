@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Time series | MA30234.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Time series | MA30234.utf8" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Time series | MA30234.utf8" />
+  
+  
+  
+
+<meta name="author" content="Matt Nunes" />
+
+
+<meta name="date" content="2020-10-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="mlr.html"/>
+<link rel="next" href="boxjenkinschap.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="timeseries" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Time series</h1>
+<div id="tsmotivation" class="section level2">
+<h2><span class="header-section-number">4.1</span> Motivation</h2>
+<p>So far, we have looked at predicting a response variable based on one or
+more predictor variables. Another form of prediction, called Time
+Series, is where we have only the chronological values of a response
+variable e.g. the FTSE index, or annual sales levels. Time Series can
+occur in continuous time (e.g. temperature) or discrete time (
+e.g. monthly rainfall, FTSE 100 closing level). We concentrate here only on
+discrete time models.</p>
+<p>If we are to fit a model to the data, we are assuming:</p>
+<ul>
+<li><p>Any patterns identified will continue into the future</p></li>
+<li><p>Measurements in the historical data are correlated</p></li>
+<li><p>The model we build will typically lose accuracy the longer into the
+future we try to predict. In other words, the shorter the time scale
+of the prediction, the more accurate our forecast should be.</p></li>
+</ul>
+<div id="tscomponents" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Components of a time series</h3>
+
+</div>
+<div id="tstypes" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Types of time series models</h3>
+<p>Assume that our time series consists of measurements made at discrete
+time points, so that <span class="math inline">\(X_{t}\)</span> denotes the measurement of quantity <span class="math inline">\(X\)</span> at time <span class="math inline">\(t\)</span>
+<span class="math inline">\(\left\{X_{t} \right\}\)</span> denotes the series of measurements on <span class="math inline">\(X\)</span>.
+Let <span class="math inline">\({\hat{X}}_{t}\)</span> denote our forecast value for <span class="math inline">\(X\)</span> at time <span class="math inline">\(t\)</span>.</p>
+<p>There are several different ways of combining the components of a time
+series listed in Section <a href="timeseries.html#tscomponents">4.1.1</a>. For instance, we might consider:</p>
+<p><strong>Model without trend and without seasonality</strong>
+<span class="math display">\[X_{t} = M_{t} + I_{t}\]</span>
+or
+<span class="math display">\[\ X_{t} = \beta_{0} + I_{t}\]</span></p>
+<p>where <span class="math inline">\(\beta_{0}\)</span> is a constant</p>
+<p>or <strong>additive seasonal model with trend</strong>
+<span class="math display">\[X_{t} = M_{t} + \ T_{t} + \ S_{t} + \ I_{t}\]</span></p>
+<p>or <strong>multiplicative seasonal model with trend</strong>
+<span class="math display">\[X_{t} = \left( M_{t} + \ T_{t} \right) S_{t} + \ I_{t}\]</span></p>
+<p>or <strong>multiplicative seasonal model without trend</strong>
+<span class="math display">\[X_{t} = M_{t} S_{t} + \ I_{t}\]</span></p>
+<p>where</p>
+<ul>
+<li><p><span class="math inline">\(M_{t}\)</span> represents the general level of the series</p></li>
+<li><p><span class="math inline">\(T_{t}\)</span> represents the trend at time <span class="math inline">\(t\)</span></p></li>
+<li><p><span class="math inline">\(S_{t}\)</span> represents the seasonal component at time <span class="math inline">\(t\)</span></p></li>
+<li><p><span class="math inline">\(I_{t}\)</span> represents the irregular component at time <span class="math inline">\(t\)</span></p></li>
+</ul>
+</div>
+</div>
+<div id="tsma" class="section level2">
+<h2><span class="header-section-number">4.2</span> Using moving averages to estimate trend</h2>
+<p>A moving average is used to smooth fluctuations in a time series in
+order to recognise its trend. To be effective, the data should follow a
+roughly linear trend, and have a pattern of fluctuations, repeating
+every few time periods (e.g. every 12 months, or every 5 years).</p>
+
+<div class="example">
+<p><span id="exm:tsex1" class="example"><strong>Example 4.1  (Production (moving average))  </strong></span>Suppose we have 19 years of data <span class="math inline">\(\left\{Y_{i}, \ i = 1, \ldots, 19 \right\}\)</span> showing production levels in
+millions of dollars for 1991 – 2009:</p>
+</div>
+
+<p>A plot of the data (Figure <a href="timeseries.html#fig:tsfig1">4.1</a>) suggests a rising trend and a cycle of length
+perhaps 5 years:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">production&lt;-<span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">11</span>, <span class="dv">9</span>, <span class="dv">13</span>, <span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">15</span>, <span class="dv">11</span>, <span class="dv">14</span>,</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">                                        <span class="dv">17</span>, <span class="dv">22</span>)</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="co"># coerce vector to ts object </span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">production&lt;-<span class="kw">ts</span>(production, <span class="dt">start =</span> <span class="dv">1991</span>, <span class="dt">frequency =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="kw">plot</span>(production, <span class="dt">ylab =</span> <span class="st">&quot;Production, ($m)&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</a>
+<a class="sourceLine" id="cb22-8" data-line-number="8">                                        <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:tsfig1"></span>
+<img src="MA30234_files/figure-html/tsfig1-1.png" alt="A time series plot for the production data." width="70%" />
+<p class="caption">
+Figure 4.1: A time series plot for the production data.
+</p>
+</div>
+
+<p>We might investigate 3-year and 5-year moving averages defined as
+<span class="math display">\[ \text{3-year }\ \text{Moving Annual Total} = (Y_{i - 1} + Y_{i} + Y_{i + 1}) \]</span>
+<span class="math display">\[ \text{3-year }\  \text{Moving Average} = (Y_{i - 1} + Y_{i} + Y_{i + 1})/3 \]</span>
+<span class="math display">\[ \text{5-year }\  \text{Moving Annual Total} = (Y_{i - 2} + Y_{i - 1} + Y_{i} + Y_{i + 1} + Y_{i + 2}) \]</span>
+<span class="math display">\[ \text{5-year }\  \text{Moving Average} = (Y_{i - 2} + Y_{i - 1} + Y_{i} + Y_{i + 1} + Y_{i + 2})/5 \]</span></p>
+<p>There seems to be a 5-year cycle in the data, but we use the 3-year moving average for comparison. </p>
+
+
+<p>To calculate a 3-year moving average, we calculate the 3-year
+<em>moving total</em> and place it at the mid-point of the 3 years used in its
+calculation. The 3-year MA at this point is simply the 3-year moving
+total divided by 3 i.e.
+<span class="math display">\[{MA3}_{i} = (Y_{i - 1} + Y_{i} + Y_{i + 1})/3\]</span></p>
+<p>Note that this means that <span class="math inline">\(MA3_{1}\)</span> and <span class="math inline">\(MA3_{19}\)</span> cannot be calculated.</p>
+<p>Similarly,
+<span class="math display">\[{MA5}_{i} = (Y_{i - 2} + Y_{i - 1} + Y_{i} + Y_{i + 1} + Y_{i + 2})/5\]</span></p>
+<p>and we cannot calculate <span class="math inline">\(MA5_{1},MA5_{2},MA5_{18},MA5_{19}\)</span></p>
+<p>A plot of the original data (Figure <a href="timeseries.html#fig:tsfig2">4.2</a>) shows that both the 3-year and
+5-year moving averages smooth out the data – the 5-year MA more so. The
+5-year MA removes virtually any trace of the cycle, and is a good
+estimate of the trend in the data.</p>
+<div class="figure" style="text-align: center"><span id="fig:tsfig2"></span>
+<img src="MA30234_files/figure-html/tsfig2-1.png" alt="A time series plot with 5-year and 3-years moving averages for the production data." width="70%" />
+<p class="caption">
+Figure 4.2: A time series plot with 5-year and 3-years moving averages for the production data.
+</p>
+</div>
+<div id="weightedma" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Weighted Moving Averages</h3>
+<p>In this example, we have calculated moving averages which place equal
+weight (i.e. 1/3 , 1/3, 1/3 in the case of a 3-year moving average; 1/5, 1/5
+, 1/5, 1/5, 1/5 for a 5-year moving average) . In many instances, we may
+wish to give greater weight to more recent observations.</p>
+<p>For instance, if we were using the data above, we may wish to calculate
+3-year moving averages, with twice as much weight afforded to the latest
+year’s data. Then </p>
+
+</div>
+</div>
+<div id="seasonalindices" class="section level2">
+<h2><span class="header-section-number">4.3</span> Estimating seasonal variation with seasonal indices</h2>
+<p>Many time series will demonstrate seasonality, for example:</p>
+<ul>
+<li><p>Sales of ice cream in the UK rise in the summer and fall in the winter</p></li>
+<li><p>UK department store sales levels may peak in December (Christmas),
+maintain a healthy level in January (when sales are held), and reduce
+significantly in February</p></li>
+<li><p>UK factory production may be lowest in August and December as more
+people take annual leave in those months.</p></li>
+</ul>
+<p>In order to determine the size of the typical seasonal fluctuation in a
+time series, we can calculate .</p>
+<p>For instance, the following table shows monthly indices for
+sales in a department store:</p>
+
+<p>This table can be interpreted as follows:</p>
+<ul>
+<li><p>Sales in December are typically 26.8% higher than in a typical month</p></li>
+<li><p>Sales in July are typically 14% lower than in a typical month</p></li>
+</ul>
+<p>Seasonal indices can be calculated using a variety of methods, the most
+widely-used of which is the .
+This method:</p>
+<ol style="list-style-type: decimal">
+<li><p>Calculates a moving average at as many observation points as possible</p></li>
+<li><p>Estimates a seasonal index at each of these points, by dividing the
+actual observation by the moving average</p></li>
+<li><p>Calculates mean seasonal indices</p></li>
+<li><p>Adjusts the seasonal indices appropriately.
+</p></li>
+</ol>
+
+<div class="example">
+<p><span id="exm:lind" class="example"><strong>Example 4.2  (Toy sales)  </strong></span>Suppose we observe the quarterly sales (in $m) of a toy manufacturer,
+over the period 2006 to 2011:</p>
+</div>
+
+<p>A plot of the data (Figure <a href="timeseries.html#fig:tsfig3">4.3</a>) suggests a slight increasing trend, and displays seasonality. </p>
+<div class="figure" style="text-align: center"><span id="fig:tsfig3"></span>
+<img src="MA30234_files/figure-html/tsfig3-1.png" alt="The time series plot for the toy data exhibiting a seasonal cycle." width="70%" />
+<p class="caption">
+Figure 4.3: The time series plot for the toy data exhibiting a seasonal cycle.
+</p>
+</div>
+
+<p>The steps in the calculation are as follows (the results are shown in Table ):</p>
+<ol style="list-style-type: decimal">
+<li><p>Calculate 4-Quarter Moving Totals (since there are 4 quarters in the
+year), and centre these at the mid-point. For instance, the 4-Quarter
+Moving Total covering the first 4 observations are centred between
+Quarters 2 and 3 of 2006.</p></li>
+<li><p>Calculate 4-Quarter Moving Averages at the same points by dividing the
+4-Quarter Moving Total by 4.</p></li>
+<li><p>Calculate a <em>Centred Moving Average</em> at the points 2006 Q3 to 2009 Q2
+by averaging the two 4-Quarter Moving Averages at either side.</p></li>
+<li><p>Calculate a Seasonal value at these points by dividing the actual
+observation by the Centred Moving Average.</p></li>
+</ol>
+
+<p>The successive estimates of the seasonal indices for each quarter are</p>
+
+<p>The mean values of the seasonal indices need to add up to 4, so we
+adjust each mean index by multiplying by 4/4.009. Hence our final
+estimates of the seasonal indices are:</p>
+<ul>
+<li><p>Quarter 1 0.765</p></li>
+<li><p>Quarter 2 0.575</p></li>
+<li><p>Quarter 3 1.141</p></li>
+<li><p>Quarter 4 1.519</p></li>
+</ul>
+<p>Note that this method of estimating seasonal effects calculates the mean
+seasonal index - hence it does not take account of changes over time in
+the seasonal indices. For instance, if we plot the five Quarter 2
+seasonal estimates (Figure <a href="timeseries.html#fig:tsfig4">4.4</a>), we see that this seasonal element is
+increasing over the 5 years of observations.</p>
+<pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
+##   method            from
+##   as.zoo.data.frame zoo</code></pre>
+<pre><code>## This is forecast 8.12 
+##   Want to meet other forecasters? Join the International Institute of Forecasters:
+##   http://forecasters.org/</code></pre>
+<pre><code>## 
+## Attaching package: &#39;forecast&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:astsa&#39;:
+## 
+##     gas</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:tsfig4"></span>
+<img src="MA30234_files/figure-html/tsfig4-1.png" alt="Plot of the Quarter 2 seasonal index estimates for the toy data." width="70%" />
+<p class="caption">
+Figure 4.4: Plot of the Quarter 2 seasonal index estimates for the toy data.
+</p>
+</div>
+<p>More complex time series methods, including exponential smoothing, are
+able to track changes in seasonal patterns, and amend estimates
+accordingly.</p>
+</div>
+<div id="expsmooth" class="section level2">
+<h2><span class="header-section-number">4.4</span> Exponential smoothing</h2>
+<p>Exponential smoothing is a method of estimating the various elements of
+a time series (general level, trend and seasonality) and updating those
+estimates with each new observation. At any point, it is able to take
+into account every single observation to date in estimating the elements
+of a time series, but placing greater weight on the latest observation.</p>
+<div style="page-break-after: always;"></div>
+<p>There are 3 types of exponential smoothing:</p>
+
+<p>The name  is taken from the fact that at any time
+point <span class="math inline">\(i\)</span>, the updated estimate of an element of the time series is
+calculated as:
+<span class="math display">\[\mbox{New estimate} =  \mbox{factor}\times \mbox{new observation of element} + \mbox{(1 - factor)} \times \mbox{previous estimate}\]</span>
+where the factor is some value between 0 and 1. As a result, the weight
+placed on previous observations decreases exponentially as we go back in
+time.</p>
+<div id="ses" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Simple exponential smoothing</h3>
+<p>Simple exponential smoothing is a technique method for
+forecasting time series. It is applicable where the time series has no
+discernible trend, either increasing or decreasing, and no seasonality.</p>
+<p>With no trend or seasonal element, we can think of a model of the form:
+<span class="math display">\[\begin{equation}
+X_{t} = \beta_{0} + I_{t}
+\end{equation}\]</span>
+where <span class="math inline">\(\beta_{0}\)</span> represents the general level of the time series, and
+<span class="math inline">\(I_{t}\)</span> the random error.</p>
+<div style="page-break-after: always;"></div>
+
+<div class="example">
+<p><span id="exm:shipex" class="example"><strong>Example 4.3  (Shipments)  </strong></span>The following time series give information on the monthly percentage
+of all shipments received on time by a company in the past year:</p>
+</div>
+
+<p>The plot in Figure <a href="timeseries.html#fig:tsfig5">4.5</a> shows that, although the percentage for months 1 and 2 are
+lower than those for most of the other months, there is no discernible
+trend or seasonality (we only have one year’s figures!) so exponential
+smoothing is appropriate.</p>
+<div class="figure" style="text-align: center"><span id="fig:tsfig5"></span>
+<img src="MA30234_files/figure-html/tsfig5-1.png" alt="Time series of the monthly percentage of shipments on time (\texttt{shipments} dataset)." width="70%" />
+<p class="caption">
+Figure 4.5: Time series of the monthly percentage of shipments on time ( dataset).
+</p>
+</div>
+<p>We wish to estimate the level of the series at time <span class="math inline">\(t\)</span>. Since the
+<span class="math inline">\(\left\{ X_{t} \right\}\)</span> are all equal to the general level plus a
+variable element, it makes sense to use all observations to date to
+determine our estimate of the level. However, we want to give greater
+weight to the latest observation, as this is our latest indicator of the
+level of the series. Exponential smoothing allows us to do this – if
+<span class="math inline">\(M_{t}\)</span> denotes the estimate of the level at time <span class="math inline">\(t\)</span>, then we use:
+<span class="math display">\[\begin{equation}
+M_{t} = \ \alpha X_{t} + \ \alpha\left( 1 - \alpha \right)X_{t - 1} + \ \alpha\ {(1 - \alpha)}^{2}X_{t - 2} + \ldots
+\label{eq:expSmooth2}
+\end{equation}\]</span>
+where <span class="math inline">\(0\  &lt; \ \alpha\  &lt; 1\)</span> is called the smoothing constant.</p>
+<p>Equation () can be re-written:
+<span class="math display">\[\begin{equation}
+M_{t} = \ \alpha X_{t} + \ \left( 1 - \alpha \right)\left\{ \alpha X_{t - 1} + \alpha(1 - \alpha)X_{t - 2} + \ldots \right\}
+\label{eq:expSmooth3}
+\end{equation}\]</span>
+<span class="math display">\[\begin{equation}
+M_{t} = \ \alpha X_{t} + \ \left( 1 - \alpha \right)M_{t - 1}
+\label{eq:expSmooth4}
+\end{equation}\]</span>
+So, our latest estimate for the level (<span class="math inline">\(M_{t}\)</span>) is a weighted average
+of our latest observation (<span class="math inline">\(X_{t}\)</span>) and our previous estimate for the
+level (<span class="math inline">\(M_{t - 1}\)</span>).</p>
+<p>Note that a value of <span class="math inline">\(\alpha\)</span> close to 1 gives greater weight to most
+recent observations; a value of <span class="math inline">\(\alpha\)</span> close to 0 gives less weight
+to recent observations</p>
+<p>Given a starting value for <span class="math inline">\(M_{1}\)</span>, we can use Equation ()
+iteratively to obtain <span class="math inline">\(M_{2}, M_{3},\)</span> etc.</p>
+<p>Let <span class="math inline">\({\hat{X}}_{t + n}\)</span> denote the forecast at time <span class="math inline">\(t + n\)</span>, made
+using the observations available to us at time <span class="math inline">\(t\)</span>, namely
+<span class="math inline">\(\left\{ X_{1},X_{2},X_{3},\ \ldots,X_{t} \right\}\)</span>.
+<span class="math inline">\({\hat{X}}_{t + n}\)</span> is called the  from
+<span class="math inline">\(X_{t}\)</span>.</p>
+<p>For exponential smoothing, our best estimate of the level of the series
+in the future is the latest estimate of the level made at time <span class="math inline">\(t\)</span>,
+which is <span class="math inline">\(M_{t}\)</span> i.e.
+<span class="math display">\[\begin{equation}
+{\hat{X}}_{t + n} = \ M_{t},\ \ \ n = 1,2,\ldots
+\label{eq:expSmooth5}
+\end{equation}\]</span></p>
+<p>Note therefore that:
+<span class="math display">\[{\hat{X}}_{t} = \ M_{t - 1} \quad \mbox{and} \quad {\hat{X}}_{t + 1} = \ M_{t}\]</span></p>
+<p>Then substituting in Equation () gives us:
+<span class="math display">\[\begin{align}
+{\hat{X}}_{t + 1} &amp;  = {\alpha X_{t} + \left( 1 - \alpha \right)\hat{X}}_{t} \\
+   &amp; = {\hat{X}}_{t} + \ \alpha(X_{t} - {\hat{X}}_{t})
+\label{eq:expSmooth6}
+\end{align}\]</span></p>
+<p>Since <span class="math inline">\((X_{t} - {\hat{X}}_{t})\)</span> is just the forecasting error at time
+<span class="math inline">\(t\)</span>, Equation () shows that the new forecast <span class="math inline">\({\hat{X}}_{t + 1}\)</span>
+is equal to the previous forecast <span class="math inline">\({\hat{X}}_{t}\)</span> plus an adjustment
+which is <span class="math inline">\(\alpha\)</span> times the most recent forecast error.</p>
+<p>The objective of smoothing is to smooth out the effect of the random
+fluctuations caused by the irregular component (<span class="math inline">\(I_{t}\)</span>) in the time
+series.</p>
+<p>If the irregular component in the series is large, then a small value of
+<span class="math inline">\(\alpha\)</span> is preferred, because a large proportion of the forecast
+error will be due to this large irregular component.</p>
+<p>If the irregular component in the series is small, then a large value of
+<span class="math inline">\(\alpha\)</span> is preferred, so that we can quickly adjust the forecast when
+a forecasting error occurs.</p>
+<div id="determining-alpha" class="section level4 unnumbered">
+<h4>Determining <span class="math inline">\(\alpha\)</span></h4>
+<p>It makes sense to choose that value of <span class="math inline">\(\alpha\)</span> which minimises the
+forecasting errors produced by the exponential smoothing. The measure we
+use is the mean square deviation (MSD), the average of the sum of
+squared errors. If our observations are
+<span class="math inline">\(X_{1},X_{2},\ \ldots,\ X_{T}\)</span>, then the MSD is defined by:
+<span class="math display">\[MSD = \ \frac{1}{T - 1}\sum_{t = 2}^{T}{(X_{t} - {\hat{X}}_{t})}^{2}\]</span></p>
+<p>A small MSD indicates a good fit to our data.</p>
+<div style="page-break-after: always;"></div>
+<p>There are two main methods available to us to determine the value of
+<span class="math inline">\(\alpha\)</span> which minimises the MSD:</p>
+<ul>
+<li>to calculate the MSD for, say, all values of <span class="math inline">\(\alpha\)</span> from 0.01 to
+0.99 in steps of 0.01, and choose the <span class="math inline">\(\alpha\)</span> which gives the
+lowest MSD</li>
+<li>to use an optimisation routine, like the <code>optim</code> function in  .</li>
+</ul>
+<p>From the data previously given and using <span class="math inline">\(\alpha = 0.2\)</span> and <span class="math inline">\(\alpha = 0.8\)</span>: </p>
+
+<div class="figure" style="text-align: center"><span id="fig:tsfig6"></span>
+<img src="MA30234_files/figure-html/tsfig6-1.png" alt="Time series plot of the \texttt{shipments} data with $\alpha=0.2$ and $\alpha=0.8$." width="70%" />
+<p class="caption">
+Figure 4.6: Time series plot of the  data with <span class="math inline">\(\alpha=0.2\)</span> and <span class="math inline">\(\alpha=0.8\)</span>.
+</p>
+</div>
+<p>We will investigate manual and optimal values of <span class="math inline">\(\alpha\)</span> in  in the practical sessions.</p>
+</div>
+</div>
+<div id="des" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> Holt’s linear trend method (double exponential smoothing)</h3>
+<p>Suppose our time series displays a linear trend. Then we can model the
+series as:
+<span class="math display">\[\begin{equation}
+X_{t} = \beta_{0} + {\beta_{1}t + \ I}_{t}
+\label{eq:ts_Holt1}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\beta_{0}\)</span> represents the intercept and <span class="math inline">\(\beta_{1}\)</span>
+represents the slope.</p>
+<p>Consider the time series at time <span class="math inline">\(t + n\)</span>. It follows from Equation () that:
+<span class="math display">\[\begin{eqnarray}\nonumber
+X_{t + n} &amp; =&amp; \beta_{0} + {\beta_{1}(t + n) + \ I}_{t + n}\\
+          &amp; = &amp; \left( \beta_{0} + \beta_{1}t \right) + \beta_{1}n + I_{t + n}
+\label{eq:ts_Holt2}
+\end{eqnarray}\]</span></p>
+<p>Equation () shows that we can express a time series at time
+<span class="math inline">\(t + n\)</span> as the level at time <span class="math inline">\(t\)</span> plus <span class="math inline">\(n\)</span> times the slope of the
+linear trend, plus the irregular variation.</p>
+<p>Let <span class="math inline">\(M_{t}\)</span> and <span class="math inline">\(T_{t}\)</span> denote the smoothed estimates of the level
+and slope at time period <span class="math inline">\(t\)</span>. Then, <span class="math inline">\(M_{t}\)</span> is an estimate
+of <span class="math inline">\(\beta_{0} + \beta_{1}t\)</span>, and <span class="math inline">\(T_{t}\)</span> an estimate of the slope of
+the trend line at time <span class="math inline">\(t\)</span> (in other words, an estimate of
+<span class="math inline">\(\beta_{1}\)</span>).</p>
+<p>So, if we wish to obtain the <em>n-step ahead forecast</em> from time <span class="math inline">\(t\)</span>,
+i.e. <span class="math inline">\({\hat{X}}_{t + n}\)</span>, based on the observations
+<span class="math inline">\(X_{1},X_{2},\ldots,X_{t}\)</span>.</p>
+<p>In equation ():</p>
+<ul>
+<li><p><span class="math inline">\(X_{t + n}\)</span> is unknown, and we look to replace it with our forecast
+<span class="math inline">\({\hat{X}}_{t + n}.\)</span></p></li>
+<li><p><span class="math inline">\(M_{t}\)</span> is an estimate of <span class="math inline">\(\beta_{0} + \beta_{1}t\)</span></p></li>
+<li><p><span class="math inline">\(T_{t}\)</span> is an estimate of <span class="math inline">\(\beta_{1}\)</span>.</p></li>
+<li><p>Our forecast of the irregular component <span class="math inline">\(I_{t + n}\)</span> is its
+expectation i.e. zero.</p></li>
+</ul>
+<p>This means that
+<span class="math display">\[\begin{equation}
+{\hat{X}}_{t + n} = M_{t} + T_{t}\times n,\ \ \ n = 1,2,3,\ldots
+\label{eq:ts_Holt3}
+\end{equation}\]</span>
+We use exponential smoothing to estimate <span class="math inline">\(M_{t}\)</span> and <span class="math inline">\(T_{t}\)</span> –
+hence the phrase .</p>
+<p>Substituting <span class="math inline">\((t - 1)\)</span> for <span class="math inline">\(t\)</span> and setting <span class="math inline">\(n = 1\)</span> in Equation () above, we obtain
+<span class="math display">\[{\hat{X}}_{t} = M_{t - 1} + T_{t - 1}\]</span></p>
+<p>and therefore, using Equation (), with a smoothing constant
+<span class="math inline">\(0 &lt; \alpha &lt; 1\)</span>,
+<span class="math display">\[\begin{equation}
+M_{t} = \alpha X_{t} + (1 - \alpha)(M_{t - 1} + T_{t - 1})
+\label{eq:ts_Holt5}
+\end{equation}\]</span></p>
+<p>Now note that the current estimate of the slope is
+<span class="math inline">\(M_{t} - M_{t - 1}\)</span>. Hence smoothed values for <span class="math inline">\(T_{t}\)</span> are given
+by:
+<span class="math display">\[\begin{equation}
+T_{t} = \gamma\left( M_{t} - M_{t - 1} \right) + (1 - \gamma)T_{t - 1}
+\label{eq:ts_Holt6}
+\end{equation}\]</span>
+where <span class="math inline">\(0 &lt; \gamma &lt; 1\)</span> is the smoothing constant for the trend.</p>
+<p>In order to solve the recursive Equations () and (), we need
+initial values. An intuitive choice is to set <span class="math inline">\(T_{2} = X_{2} - X_{1}\)</span>,
+and <span class="math inline">\(M_{2} = X_{2}.\)</span></p>
+</div>
+<div id="tes" class="section level3">
+<h3><span class="header-section-number">4.4.3</span> Holt-Winters’ multiplicative model (triple exponential smoothing)</h3>
+<p>We now extend the Holt-Winters’ trend method to include a seasonal term.
+Assuming the trend is linear, we have
+<span class="math display">\[X_{t} = C_{t}\left( \beta_{0} + \beta_{1}\times t \right) + I_{t}\]</span></p>
+<p>where <span class="math inline">\(C_{t}\)</span> is a seasonal component with <span class="math inline">\(s\)</span> periods (e.g.
+<span class="math inline">\(s = 4\)</span> for quarterly data, <span class="math inline">\(s = 12\)</span> for monthly data).</p>
+<p>Thus, for forecasting purposes, we <em>multiply</em> the updated trend by the updated
+seasonal factor; to deseasonalise the data, we <em>divide</em> the data by the
+appropriate seasonal factor.</p>
+<p>Utilising the general exponential smoothing Equation (), the
+de-seasonalised data for time period <span class="math inline">\(t\)</span> can be obtained by dividing by
+the latest estimate of the seasonal effect i.e. the seasonal effect
+<span class="math inline">\(s\)</span> periods ago.</p>
+<p>Thus:
+<span class="math display">\[\begin{equation}
+M_{t} = \alpha\frac{X_{t}}{S_{t - s}} + (1 - \alpha)(M_{t - 1} + T_{t - 1})
+\label{eq:ts_HoltWint1}
+\end{equation}\]</span></p>
+<p>for a smoothing constant <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span>.</p>
+<p>For the linear trend <span class="math inline">\(T_{t}\)</span>, we have
+<span class="math display">\[\begin{equation}
+T_{t} = \gamma\left( M_{t} - M_{t - 1} \right) + (1 - \gamma)T_{t - 1}
+\label{eq:ts_HoltWint2}
+\end{equation}\]</span></p>
+<p>from before, where <span class="math inline">\(0 &lt; \gamma &lt; 1\)</span> is the smoothing constant for the
+trend.</p>
+<p>For the seasonal effect <span class="math inline">\(S_{t}\)</span>, note that the actual seasonal
+variation in the data is equal to the actual data point divided by the
+new estimate of the level. Our old estimate of the seasonal component at
+time <span class="math inline">\(t\)</span> is the old estimate made at time <span class="math inline">\(t - s\)</span>. So, again using
+our general Equation (), we have:
+<span class="math display">\[\begin{equation}
+S_{t} = \delta \frac{X_{t}}{M_{t}} + (1-\delta)S_{t - s}
+\label{eq:ts_HoltWint3}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(0 &lt; \delta &lt; 1\)</span> is the smoothing constant for the seasonal
+component.</p>
+<div id="starting-values" class="section level4 unnumbered">
+<h4>Starting values</h4>
+<p>In order to solve the recursive equations (), (), () we need
+to apply starting values. There is a whole field of research dedicated
+to identifying the optimal starting values for the Holt-Winters method,
+and starting values can have an effect on forecasts produced by the
+methods. Here we provide some fairly simple starting values, which have
+the advantage of being fairly intuitive:</p>
+
+
+<div class="example">
+<p><span id="exm:generator" class="example"><strong>Example 4.4  (Generator sales)  </strong></span>Below, we list quarterly product sales over the period 1984–1987 for a commercial
+generator manufacturer:</p>
+</div>
+
+<div class="figure" style="text-align: center"><span id="fig:generatorts"></span>
+<img src="MA30234_files/figure-html/generatorts-1.png" alt="Quarterly product sales for 1984--1987 from the generator example." width="70%" />
+<p class="caption">
+Figure 4.7: Quarterly product sales for 1984–1987 from the generator example.
+</p>
+</div>
+
+<p>A plot of the data (Figure <a href="timeseries.html#fig:generatorts">4.7</a>) suggests both a trend and seasonal
+component to the data. It is not obvious from the plot whether the
+seasonal element is multiplicative or additive – for illustration
+purposes, we will fit the Holt Winters multiplicative model. Note that the period (<span class="math inline">\(s\)</span>) in this example is 4.</p>
+
+<p>Starting values are calculated as follows:</p>
+<p>General Level:</p>
+<p><span class="math display">\[M_{4} = \frac{2881 + 3249 + 3180 + 3505}{4} = 3203.75\]</span></p>
+<div style="page-break-after: always;"></div>
+<p>Trend:</p>
+<p><span class="math display">\[T_{4} = \frac{\left(3020 + 3449 + 3472 + 3715 \right) - \left( 2881 + 3249 + 3180 + 3505 \right)}{4 \times 4} = 52.56\]</span></p>
+<p>Seasonal component:</p>
+<p><span class="math display">\[S_{1} = \frac{2881}{3203.75} = 0.899259\]</span> 
+<span class="math display">\[S_{2} = \frac{3249}{3203.75} = 1.014124\]</span>
+<span class="math display">\[S_{3} = \frac{3180}{3203.75} = 0.992587\]</span> 
+<span class="math display">\[S_{4} = \frac{3505}{3203.75} = 1.09430\]</span>
+</p>
+<p>Using parameter values of <span class="math inline">\(\alpha = 0.2\)</span>, <span class="math inline">\(\gamma = 0.2\)</span> and <span class="math inline">\(\delta = 0.1\)</span>, we can calculate relevant quantities for the forecasting as follows.</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mlr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="boxjenkinschap.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["MA30234.pdf", "MA30234.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

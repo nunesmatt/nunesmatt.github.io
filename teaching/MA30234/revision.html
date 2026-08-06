@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Revision of Summations and Sampling Distributions and Introduction to R | MA30234.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Revision of Summations and Sampling Distributions and Introduction to R | MA30234.utf8" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Revision of Summations and Sampling Distributions and Introduction to R | MA30234.utf8" />
+  
+  
+  
+
+<meta name="author" content="Matt Nunes" />
+
+
+<meta name="date" content="2020-10-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="slr.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="revision" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Revision of Summations and Sampling Distributions and Introduction to R</h1>
+<div id="revnotation" class="section level2">
+<h2><span class="header-section-number">1.1</span> Summation</h2>
+<p>Summation, as the name suggests, is simply the addition of a sequence of numbers. In mathematical notation, we use the Greek summation symbol <span class="math inline">\(\Sigma\)</span> () for this; the index, usually <span class="math inline">\(i\)</span> or <span class="math inline">\(j\)</span>, indicates the start and end points in the sequence where the summation should be calculated. For example, for a sequence
+<span class="math inline">\(\{x_i\}_{i=1}^{n}= \{x_1, \dots, x_n\}\)</span>, if we wanted to calculate <span class="math inline">\(x_3+x_4+x_5\)</span> it would be <span class="math inline">\(\sum_{i=3}^5 x_i\)</span>.</p>
+<p>For sequences <span class="math inline">\(\{x_i\}_{i=1}^{n}= \{x_1, \dots, x_n\}\)</span> and <span class="math inline">\(\{y_j\}_{j=1}^{n}=\{y_1,\dots,y_n\}\)</span>, some frequently used summations are given below:
+<span class="math display">\[\begin{eqnarray*}
+\sum_{i=1}^n x_i &amp;=&amp;  x_1 + x_2 + \ldots + x_n\\
+\sum_{i=1}^n y_i^2 &amp;=&amp;  y_1^2 + y_2^2 + \ldots + y_n^2\\
+\sum_{i=1}^n x_i y_i &amp;=&amp;  x_1 y_1 + x_2 y_2 + \ldots + x_n y_n\\
+\sum_{i=1}^n (x_i - \bar{x}) &amp;=&amp; (x_1 - \bar{x}) + (x_2 - \bar{x}) + \ldots + (x_n - \bar{x})\\
+\sum_{i=1}^n (x_i - \bar{x})^2 &amp;=&amp; (x_1 - \bar{x})^2 + (x_2 - \bar{x})^2 + \ldots + (x_n - \bar{x})^2
+\end{eqnarray*}\]</span></p>
+<p>These types of summations will be used in the first part of the course.</p>
+<div id="some-propertiestricks" class="section level3 unnumbered">
+<h3>Some properties/tricks</h3>
+<p><span class="math display">\[\begin{eqnarray*}
+\sum_{i=1}^{n} a x_i &amp;=&amp; a \sum_{i=1}^{n} x_i \\
+\sum_{i=1}^{n} (x_i + a) &amp;=&amp; \left(\sum_{i=1}^{n} x_i\right) + n a \\
+\sum_{i=1}^{n} (x_i + y_i) &amp;=&amp; \sum_{i=1}^{n} x_i + \sum_{i=1}^{n} y_i \\
+\sum_{i=1}^{n} (x_i - y_i) &amp;=&amp; \sum_{i=1}^{n} x_i - \sum_{i=1}^{n} y_i \\
+\sum_{i=1}^{n} i &amp;=&amp; 1 + 2 + 3 + \ldots + (n-2) + (n-1) + n = \frac{n(n+1)}{2}
+\end{eqnarray*}\]</span>
+</p>
+
+
+</div>
+</div>
+<div id="sampdist" class="section level2">
+<h2><span class="header-section-number">1.2</span> Estimates and sampling distributions</h2>
+<p>An  is our best guess at a parameter’s value, based on
+the data available to us. For example, suppose we assume that
+<span class="math display">\[\left\{ X_{1},X_{2},\ldots,X_{n} \right\}\]</span>
+are independently distributed <span class="math inline">\(N(\mu,\sigma^{2})\)</span> random variables.
+<span class="math inline">\(\mu\)</span> is a  representing a typical value, the mean of the
+ of <span class="math inline">\(X\)</span>’s we might encounter. <span class="math inline">\(\sigma^{2}\)</span> is
+another parameter, representing the variance of the same population.</p>
+<div style="page-break-after: always;"></div>
+<p>We can estimate <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^{2}\)</span> in a variety of ways, but, based on a
+sample of size , the most common estimates used are:
+<span class="math display">\[\hat{\mu} = \bar{x} = \frac{1}{n}\ \sum_{i = 1}^{n}x_{i}\]</span></p>
+<p>and
+<span class="math display">\[{\hat{\sigma}}^{2} = \ s^{2} = \ \frac{1}{n - 1}\sum_{i = 1}^{n}{(x_{i} -\bar{x}})^{2}\]</span></p>
+<p>The hat symbol <span class="math inline">\(\hat{\phantom{mu}}\)</span> indicates we are calculating an estimate.
+</p>
+
+<div class="example">
+<p><span id="exm:sumtesting" class="example"><strong>Example 1.1  (Estimate example)  </strong></span>Suppose we have a <strong>sample</strong> of 10 observations (<span class="math inline">\(n = 10\)</span>) from an assumed <span class="math inline">\(N(\mu,\sigma^{2})\)</span> population, namely:</p>
+<p>You should be able to calculate
+<span class="math display">\[\hat{\mu} = \bar{x}= \frac{1}{10}\ \sum_{i = 1}^{10}x_{i} = 1.967\]</span>
+<span class="math display">\[{\hat{\sigma}}^{2} = \ s^{2} = \ \frac{1}{9}\sum_{i = 1}^{10}{(x_{i} -\bar{x}})^{2} = 1.7449\]</span></p>
+So, from this particular sample of 10, we estimate <span class="math inline">\(\hat{\mu} = 1.967\)</span>
+and <span class="math inline">\(\hat{\sigma}^{2} = 1.7449\)</span>.
+</div>
+
+<p>If we selected another sample of 10 from the population, we would obtain
+another, almost certainly different, estimate <span class="math inline">\(\hat{\mu}\)</span> and another
+estimate <span class="math inline">\({\hat{\sigma}}^{2}\)</span>. The variation in the value of our
+estimate from sample to sample is called the  of the estimate. If we know the sampling distribution of
+the estimate, we can use it to build confidence intervals and carry out
+hypothesis tests on the population parameters.</p>
+<p>If <span class="math inline">\(\left\{ X_{1},X_{2},\ldots,X_{n} \right\}\)</span> are
+<span class="math inline">\(N(\mu,\sigma^{2})\)</span> random variables with <span class="math inline">\(\sigma\)</span> known, then
+<span class="math display">\[\bar{X}= \hat{\mu}\sim N\left(\mu,\ \frac{\sigma^{2}}{n}\right)\]</span></p>
+<p>Note that:</p>
+<ul>
+<li><p>the distribution of <span class="math inline">\(\hat{\mu}\)</span> has the same mean as the
+distribution of <span class="math inline">\(X_{1}\)</span> or <span class="math inline">\(X_{2}\)</span>, but a smaller variance.</p></li>
+<li><p>the variance of <span class="math inline">\(\hat{\mu}\)</span> reduces as the sample size <span class="math inline">\(n\)</span> increases</p></li>
+<li><p>Hence, <span class="math inline">\(\bar{X}\)</span> is a better estimate of <span class="math inline">\(\mu\)</span>
+than a single observation, e.g. <span class="math inline">\(X_{1}\)</span> or <span class="math inline">\(X_{2}\)</span></p></li>
+</ul>
+<p>A 95% confidence interval for <span class="math inline">\(\mu\)</span> <strong>based on an observed sample</strong> <span class="math inline">\(x=(x_1,\dots,x_n)\)</span> is therefore:
+<span class="math display">\[\bar{x} \pm 1.96\times\frac{\sigma}{\sqrt{n}}\]</span></p>
+<p>If <span class="math inline">\(\sigma\)</span> is not known, but is estimated using the sample standard
+deviation, we use the <span class="math inline">\(t\)</span>-distribution (with <span class="math inline">\((n - 1) = 9\)</span> degrees
+of freedom) to build a confidence interval for <span class="math inline">\(\mu\)</span>.
+</p>
+
+<div class="example">
+<span id="exm:sumtestCI" class="example"><strong>Example 1.2  (Confidence interval example)  </strong></span>For Example <a href="revision.html#exm:sumtesting">1.1</a>, for instance, the 95% confidence interval for <span class="math inline">\(\mu\)</span> is
+<span class="math display">\[ 1.967 - t_{0.025,9}\times\sqrt{1.7449/10} &lt; \ \mu &lt; 1.967 + t_{0.025,9}\times\sqrt{1.7449/10} \]</span>
+i.e.
+<span class="math display">\[1.0221 &lt; \mu &lt; 2.9119\]</span>
+</div>
+
+<p>We will use the sampling distributions of estimates of parameters in our analysis later in the unit.</p>
+<div id="hyptest" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Hypothesis testing</h3>
+<p>We can use the sampling distribution of an estimate of the parameter of a population to test hypotheses about the parameter.
+For instance, we can hypothesise that the population mean is</p>
+<ul>
+<li><p>different from a value <span class="math inline">\(\mu_0\)</span></p></li>
+<li><p>greater than a value <span class="math inline">\(\mu_0\)</span></p></li>
+<li><p>smaller from a value <span class="math inline">\(\mu_0\)</span></p></li>
+</ul>
+<p>In these cases, the hypotheses we are testing are (respectively):</p>
+<ul>
+<li><p><span class="math inline">\(H_0: \mu = \mu_0\)</span> vs. <span class="math inline">\(H_1: \mu \neq \mu_0\)</span></p></li>
+<li><p><span class="math inline">\(H_0: \mu = \mu_0\)</span> vs. <span class="math inline">\(H_1: \mu &gt; \mu_0\)</span></p></li>
+<li><p><span class="math inline">\(H_0: \mu = \mu_0\)</span> vs. <span class="math inline">\(H_1: \mu &lt; \mu_0\)</span></p></li>
+</ul>
+<p>In the first case we carry out a two-tailed test; in the latter two cases we carry out a one-tailed test (right-tailed and left-tailed).</p>
+<p>Typically a test is carried out a pre-specified type-I error rate <span class="math inline">\(\alpha\)</span> (typical values of <span class="math inline">\(\alpha\)</span> are 0.1, 0.05, 0.01).
+The pre-specified type-I error rate indicates the level of false positives we are willing to allow in the testing procedures (i.e. tests which reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(H_0\)</span> is actually true).</p>
+<p>Alternatively one can compute the p-value corresponding to the observed test-statistic, which gives an indication of the evidence in favour of <span class="math inline">\(H_0\)</span>.
+The p-value can then be compared with the pre-specified type-I error rate.</p>
+<p>If we can assume that the sample mean is Normally distributed, either because the original data is Normally distributed, or our sample size is large enough (say,
+<span class="math inline">\(n=30\)</span> or above) AND we know the population standard deviation, then we use the Normal distribution to test the hypotheses.</p>
+<p>If we can assume the sample mean is Normally distributed, but we have had to estimate the standard deviation using the sample standard deviation (and we have therefore
+introduced additional uncertainty into our hypothesis), then we use the t-distribution to test the hypotheses.</p>
+<p>Assuming we do not know the population variance, then we would proceed as follows in each of the cases above:</p>
+<ol style="list-style-type: decimal">
+<li><em>two-sided test</em> <span class="math inline">\(H_0: \mu = \mu_0\)</span> vs. <span class="math inline">\(H_1: \mu \neq \mu_0\)</span>.</li>
+</ol>
+<p>Since this is a two-sided test, if the test statistic
+<span class="math display">\[ t_{obs} = \frac{(\bar{x} - \mu_0)}{s/\sqrt{n}} &gt; t_{1-\alpha/2, n-1} \quad {or} \quad t_{obs} = \frac{(\bar{x} - \mu_0)}{s/\sqrt{n}} &lt; t_{\alpha/2, n-1}\]</span>
+then we reject <span class="math inline">\(H_0\)</span>. The p-value of the test can be calculated as: <span class="math inline">\(p = 2 P(T_{n-1} &gt; |t_{obs}|)\)</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><em>one-sided test</em> <span class="math inline">\(H_0: \mu = \mu_0\)</span> vs. <span class="math inline">\(H_1: \mu &gt; \mu_0\)</span>.</li>
+</ol>
+<p>Since this is a one-sided test, if the test statistic
+<span class="math display">\[ t_{obs} = \frac{(\bar{x} - \mu_0)}{s/\sqrt{n}} &gt; t_{1-\alpha, n-1} \]</span>
+then we reject <span class="math inline">\(H_0\)</span>.
+The p-value of the test can be calculated as: <span class="math inline">\(p = P(T_{n-1} &gt; t_{obs})\)</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li><em>one-sided test</em> <span class="math inline">\(H_0: \mu = \mu_0\)</span> vs. <span class="math inline">\(H_1: \mu &lt; \mu_0\)</span>.</li>
+</ol>
+<p>Since this is a one-sided test, if the test statistic
+<span class="math display">\[ t_{obs} = \frac{(\bar{x} - \mu_0)}{s/\sqrt{n}} &lt; t_{\alpha, n-1} \]</span>
+then we reject <span class="math inline">\(H_0\)</span>.
+The p-value of the test can be calculated as: <span class="math inline">\(p = P(T_{n-1} &lt; t_{obs})\)</span></p>
+</div>
+</div>
+<div id="usingr" class="section level2">
+<h2><span class="header-section-number">1.3</span> Using R</h2>
+<p>We will use  for different sections of this course:</p>
+<ul>
+<li><p>for plotting and visualising data</p></li>
+<li><p>carrying out repetitive calculations</p></li>
+<li><p>calculating parameter estimation</p></li>
+<li><p>using in-built functions and packages to carry out some of the analysis itself.</p></li>
+</ul>
+<p>It is recommended you look over the suggested <em>Introduction to R</em> material on Moodle at the start of the course to reduce the time needed later for producing results for assessed coursework.</p>
+<div id="r-packages" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> R packages</h3>
+<p>We will predominantly use in-built functions, as well as two  add-on packages for the time series section of this course: the <code>astsa</code> package and the <code>tseries</code> package. Some additional packages may be required for specific datasets and methods, such as the <code>forecast</code> package.</p>
+<p>Although not needed early in the course, it is suggested you make sure these are installed on your version of  so they are ready for when you need them.  add-on packages can be installed by:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>( <span class="kw">c</span>(<span class="st">&quot;astsa&quot;</span>, <span class="st">&quot;tseries&quot;</span>) )</a></code></pre></div>
+
+<p>When you need to use them, load them into your  workspace using for
+example: </p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;astsa&quot;</span>)</a></code></pre></div>
+</div>
+<div id="plotting-data" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Plotting data</h3>
+<p>Line and scatter plots in particular are useful accompaniments to
+analysis in this unit, although other types of charts (e.g. histograms)
+may also be appropriate.</p>
+<p>To create a plot in , the <code>plot</code> command is very general command which allows a graph to be drawn with different attributes. We now introduce some useful graphs types in ,.</p>
+<div id="histograms" class="section level4 unnumbered">
+<h4>Histograms</h4>
+<p>A histogram is one of the most commonly used graphs and is used to illustrate comparisons among categories or the general behaviour (distribution)
+of data.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># load in-built dataset</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">data</span>(mtcars)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># plot histogram, with a user-defined x axis label</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">hist</span>(mtcars<span class="op">$</span>hp, <span class="dt">xlab =</span> <span class="st">&quot;Horse power of cars in 1974&quot;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:mtcarhp"></span>
+<img src="MA30234_files/figure-html/mtcarhp-1.png" alt="An example of a histogram using an in-built dataset using the \texttt{hist} function." width="70%" />
+<p class="caption">
+Figure 1.1: An example of a histogram using an in-built dataset using the  function.
+</p>
+</div>
+
+</div>
+<div id="line-graphs" class="section level4 unnumbered">
+<h4>Line graphs</h4>
+<p>Line Graphs are mainly used to plot changes in data over time e.g. temperature.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># load saved data</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">load</span>(<span class="st">&quot;arctic.Rdata&quot;</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw">names</span>(minSeaIce)</a></code></pre></div>
+<pre><code>## [1] &quot;Year&quot;      &quot;IceExtent&quot;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># plot data with &quot;b&quot; -- both points and line </span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">plot</span>(minSeaIce<span class="op">$</span>Year, minSeaIce<span class="op">$</span>IceExtent, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>, </a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">                    <span class="dt">ylab =</span> <span class="st">&quot;Sea Ice Extent&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>)    </a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">library</span>(astsa)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co"># plot in-built time series data object</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="kw">data</span>(gtemp)</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="kw">plot</span>(gtemp, <span class="dt">ylab =</span> <span class="st">&quot;Global Temperature&quot;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:lineplots"></span>
+<img src="MA30234_files/figure-html/lineplots-1.png" alt="Examples of line graphs with both general data and \texttt{ts} (time series) objects. Left: arctic sea ice; right: global annual temperature." width="70%" /><img src="MA30234_files/figure-html/lineplots-2.png" alt="Examples of line graphs with both general data and \texttt{ts} (time series) objects. Left: arctic sea ice; right: global annual temperature." width="70%" />
+<p class="caption">
+Figure 1.2: Examples of line graphs with both general data and  (time series) objects. Left: arctic sea ice; right: global annual temperature.
+</p>
+</div>
+
+</div>
+<div id="scatter-graphs" class="section level4 unnumbered">
+<h4>Scatter graphs</h4>
+<p>A scatter graph is useful for plotting the relationship between two different variables.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># load in-built dataset</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">data</span>(mtcars)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># plot scatter plot, using a different point type </span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw">plot</span>(mtcars<span class="op">$</span>wt, mtcars<span class="op">$</span>mpg, <span class="dt">main =</span> <span class="st">&quot;Scatterplot example&quot;</span>, </a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">                    <span class="dt">xlab =</span> <span class="st">&quot;Car Weight&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Miles Per Gallon&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:mtcarscatter"></span>
+<img src="MA30234_files/figure-html/mtcarscatter-1.png" alt="An example of a scatter plot." width="70%" />
+<p class="caption">
+Figure 1.3: An example of a scatter plot.
+</p>
+</div>
+
+<p>Examples will be given in the first problem class.</p>
+</div>
+</div>
+<div id="formulae" class="section level3">
+<h3><span class="header-section-number">1.3.3</span> Formulae, Data Manipulation and Functions</h3>
+<p>Calculations in  are carried out on data in vector or matrix objects, using <em>assignment</em>, using <code>=</code> or <code>&lt;-</code> (or <code>-&gt;</code>). For example, suppose we wanted to store the sample <span class="math inline">\((x_1, \ldots ,x_{10}) = (2,5,6,7,1,9,5,1,4,5)\)</span> as the vector <code>x</code> in  .</p>
+<p>We would do the command </p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># c() is for &quot;concatenate&quot;</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">x =<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># same as above (left assignment)</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co"># same as above (right assignment)</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>) -&gt;<span class="st"> </span>x</a></code></pre></div>
+
+<div id="vectors-and-elements" class="section level4 unnumbered">
+<h4>Vectors and elements</h4>
+<p>In  , we can access elements of vectors and matrices easily:</p>
+<ul>
+<li><p>To refer to a particular entry of <code>x</code>, we use square brackets. For example <code>x[3]</code> is the third element of <code>x</code>, i.e. 6.</p></li>
+<li><p>To refer to a particular entry of the <em>matrix</em> <code>X</code>, it would be <code>X[3,4]</code> for the <span class="math inline">\((3,4)th\)</span> entry (third row, fourth column).</p></li>
+<li><p>we can manipulate the vectors directly as objects. For example, if you wanted to calculate the square of <span class="math inline">\(x_3\)</span>, and place the
+result in a different object <code>y</code>, you could just write <code>y = x[3]^2</code>. Note that vectors are similarly handled; <code>x^2</code> would be the vector consisting of all of entries in the vector <code>x</code> but squared, whereas <code>x[2:4]^2</code> would be the vector <span class="math inline">\((x_2^2,x_3^2,x_4^2)\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div id="functions" class="section level3">
+<h3><span class="header-section-number">1.3.4</span> Functions</h3>
+<p>There are many functions built-in to  . Some useful ones are:</p>
+<ul>
+<li><p><code>sum(x)</code> calculates the sum of the data in cells <code>x</code></p></li>
+<li><p><code>mean(x)</code> calculates the mean of the data in the vector <code>x</code></p></li>
+<li><p><code>sd(x)</code> calculates the standard deviation of the data points in <code>x</code></p></li>
+<li><p><code>cor(x,y)</code> calculates the correlation between two data sets <code>x</code> and <code>y</code></p></li>
+</ul>
+<p>Other functions are available – see the  documentation.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="slr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["MA30234.pdf", "MA30234.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

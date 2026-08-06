@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Simple Linear Regression | MA30234.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Simple Linear Regression | MA30234.utf8" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Simple Linear Regression | MA30234.utf8" />
+  
+  
+  
+
+<meta name="author" content="Matt Nunes" />
+
+
+<meta name="date" content="2020-10-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="revision.html"/>
+<link rel="next" href="mlr.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="slr" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Simple Linear Regression</h1>
+<div id="slrmotivation" class="section level2">
+<h2><span class="header-section-number">2.1</span> Motivation</h2>
+<p>In the search for structure between variables,  is one of the most commonly used approaches.</p>
+<p>Regression is defined in the <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
+on-line dictionary as
+follows:</p>
+
+<p> is:</p>
+<ul>
+<li><p>simple – using just a single variable to predict another variable</p></li>
+<li><p>linear – a linear relationship is assumed between the two variables under consideration</p></li>
+</ul>
+<p>It is relevant when we have a response variable <span class="math inline">\(Y\)</span> (also called the
+dependent variable or the predicted variable) which depends linearly on
+an explanatory variable <span class="math inline">\(x\)</span> (also called a predictor variable, covariate or
+independent variable).</p>
+<p>In linear regression,</p>
+<ul>
+<li><p>x is considered as a vector of measured values which we know correctly</p></li>
+<li><p>Y is considered as having a random distribution</p></li>
+</ul>
+<p>Examples of relationship which could be investigated using simple linear regression are listed in Table .</p>
+<div style="page-break-after: always;"></div>
+
+<p>The standard linear regression model is of the form:
+<span class="math display">\[\begin{equation}
+Y = \ \alpha + \ \beta x + \ \varepsilon
+\end{equation}\]</span></p>
+<p>where:</p>
+<ul>
+<li><p><span class="math inline">\(Y\)</span> is the response variable</p></li>
+<li><p><span class="math inline">\(x\)</span> is the explanatory variable</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> is the intercept</p></li>
+<li><p><span class="math inline">\(\beta\)</span> is the slope</p></li>
+<li><p><span class="math inline">\(\varepsilon\)</span> is an error term</p></li>
+</ul>
+<p>The intercept <span class="math inline">\(\alpha\)</span> can be zero or non-zero.
+The slope <span class="math inline">\(\beta\)</span> can be positive (i.e. the predicted variable tends
+to increase as the predictor variable increases), negative, or zero.
+In the next sections we consider:</p>
+<ul>
+<li><p>How to measure the strength of the (linear) relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(Y\)</span></p></li>
+<li><p>How to fit such a model to data – i.e. how do we find estimates of <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> and the error term <span class="math inline">\(\varepsilon\)</span> ?</p></li>
+<li><p>How to predict additional values of <span class="math inline">\(Y\)</span> for given values of <span class="math inline">\(x\)</span></p></li>
+<li><p>How to examine whether the simple linear regression model is appropriate for the particular data set we are investigating.</p></li>
+</ul>
+</div>
+<div id="slrassess" class="section level2">
+<h2><span class="header-section-number">2.2</span> Assessing the linear relationship: Pearson’s correlation coefficient</h2>
+<p>A convenient measure to quantify the strength of the linear relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(Y\)</span> is the Pearson’s correlation coefficient, generally indicated as <span class="math inline">\(\rho\)</span>.
+The coefficient varies between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>: a value of <span class="math inline">\(\rho = -1\)</span> indicate a perfect negative correlation, which means that for increasing values of <span class="math inline">\(x\)</span> we are certain that the values of <span class="math inline">\(Y\)</span> will be diminishing.
+Inversely, when <span class="math inline">\(\rho = 1\)</span> there is a perfect positive correlation: increasing values of <span class="math inline">\(x\)</span> would correspond to increasing values of <span class="math inline">\(Y\)</span>.
+Finally, when <span class="math inline">\(\rho = 0\)</span>, <span class="math inline">\(x\)</span> and <span class="math inline">\(Y\)</span> are independent, and knowing something about the value of <span class="math inline">\(x\)</span> gives no information on the possible values of <span class="math inline">\(Y\)</span>.</p>
+<p>Since <span class="math inline">\(\rho\)</span> gives an indication of the strength of the relationship between two variables we have that <span class="math inline">\(\rho(x,y) = \rho(y,x)\)</span>. The coefficient simply gives an indication of how much one variable can be related to the other one, it does not give an indication on causality (correlation does not imply causation).</p>
+<p>For two samples <span class="math inline">\(x = (x_1, \ldots, x_n)\)</span> and <span class="math inline">\(y = (y_1, \ldots, y_n)\)</span>, the correlation coefficient is estimated as
+<span class="math display">\[r = \frac{\sum_{i=1}^n (x_i - \bar{x}) (y_i - \bar{y}) }{\sqrt{ \sum_{i=1}^n (x_i - \bar{x})^2 \sum_{i=1}^n (y_i - \bar{y})^2}} \]</span></p>
+<p>A statistical test to assess whether a significant linear relationship exists between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> can be performed by testing whether
+<span class="math display">\[H_0 : \rho = 0 \quad \text{vs.} \quad  H_1 : \rho \neq 0 \]</span></p>
+<p>The test statistic to be used is
+<span class="math display">\[ t_{obs} = \frac{r \sqrt{(n-2)}}{\sqrt{1-r^2}}  \]</span></p>
+<p>and it can be shown that under the null hypothesis the test-statistic follows a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n-2\)</span> degrees of freedom (<span class="math inline">\(t_{n-2}\)</span>).
+For a confidence level of <span class="math inline">\(1-\alpha\)</span>, we would typically reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(t_{obs}\)</span> is large, i.e when <span class="math inline">\(t_{obs} &gt; t_{1-\alpha/2, n-2}\)</span> or <span class="math inline">\(t_{obs} &lt; t_{\alpha/2, n-2}\)</span>.</p>
+<p>Note that the significance of the correlation can only be assessed between any pair of variables: this will be less useful for multiple linear regression.
+Also, if the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(Y\)</span> is not linear, the correlation between the two variables might show as not significant: it is always a good idea to plot the data to assess whether a linear relationship is appropriate.</p>
+<p>In  there is a built-in <code>cor</code> function which can be used on single as well as multiple variables.</p>
+</div>
+<div id="slrfitting" class="section level2">
+<h2><span class="header-section-number">2.3</span> Fitting and testing</h2>
+<div id="slrtheory" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Estimating regression coefficients – Theory</h3>
+<p>Let us assume we have <span class="math inline">\(n\)</span> pairs of points
+<span class="math inline">\(\{(x_{i},y_{i})\}_{i = 1}^{n}\)</span>, and that the
+initial plot of <span class="math inline">\(Y\)</span> against <span class="math inline">\(x\)</span> suggests a linear relationship
+between the two variables (we will examine this assumption later).</p>
+<p>We assume that the <span class="math inline">\(\left\{ Y_{i} \right\}\)</span> are:</p>
+<ul>
+<li><p>mutually independent: i.e. the value of <span class="math inline">\(Y_{j}\)</span> is independent of <span class="math inline">\(Y_{k}\)</span> for all <span class="math inline">\(j,k = 1,\ldots,n\ j \neq k\)</span></p></li>
+<li><p>normally distributed with mean <span class="math inline">\(\alpha + \ \beta x_{i}\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span> i.e.</p></li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+Y_{i}\sim\ N(\alpha + \ \beta x_{i},\ \sigma^{2})
+\label{eq:linRegStatement}
+\end{equation}\]</span></p>
+<p>What rationale should we use to choose the “best” estimators <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>?
+Figure <a href="slr.html#fig:slrex">2.1</a> shows sample data points <span class="math inline">\(\left\{ (x_{i}, y_{i}) |\ i = 1,\ldots, n \right\}\)</span> and a regression line <span class="math inline">\(\alpha + \ \beta x\)</span>. </p>
+<div class="figure" style="text-align: center"><span id="fig:slrex"></span>
+<img src="MA30234_files/figure-html/slrex-1.png" alt="Data points and an estimated simple linear regression line." width="70%" />
+<p class="caption">
+Figure 2.1: Data points and an estimated simple linear regression line.
+</p>
+</div>
+
+<p>One method (there are others!) is to minimise the total distance
+between all of the data points and the regression line. To take
+account of differences above the line and below the line, we choose
+<span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> to minimise the sum of squared
+differences:
+<span class="math display">\[\begin{equation}
+S(\alpha,\beta) = \ \sum_{i = 1}^{n}{(y_{i} - (\alpha + \beta x_{i}))^{2}}
+\label{eq:lsobj}
+\end{equation}\]</span></p>
+<p>This method is called the .</p>
+<p>To find the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> which minimise <span class="math inline">\(S\)</span> (i.e. <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span>), we differentiate <span class="math inline">\(S\)</span> with respect to <span class="math inline">\(\alpha\)</span> and
+<span class="math inline">\(\beta\)</span> and find values which make <span class="math inline">\(\frac{\partial S}{\partial\alpha}\)</span> and<span class="math inline">\(\ \frac{\partial S}{\partial\beta}\)</span> equal to 0. Firstly,
+<span class="math display">\[\begin{equation}
+\frac{\partial S}{\partial \alpha }= \ \sum_{i = 1}^{n}{2(y_{i} - (\alpha + \beta x_{i})\ {)( - 1)}^{}}
+\label{eq:leastSquares_a}
+\end{equation}\]</span></p>
+<p>which equals 0 when
+<span class="math display">\[\begin{equation*}
+\sum_{i = 1}^{n}{(y_{i} - ( \alpha + \beta x_{i})) = 0\ }
+\end{equation*}\]</span></p>
+<p>i.e. when
+<span class="math display">\[\begin{equation}
+\alpha = \ \frac{\sum_{i = 1}^{n}y_{i}}{n} - \ \beta\frac{\sum_{i = 1}^{n}x_{i}}{n}.
+\label{eq:alphaLeastSquares}
+\end{equation}\]</span></p>
+<p>Similarly,
+<span class="math display">\[\begin{equation}
+\frac{\partial S}{\partial\beta} = \ \sum_{i = 1}^{n}{2(y_{i} - (\alpha + \beta x_{i})\ {)( - x_{i})}^{}}
+\label{eq:leastSquares_b}
+\end{equation}\]</span></p>
+<p>which equals 0 when
+<span class="math display">\[\begin{equation}
+\sum_{i = 1}^{n}{x_{i}y_{i}} - \alpha \sum_{i = 1}^{n}{x_{i}} - \ \beta \sum_{i = 1}^{n}{x_{i}^{2} = 0.}
+\label{eq:leastSquaresProd}
+\end{equation}\]</span></p>
+<p>Combining these two equations, if we define:
+<span class="math display">\[\begin{equation}
+\bar{x} = \ \frac{\sum_{i = 1}^{n}x_{i}}{n} 
+\label{eq:regXmean}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\bar{y} = \ \frac{\sum_{i = 1}^{n}y_{i}}{n}
+\label{eq:regYmean}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+S_{xx} = \ \sum_{i = 1}^{n}x_{i}^{2} - \ \frac{1}{n}\left(\sum_{i = 1}^{n}x_{i}\right)^{2}
+\label{eq:leastSquares2}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+S_{yy} = \ \sum_{i = 1}^{n}y_{i}^{2} - \ \frac{1}{n}\left(\sum_{i = 1}^{n}y_{i}\right)^{2}
+\label{eq:leastSquares3}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+S_{xy}  = \ \sum_{i = 1}^{n}x_{i}y_{i} - \ \frac{1}{n}\sum_{i = 1}^{n}x_{i}\sum_{i = 1}^{n}y_{i}
+\label{eq:leastSquares4}
+\end{equation}\]</span></p>
+<p>then we find:
+<span class="math display">\[\begin{equation}
+\hat{\beta} = \ \frac{S_{x,y}}{S_{xx}}
+\label{eq:betaLeastSquares}
+\end{equation}\]</span>
+<span class="math display">\[\begin{equation}
+\hat{\alpha} = \ \bar{y} - \ \hat{\beta}\ \bar{x}
+\label{eq:zz}
+\end{equation}\]</span></p>
+<p>Although this may look complex, in practice it is fairly reasonable to calculate, even by hand. </p>
+
+<div class="example">
+<p><span id="exm:lsex" class="example"><strong>Example 2.1  (Least squares)  </strong></span>Let us take a set of 6 data points, as listed below.</p>
+</div>
+
+<p>We need to add 3 more columns and a row for the totals, as follows:</p>
+
+<p>So:
+<span class="math display">\[\begin{eqnarray*} 
+\bar{x} &amp;=&amp; 58/6 = 9.67\\
+\bar{y} &amp;=&amp; 115/6 = 19.17\\
+S_{xx} &amp;=&amp; 690 - (58)^{2}/6 = 129.33 \\
+S_{yy} &amp;=&amp; 2717 - (115)^{2}/6 = 512.83 \\
+S_{xy} &amp;=&amp; 1368 - (58\times115)/6 = 256.33 
+\end{eqnarray*}\]</span></p>
+<p>Then,
+<span class="math display">\[\begin{eqnarray*} 
+\hat{\beta} &amp;=&amp;  \frac{S_{xy}}{S_{xx}} = \frac{256.33}{129.33} =  1.9820\\
+\hat{\alpha} &amp;=&amp;  \bar{y} - \ \hat{\beta}\bar{x} = 19.17 - 1.9820\times9.67 = 0.00406. 
+\end{eqnarray*}\]</span></p>
+<p>Note that we can now also calculate the correlation coefficient between <span class="math inline">\(x\)</span> and <span class="math inline">\(Y\)</span>, namely:
+<span class="math display">\[\begin{equation}
+r = \frac{S_{xy}}{\sqrt{S_{xx}\times S_{yy}}}
+\end{equation}\]</span></p>
+<p>In Example <a href="slr.html#exm:lsex">2.1</a>,
+<span class="math display">\[r = \frac{256.33}{\sqrt{129.33\times512.83}} = 0.9953\]</span></p>
+<p>– a very strong correlation indeed!</p>
+</div>
+<div id="testreg" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Testing if the regression is significant</h3>
+<p>Our estimates of <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> to date are point estimates.
+It can be shown that these estimates are unbiased, i.e. the estimated values tend to correctly estimate the true value of the parameters.
+For this property yo be true, we only need to make sure that the sample use din the calculation is formed by independent observations.
+However, in order to test hypotheses about the coefficients,
+we need to know the sampling distributions of <span class="math inline">\(\hat{\alpha}\)</span> and
+<span class="math inline">\(\hat{\beta}.\)</span> To say something about these sampling distribution
+we need to rely on the assumption of normally distributed errors with
+equal variances: <span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span>.
+If this assumption holds, it can be shown (but not here!) that:</p>
+<p><span class="math display">\[\hat{\alpha}\sim N\left(\alpha,\ \frac{\sigma^{2}\sum_{i = 1}^{n}x_{i}^{2}}{n\times S_{xx}} \right)\]</span></p>
+<p>and
+<span class="math display">\[\hat{\beta}\sim N\left(\beta,\ \frac{\sigma^{2}}{S_{xx}}\right)\]</span></p>
+<p>Clearly, the sampling distributions of both <span class="math inline">\(\hat{\alpha}\)</span> and
+<span class="math inline">\(\hat{\beta}\)</span> depend on the unknown parameter <span class="math inline">\(\sigma^{2}\)</span>. The
+estimate we use for <span class="math inline">\(\sigma^{2}\)</span> is an average of the squared
+differences between the observed <span class="math inline">\(\{ y_{i}\}\)</span> and the
+fitted values <span class="math inline">\(\{\hat{y}_{i} = \hat{\alpha} + \hat{\beta}x_{i} \}\)</span>
+<span class="math display">\[{\hat{\sigma}}^{2} = \ \frac{1}{n - 2}\sum_{i=1}^{n}(y_{i} - \hat{y}_{i})^{2}\]</span></p>
+<p>Note the use of the denominator <span class="math inline">\((n-2)\)</span> in the above equation, because we ``lose’’ 2 degrees of freedom since we are estimating two parameters (<span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>).</p>
+<p>Once the regression parameters have been estimated it is generally asked whether the regression is significant. Typically this means assessing whether there is a significant linear
+dependence of y on x i.e. if <span class="math inline">\(\beta \neq 0\)</span> in the regression equation <span class="math inline">\(y = \ \alpha + \ \beta x.\)</span> Formally, therefore, our hypothesis is of the form:
+<span class="math display">\[H_{0}:\beta = 0 \quad vs. \quad H_{1}:\beta \neq 0\]</span>
+We could test these hypotheses by just using the sampling distribution
+of <span class="math inline">\(\hat{\beta}\)</span>. However, we cannot do the same thing for multiple
+regression in Chapter 3. Therefore, we won’t use the sampling
+distribution of <span class="math inline">\(\hat{\beta}\)</span> here to test the hypotheses – instead
+we will use another form of Analysis of Variance which CAN be extended
+to multiple regression.</p>
+<p>In this form of Analysis of Variance, we partition the total variability
+in the data into two parts:</p>
+<ul>
+<li><p>that which can be used as an estimate of <span class="math inline">\(\sigma^{2}\)</span> (the
+``residual’’ source of variation)</p></li>
+<li><p>that which is OK if <span class="math inline">\(H_{0}\)</span> is true, but is “too large” if <span class="math inline">\(H_{0}\)</span>
+is not true i.e. if <span class="math inline">\(\beta \neq 0\)</span> (the “regression” source of
+variation).</p></li>
+</ul>
+<p>As we might expect, the regression source of variation is a function of
+<span class="math inline">\(\hat{\beta}\)</span>. Because <span class="math inline">\(\beta\)</span> can be positive or negative, consider
+<span class="math inline">\({\hat{\beta}}^{2}\)</span>, which is always positive.
+If <span class="math inline">\(\beta = 0\)</span> (i.e. <span class="math inline">\(H_{0}\)</span> is true), we expect <span class="math inline">\(\hat{\beta}\)</span> to
+be small, and hence <span class="math inline">\({\hat{\beta}}^{2}\)</span> will be small too.
+However, if <span class="math inline">\(\beta \neq 0\)</span>, we expect <span class="math inline">\({\hat{\beta}}^{2}\)</span> to be
+large. To decide what a  or  values of <span class="math inline">\({\hat{\beta}}^{2}\)</span> is we need some more information.</p>
+<p>The variance of <span class="math inline">\(\hat{\beta}\)</span> is defined by:
+<span class="math display">\[\Var(\hat{\beta})= \E({\hat{\beta}}^{2}) - \E(\hat{\beta})^{2}\]</span>
+so that
+<span class="math display">\[\begin{eqnarray*}
+\E({\hat{\beta}}^{2}) &amp;=&amp; \Var(\hat{\beta}) + {\E(\hat{\beta})}^{2}\\
+&amp; = &amp; \frac{\sigma^{2}}{S_{xx}} +  \beta^{2}
+\end{eqnarray*}\]</span></p>
+<p>and hence
+<span class="math display">\[S_{xx} \E(\hat{\beta}^{2}) = \sigma^{2} + 
+\beta^{2} S_{xx}\]</span></p>
+<p>So, if <span class="math inline">\(\beta = 0\)</span> (i.e. <span class="math inline">\(H_{0}\)</span> is true), then
+<span class="math inline">\(S_{x,x}{\hat{\beta}}^{2}\)</span> will be a good estimate of
+<span class="math inline">\(\sigma^{2}\)</span>.</p>
+<p>Conversely, if <span class="math inline">\(\beta \neq 0\)</span> (i.e. <span class="math inline">\(H_{0}\)</span> is not true), then
+<span class="math inline">\(S_{xx}{\hat{\beta}}^{2}\)</span> will be too large to be an
+estimate of <span class="math inline">\(\sigma^{2}\)</span>.</p>
+<p>The regression ANOVA table is constructed as follows:</p>
+
+<p>Note that:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math inline">\(\sum_{i = 1}^{n}{(y_{i} - \bar{y})}^{2}\)</span> = <span class="math inline">\(S_{y,y}\)</span>, which has already been calculated. Since the Residual Sum of Squares = the Total Sum of Squares minus the Regression Sum of Squares, we can easily calculate <span class="math inline">\(\sum_{i = 1}^{n}{(y_{i} - {\hat{y}}_{i})}^{2}\)</span> from other calculations that we have already made.</p></li>
+<li><p>The degrees of freedom add up.</p></li>
+</ol>
+<p>If <span class="math inline">\(H_{0}\)</span> is valid, the ratio of the Regression Mean Square to the Residual Mean Square follows a <span class="math inline">\(F_{1,n - 2}\)</span> random variable. If the ratio is large (as assessed by comparing it to quantiles of the <span class="math inline">\(F_{1, n-2}\)</span> distribution) there is an indication that <span class="math inline">\(H_{0}\)</span> might not be true.</p>
+
+<div class="example">
+<p><span id="exm:machines" class="example"><strong>Example 2.2  (Machines)  </strong></span>A sample of 10 observations <span class="math inline">\((x_i,y_i)\)</span> is given. <span class="math inline">\(\{ y_{i}\}_{i = 1}^{10}\)</span> are the running costs (in thousand pounds) of machines over a year; <span class="math inline">\(\{x_{i}\}_{i=1}^{10}\)</span> are the time (in hundreds of hours) the machines were running in the year.</p>
+</div>
+
+<p>A plot of the data (see Figure <a href="slr.html#fig:machinesplot">2.2</a>) suggests a linear relationship may be appropriate.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&quot;machines.rda&quot;</span>)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">plot</span>(machines<span class="op">$</span>runtime, machines<span class="op">$</span>costs, <span class="dt">xlab =</span> <span class="st">&quot;Running time (100&#39;s hours)&quot;</span>, </a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">                    <span class="dt">ylab =</span> <span class="st">&quot;Costs (£1000)&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:machinesplot"></span>
+<img src="MA30234_files/figure-html/machinesplot-1.png" alt="Data plot for machines example." width="70%" />
+<p class="caption">
+Figure 2.2: Data plot for machines example.
+</p>
+</div>
+
+<p>Calculating the summary statistics:
+<span class="math display">\[\sum_{i = 1}^{10}x_{i} = 80;  \  \ \bar{x} = 8.0\]</span>
+<span class="math display">\[\sum_{i = 1}^{10}y_{i} = 204;  \  \ \bar{y} = 20.4\]</span>
+<span class="math display">\[\sum_{i = 1}^{10}x_{i}^{2} = 742;  \  \ \sum_{i = 1}^{10}y_{i}^{2} = 4242;  \  \ \sum_{i = 1}^{10}{x_{i}y_{i}} = 1711\]</span></p>
+<p>Hence,
+<span class="math display">\[S_{xx} = 102;  \  \ S_{yy}  = 80.4 \ \ S_{xy} = 79\]</span></p>
+<p>Our estimates of the regression coefficients are:
+<span class="math display">\[\hat{\beta} = \frac{S_{xy}}{S_{xx}} = 0.775\ \left( to\ 3\ d.p. \right)\]</span>
+<span class="math display">\[\hat{\alpha} = \ \bar{y} - \ \hat{\beta}\bar{x} = 14.204\ \left( to\ 3\ d.p. \right)\]</span></p>
+<p>The ANOVA table contains the following:</p>
+<ul>
+<li><p>Sum of Squares due to Regression = <span class="math inline">\({\hat{\beta}}^{2}S_{xx} = 61.18627\)</span></p></li>
+<li><p>Residual Sum of Squares = <span class="math inline">\(S_{yy} - 61.18627 = 19.21373\)</span></p></li>
+</ul>
+<div style="page-break-after: always;"></div>
+<p>Hence, the ANOVA table is:</p>
+
+<p>Our observed statistic is <span class="math inline">\(61.18627/2.40172 = 25.48\)</span>.
+Is this value of 25.48 large for an <span class="math inline">\(F_{1,8}\)</span> distribution?
+<span class="math inline">\(F_{0.95,1,8} = 5.32\)</span> and <span class="math inline">\(F_{0.995,1,8} = 14.69\)</span>, so our value of 25.48 is highly unusual.
+We therefore have sufficient evidence to reject <span class="math inline">\(H_{0}:\beta = 0\)</span> at the 95% confidence level, and hence to conclude there is a significant regression of running costs on hours used.
+From the ANOVA table, we can read our point estimate of the residual variance, namely:
+<span class="math display">\[{\hat{\sigma}}^{2} = 2.402\ \left( to\ 3\ d.p. \right).\]</span></p>
+</div>
+<div id="coefci" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Confidence intervals for the coefficients</h3>
+<p>Assuming we have found evidence of a significant regression between
+<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, we have to date only calculated point estimates of the
+regression coefficients <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}.\)</span> It is
+useful to derive confidence intervals for the estimates <span class="math inline">\(\hat{\alpha}\)</span>
+and <span class="math inline">\(\hat{\beta}\)</span> in order to understand the range of values that the
+real coefficients could take.</p>
+<div id="the-intercept-mathbfalpha" class="section level4 unnumbered">
+<h4>The intercept <span class="math inline">\(\mathbf{\alpha}\)</span></h4>
+<p>Recall from section <a href="slr.html#testreg">2.3.2</a> that
+<span class="math display">\[\hat{\alpha}\sim N\left(\alpha,\ \frac{\sigma^{2}\sum_{i=1}^{n}x_{i}^{2}}{n\times S_{xx}}\right)\]</span></p>
+<p>Hence, a 95% confidence interval for <span class="math inline">\(\alpha\)</span> is:
+<span class="math display">\[\hat{\alpha} \pm t_{0.975, n - 2}\sqrt{\frac{{\hat{\sigma}}^{2}\sum_{i=1}^{n}x_{i}^{2}}{n\times S_{xx}}}\ \]</span></p>
+<p>where the <span class="math inline">\(t\)</span>-distribution, rather than the Normal, is used due to the fact that we also need to estimate the <span class="math inline">\(\sigma\)</span> parameter.
+In our Example <a href="slr.html#exm:machines">2.2</a> in Section <a href="slr.html#testreg">2.3.2</a>, where <span class="math inline">\(\hat{\alpha} =\)</span> 14.204, a 95%
+confidence interval for <span class="math inline">\(\alpha\)</span> is (14.204 <span class="math inline">\(\pm\)</span> 3.05), i.e
+(11.154,17.254).</p>
+<p><span class="math inline">\(\alpha\)</span> can be interpreted as the fixed running costs of the machine
+per year i.e. the costs of the machine even if it does not run during
+the year.</p>
+</div>
+<div id="the-slope-mathbfbeta" class="section level4 unnumbered">
+<h4>The slope <span class="math inline">\(\mathbf{\beta}\)</span></h4>
+<p>Recall from section <a href="slr.html#testreg">2.3.2</a> that
+<span class="math display">\[\hat{\beta}\sim N\left(\beta,\ \frac{\sigma^{2}}{S_{xx}}\right)\]</span></p>
+<p>Hence, a 95% confidence interval for <span class="math inline">\(\beta\)</span> is:
+<span class="math display">\[\hat{\beta} \pm t_{0.975,n - 2}\ \sqrt{\frac{{\hat{\sigma}}^{2}}{S_{xx}}}\]</span></p>
+<p>Hence in Example <a href="slr.html#exm:machines">2.2</a>, where <span class="math inline">\(\hat{\beta} =\)</span> 0.775, a 95%
+confidence interval for <span class="math inline">\(\beta\)</span> is <span class="math inline">\((0.775 \pm 0.354)\)</span>, i.e <span class="math inline">\((0.421, 1.129)\)</span>.
+Note that this confidence interval does not contain zero, which is consistent with the result of the F-test calculated from the ANOVA table.
+<span class="math inline">\(\beta\)</span> can be interpreted as the unit change in running costs per 100 hours.</p>
+</div>
+</div>
+</div>
+<div id="slrpred" class="section level2">
+<h2><span class="header-section-number">2.4</span> Prediction</h2>
+<p>There are two types of prediction we can make, together with confidence
+intervals, having fitted our linear regression model.</p>
+<p>These are:</p>
+<ul>
+<li><p>the mean value of lots of possible observations at a given value of x,
+plus the associated confidence interval – sometimes referred to as
+the confidence interval for the regression line, or confidence
+interval for the mean</p></li>
+<li><p>the value of a single observation at a given value of x, with its
+associated confidence interval – sometimes referred to as
+the prediction interval</p></li>
+</ul>
+<p>It should be clear that the confidence interval for a single
+observation (the prediction interval) will be wider than the confidence interval for the mean
+value (the confidence interval).</p>
+<div id="meanci" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Confidence interval for the mean</h3>
+<p>We can derive a confidence interval for the expected value of
+<span class="math inline">\(Y = \ \alpha + \ \beta x\)</span> at a given value of x (<span class="math inline">\(x_{0}\)</span>, say).
+Let this value be denoted <span class="math inline">\(\mu_0=E(Y|x=x_0)\)</span>, so
+<span class="math display">\[{\hat{\mu}}_{0} = \hat{\alpha} + \hat{\beta}x_{0}\]</span>.</p>
+<p>Clearly, <span class="math inline">\(E({\hat{\mu}}_{0}) = \ \alpha + \ \beta x_{0}\)</span>, because
+<span class="math inline">\(\E(\hat{\alpha}) = \ \alpha\)</span> and
+<span class="math inline">\(\E(\hat{\beta}x_{0}) = \ x_{0}\beta\)</span>.
+But <span class="math inline">\(\Var({\hat{\mu}}_{0})\)</span> is NOT equal to
+<span class="math inline">\(\Var(\hat{\alpha})+x_{0}^{2} \Var(\hat{\beta})\)</span> because
+<span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> are not independent.</p>
+<p>In fact, it can be shown that (although we don’t prove it here):
+<span class="math display">\[\hat{\mu}_{0} \sim N\left(\alpha + \beta x_{0},\sigma^{2}\left( \frac{{(x_{0} - \bar{x})}^{2}}{S_{xx}} + \frac{1}{n} \right)\right)\]</span></p>
+<p>Note that the variance of <span class="math inline">\({\hat{\mu}}_{0}\)</span> varies with <span class="math inline">\(x_{0}\)</span>: the
+closer <span class="math inline">\(x_{0}\)</span> is to <span class="math inline">\(\bar{x}\)</span>, the smaller the
+variance of the fitted line; the further <span class="math inline">\(x_{0}\)</span> is from
+<span class="math inline">\(\bar{x}\)</span>, the larger the variance of the fitted
+line.</p>
+<p>Does this make intuitive sense?
+Well, consider <span class="math inline">\(x_{0} =\)</span> <span class="math inline">\(\bar{x}\)</span>: at this value
+of <span class="math inline">\(x_{0}\)</span>,
+<span class="math display">\[{\hat{\mu}}_{0} = \hat{\alpha} + \hat{\beta}\bar{x}\]</span></p>
+<p>But, if we recall that:
+<span class="math inline">\(\hat{\alpha} = \bar{y} - \hat{\beta}\bar{x}\)</span>,
+then <span class="math inline">\({\hat{\mu}}_{0} = \ \bar{y}\)</span>.
+In other words, the regression line passes through the point
+<span class="math inline">\((\bar{x},\bar{y})\)</span>. At this point,
+the variability of <span class="math inline">\({\hat{\mu}}_{0}\)</span> is the variability of
+<span class="math inline">\(\bar{Y}\)</span>, which is <span class="math inline">\(\sigma^{2}/n\)</span>, so the
+term for the variance for <span class="math inline">\({\hat{\mu}}_{0}\)</span> in the distribution above
+makes sense.</p>
+<p>Note: the fact that the variance of <span class="math inline">\({\hat{\mu}}_{0}\)</span> increases as
+<span class="math inline">\(x_{0} - \bar{x}\)</span> increases, acts as a reminder of
+the risks of extrapolating outside the range of <span class="math inline">\(x\)</span> used in the
+fitting of the model.
+A 95% confidence interval for <span class="math inline">\({\hat{\mu}}_{0}\)</span> is therefore:
+<span class="math display">\[(\hat{\alpha} + \hat{\beta}x_{0}) \pm  \ t_{0.975, n - 2}\sqrt{{\hat{\sigma}}^{2}\left( \frac{{(x_{0} - \bar{x})}^{2}}{S_{xx}} + \frac{1}{n} \right)} \]</span></p>
+<p>For instance, in the Example <a href="slr.html#exm:machines">2.2</a> in Section <a href="slr.html#testreg">2.3.2</a>, <span class="math inline">\(\bar{x} = 8.\)</span>
+So, if <span class="math inline">\(x_{0} = 8\)</span>, the 95% confidence interval is:
+<span class="math display">\[(\hat{\alpha} + 8 \hat{\beta})\pm  \ t_{0.975, 8}\sqrt{\frac{{\hat{\sigma}}^{2}}{10}}\]</span></p>
+<p>i.e. (19.272,21.536) – an interval which is 2.264 wide.
+So, if <span class="math inline">\(x_{0} = 3\)</span>, the 95% confidence interval is:
+<span class="math display">\[(\hat{\alpha} + \ 3 \hat{\beta}) \pm  \ t_{0.975,8}\sqrt{{\hat{\sigma}}^{2}\left(\frac{25}{S_{xx}} + \frac{1}{10}\right)}\]</span></p>
+<p>i.e. (14.426,18.632) – an interval which is 4.206 wide.</p>
+<p>Figure <a href="slr.html#fig:machinesci">2.3</a> shows the 95% confidence interval for the regression line for <span class="math inline">\(x_{0}\)</span> from 1 to 21.</p>
+<div class="figure" style="text-align: center"><span id="fig:machinesci"></span>
+<img src="MA30234_files/figure-html/machinesci-1.png" alt="Confidence intervals for the regression line for the machines example." width="70%" />
+<p class="caption">
+Figure 2.3: Confidence intervals for the regression line for the machines example.
+</p>
+</div>
+</div>
+<div id="cisingle" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Confidence interval for a single observation</h3>
+<p>Consider a single new observation at <span class="math inline">\(x = x_{0}\)</span>. We would expect the
+confidence interval for the observation <span class="math inline">\(y_{0}\)</span> at <span class="math inline">\(x = x_{0}\)</span> to be
+wider than the confidence interval for the emphx{mean} observation at
+<span class="math inline">\(x = x_{0}\)</span>.</p>
+<p>This is because, as we know from previous units, the mean has a
+smaller variance than a single observation. In fact, the variance of a
+single observation at <span class="math inline">\(x = x_{0}\)</span> is equal to the variance of the line
+at <span class="math inline">\(x = x_{0}\)</span> plus <span class="math inline">\(\sigma^{2}\)</span>, the variance ``about the line’’.
+Hence, for a single observation <span class="math inline">\(y_{0}:\)</span>
+<span class="math display">\[{\hat{y}}_{0} \sim N\left( \alpha + \beta x_{0},\sigma^{2}\left( \frac{{(x_{0} - \bar{x})}^{2}}{S_{xx}} + \frac{1}{n} + 1 \right) \right)\]</span></p>
+<p>Hence, a 95% prediction interval for a new <span class="math inline">\(y_{0}\)</span> is:
+<span class="math display">\[(\hat{\alpha} + \ \hat{\beta}x_{0}) \pm  \ t_{0.975,n - 2}\sqrt{{\hat{\sigma}}^{2}\left( \frac{{(x_{0} - \bar{x})}^{2}}{S_{xx}} + \frac{1}{n} + 1 \right)}\]</span></p>
+<p>In Example <a href="slr.html#exm:machines">2.2</a> from Section <a href="slr.html#testreg">2.3.2</a>:</p>
+<ul>
+<li><p>at <span class="math inline">\(x_{0} = 8\)</span>, the prediction interval is (17.832, 22.976)</p></li>
+<li><p>at <span class="math inline">\(x_{0} = 3\)</span>, the prediction interval is (12.377, 20.681).</p></li>
+</ul>
+<p>In other words, if we have a new observation at <span class="math inline">\(x_{0} = 3\)</span>, we would
+expect to find 95% of the observations to lie within the interval
+(12.377,20.681).
+Figure <a href="slr.html#fig:machinespi">2.4</a> shows the 95% confidence intervals for the line
+overlaid with the 95% confidence intervals for a single observation (prediction intervals) for
+values of <span class="math inline">\(x_{0}\)</span> from 1 to 21.</p>
+<div class="figure" style="text-align: center"><span id="fig:machinespi"></span>
+<img src="MA30234_files/figure-html/machinespi-1.png" alt="Confidence intervals for the regression line and prediction intervals for single observations for the machines example." width="70%" />
+<p class="caption">
+Figure 2.4: Confidence intervals for the regression line and prediction intervals for single observations for the machines example.
+</p>
+</div>
+</div>
+</div>
+<div id="slrvalidate" class="section level2">
+<h2><span class="header-section-number">2.5</span> Validating the model</h2>
+<p>In Section <a href="slr.html#slrmotivation">2.1</a>, we made several assumptions about our observations
+to enable us to fit a linear
+regression, namely that the <span class="math inline">\(\left\{ Y_{i} \right\}_{i=1}^{n}\)</span> are identically
+independently distributed (i.i.d.) with
+<span class="math inline">\(Y_{i}\sim N(\alpha + \beta x_{i},\sigma^{2})\)</span>. We therefore need to
+examine four separate assumptions:</p>
+<ul>
+<li><p>there is a linear relationship between <span class="math inline">\(\left\{ y_{i} \right\}\)</span> and
+<span class="math inline">\(\left\{ x_{i} \right\}\)</span></p></li>
+<li><p>the <span class="math inline">\(\left\{ Y_{i} \right\}\text{\ are\ normally\ distributed}\)</span></p></li>
+<li><p>the <span class="math inline">\(\left\{ Y_{i} \right\}\text{\ have\ constant\ variance}\)</span></p></li>
+<li><p>the <span class="math inline">\(\left\{ Y_{i} \right\}\)</span> are independent</p></li>
+</ul>
+<p>We examine the validity of these assumptions by looking at plots of the
+residuals <span class="math inline">\(\left\{ r_{i} \right\}\)</span>, where
+<span class="math display">\[r_{i} = y_{i} - {\hat{y}}_{i} = y_{i} - (\hat{\alpha} + \hat{\beta}x_{i})\]</span></p>
+<p>Why do we examine residuals? Well, if
+<span class="math display">\[Y_{i}\sim N(\alpha + \beta x_{i},\sigma^{2}),\]</span></p>
+<p>then
+<span class="math display">\[Y_{i} - (\alpha + \beta x_{i})\sim N(0,\sigma^{2}).\]</span></p>
+<p>If the regression is appropriate, we can expect <span class="math inline">\(\hat{\alpha}\)</span> to be
+close to <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\hat{\beta}\)</span> to be close to <span class="math inline">\(\beta\)</span>, and hence
+<span class="math inline">\(y_{i} - (\hat{\alpha} + \hat{\beta}x_{i})\)</span> to be close to
+<span class="math inline">\(y_{i} - (\alpha + \beta x_{i})\)</span>. Hence, the residuals should look
+like <span class="math inline">\(N\left(0,\sigma^{2} \right)\)</span> random variables. If we knew
+<span class="math inline">\(\sigma^{2}\)</span>, then the standardised residuals
+<span class="math display">\[r_{i}^{*} = \frac{(y_{i} - {\hat{y}}_{i})}{\sigma}\]</span>
+would resemble <span class="math inline">\(N(0,1)\)</span> random variables.
+Since <span class="math inline">\(\sigma^{2}\)</span> is not known, we use
+<span class="math display">\[r_{i}^{*} = \frac{(y_{i} - {\hat{y}}_{i})}{\hat{\sigma}}\]</span>
+where <span class="math inline">\(\hat{\sigma} = \sqrt{\hat{\sigma}^{2}}\)</span>, and <span class="math inline">\({\hat{\sigma}}^{2}\)</span> is the mean squared error calculated in the
+regression ANOVA table.</p>
+<p>We examine two types of plots – residual plots and normality plots. In
+either case, we are interested in the general structure or appearance of
+the plots, rather than their intricate structure.</p>
+<div id="residplots" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> Residual plots</h3>
+<div id="ordered-residuals" class="section level4 unnumbered">
+<h4>Ordered Residuals</h4>
+<p>We can use a plot of ordered residuals – a plot of <span class="math inline">\(r_{i}^{*}\)</span> against <span class="math inline">\(i\)</span> – to examine model fit. If any structure is apparent, this will suggest the observations are not
+independent e.g. they may have a temporal structure.</p>
+<p>See Figure <a href="slr.html#fig:resid1a">2.5</a> and <a href="slr.html#fig:resid1b">2.6</a> for examples of non-acceptable and acceptable ordered residual plots. </p>
+<div class="figure" style="text-align: center"><span id="fig:resid1a"></span>
+<img src="MA30234_files/figure-html/resid1a-1.png" alt="Ordered residual plot: clear pattern / structure in residuals -- perhaps a temporal model would be more appropriate?" width="70%" />
+<p class="caption">
+Figure 2.5: Ordered residual plot: clear pattern / structure in residuals – perhaps a temporal model would be more appropriate?
+</p>
+</div>
+
+<div class="figure" style="text-align: center"><span id="fig:resid1b"></span>
+<img src="MA30234_files/figure-html/resid1b-1.png" alt="Ordered residual plot: no obvious structure -- model fit seems OK." width="70%" />
+<p class="caption">
+Figure 2.6: Ordered residual plot: no obvious structure – model fit seems OK.
+</p>
+</div>
+</div>
+<div id="residuals-against-fitted-values" class="section level4 unnumbered">
+<h4>Residuals against Fitted values</h4>
+<p>Similarly, we can examine a plot of <span class="math inline">\(r_{i}^{*}\)</span> against the fitted values from the regression, <span class="math inline">\({\hat{y}}_{i}\)</span>. Again, we are hoping for no structure to be apparent: if there is any structure, this can indicate that either the linearity or constant variance assumptions – or both.
+Figure <a href="slr.html#fig:resid2a">2.7</a> shows an acceptable residual plot, similar to before; a plot like Figure <a href="slr.html#fig:resid3b">2.10</a> may lead you to question the (simple) linear regression model; Figure <a href="slr.html#fig:resid3a">2.9</a> contradicts the constant variance (homoscedasticity) assumption, whereas an outlier as featured in Figure <a href="slr.html#fig:resid3b">2.10</a> may cause concern about data collection integrity.</p>
+<div class="figure" style="text-align: center"><span id="fig:resid2a"></span>
+<img src="MA30234_files/figure-html/resid2a-1.png" alt="Residual plot: no obvious structure -- model fit seems OK." width="70%" />
+<p class="caption">
+Figure 2.7: Residual plot: no obvious structure – model fit seems OK.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:resid2b"></span>
+<img src="MA30234_files/figure-html/resid2b-1.png" alt="Residuals plot: some structure, may suggest regression line of the form $Y_i=\alpha+\beta x_i+\gamma x_i^2$." width="70%" />
+<p class="caption">
+Figure 2.8: Residuals plot: some structure, may suggest regression line of the form <span class="math inline">\(Y_i=\alpha+\beta x_i+\gamma x_i^2\)</span>.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:resid3a"></span>
+<img src="MA30234_files/figure-html/resid3a-1.png" alt="Residuals plot: Structure -- suggests variance rising with increasing $Y_i$ -- maybe try transforming using $Z_i=\log(Y_i)$ before fitting regression model." width="70%" />
+<p class="caption">
+Figure 2.9: Residuals plot: Structure – suggests variance rising with increasing <span class="math inline">\(Y_i\)</span> – maybe try transforming using <span class="math inline">\(Z_i=\log(Y_i)\)</span> before fitting regression model.
+</p>
+</div>
+
+<div class="figure" style="text-align: center"><span id="fig:resid3b"></span>
+<img src="MA30234_files/figure-html/resid3b-1.png" alt="Residuals plot:  Possible outlier having a significant effect on the fitted regression model.  Is this a valid value, or should it be discarded and the model re-fitted?" width="70%" />
+<p class="caption">
+Figure 2.10: Residuals plot: Possible outlier having a significant effect on the fitted regression model. Is this a valid value, or should it be discarded and the model re-fitted?
+</p>
+</div>
+</div>
+</div>
+<div id="normplots" class="section level3">
+<h3><span class="header-section-number">2.5.2</span> Normality plots</h3>
+<p>Normality plots provides clues to whether or not the assumption of
+normality is valid.
+If the sample size is large enough, the very first illustration of
+normality or non-normality is the histogram of residuals. The shape of
+the histogram should resemble the bell-shape of the normal curve,
+although this is difficult to see with small sample sizes.</p>
+<p>In addition, the ordered standardised residuals <span class="math inline">\(\{r_{i}^{*}\}\)</span> are
+plotted against the <span class="math inline">\(n\)</span> different <span class="math inline">\(\alpha\)</span> points (not to be
+confused with the <span class="math inline">\(\alpha\)</span> in the regression equation!) of the <span class="math inline">\(N(0,1)\)</span>
+distribution, with
+<span class="math display">\[\alpha = \ \frac{1}{(n + 1)},\frac{2}{(n + 1)},\ldots,\frac{n}{n + 1}\]</span></p>
+<p>This is known as a QQ (quantile-quantile) plot. If the normality assumption is valid, we should see an approximate
+straight line.</p>
+<div class="figure" style="text-align: center"><span id="fig:qqplot"></span>
+<img src="MA30234_files/figure-html/qqplot-1.png" alt="QQ plot from the machine example." width="70%" />
+<p class="caption">
+Figure 2.11: QQ plot from the machine example.
+</p>
+</div>
+</div>
+<div id="slrusingr" class="section level3">
+<h3><span class="header-section-number">2.5.3</span> Estimating Coefficients and Model Validation Using R</h3>
+<p>We can use software such as  to estimate <span class="math inline">\(\hat{\alpha}\)</span> and
+<span class="math inline">\(\hat{\beta}\)</span>, allowing us to concentrate on interpreting the results.
+In ,, the main way of calculating the regression line is with the in-built function <code>lm</code> (<em>linear model</em>).</p>
+<p>Of course it is also possible to write custom formulae to carry out each of the individual calculations in Section <a href="slr.html#slr">2</a>.</p>
+<div id="lmfunc" class="section level4">
+<h4><span class="header-section-number">2.5.3.1</span> The <code>lm</code> function</h4>
+<p>For the machines example, Example <a href="slr.html#exm:machines">2.2</a>, we can regress the machine <code>costs</code> on the machine <code>runtime</code>. These variables are contained in the machines <code>data.frame</code>.</p>
+<p>After loading the dataset, we use the formula </p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&quot;machines.rda&quot;</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">machlm =<span class="st"> </span><span class="kw">lm</span>(costs <span class="op">~</span><span class="st"> </span>runtime, <span class="dt">data =</span> machines)</a></code></pre></div>
+
+<p>will create a linear model regressing <code>costs</code> on <code>runtime</code>; the <code>~</code> symbol indicates the formula for the regression (we will use more complicated formulae in Chapter <a href="mlr.html#mlr">3</a> when we look at multiple linear regression). The object contains a number of useful variables associated to the linear model:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">names</span>(machlm)</a></code></pre></div>
+<pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
+##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
+##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
+
+<p>We will look at some of these in the coming sections. The most important of these is the <code>coefficients</code> component of the <code>lm</code> object, containing the regression intercept and slope, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> respectively. These can be accessed by</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">machlm<span class="op">$</span>coefficients</a></code></pre></div>
+<pre><code>## (Intercept)     runtime 
+##  14.2039216   0.7745098</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># or </span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">coef</span>(machlm)</a></code></pre></div>
+<pre><code>## (Intercept)     runtime 
+##  14.2039216   0.7745098</code></pre>
+
+<p>Note that, as expected, these coincide with the calculated values from Example <a href="slr.html#exm:machines">2.2</a>.</p>
+</div>
+<div id="visualising-a-regression" class="section level4">
+<h4><span class="header-section-number">2.5.3.2</span> Visualising a regression</h4>
+<p>The <code>coefficients</code> from the <code>lm</code> object can be used to add a trend line to a plot of data. Continuing with the <code>machines</code> data, we can use the <code>abline</code> function to add the regression line to the plot:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">machlm =<span class="st"> </span><span class="kw">lm</span>(costs<span class="op">~</span>runtime, <span class="dt">data =</span> machines)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw">plot</span>(machines<span class="op">$</span>runtime, machines<span class="op">$</span>costs, <span class="dt">xlab =</span> <span class="st">&quot;Running time (100&#39;s hours)&quot;</span>, </a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">                    <span class="dt">ylab =</span> <span class="st">&quot;Costs (£1000)&quot;</span>, <span class="dt">pch=</span><span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="kw">abline</span>(machlm<span class="op">$</span>coefficients, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:machineslm"></span>
+<img src="MA30234_files/figure-html/machineslm-1.png" alt="\texttt{machines} dataset with estimated regression line." width="70%" />
+<p class="caption">
+Figure 2.12:  dataset with estimated regression line.
+</p>
+</div>
+</div>
+</div>
+<div id="slrformulae" class="section level3">
+<h3><span class="header-section-number">2.5.4</span> Formulae for Simple Linear Regression</h3>
+<p>In several workshops, we will illustrate how  formulae and
+functions can be used to build up a comprehensive suite of calculations
+useful for the various linear regression calculations.</p>
+<div id="simple-linear-regression-with-zero-intercept" class="section level4 unnumbered">
+<h4>Simple Linear Regression with Zero Intercept</h4>
+<p>In some instances, it can seem intuitively reasonable to force the
+parameter <span class="math inline">\(\alpha\)</span> of the intercept to be zero e.g. if the value
+of <span class="math inline">\(y\)</span> should equal zero when <span class="math inline">\(x\)</span> equals zero.</p>
+<p>For example, if
+<span class="math inline">\(\{ Y_{i}\}_{i = 1}^{n}\)</span> are the number of orders from
+a mail-shot, and <span class="math inline">\(\{ x_{i}\}_{i = 1}^{n}\)</span> the number of
+mail-shots posted, if <span class="math inline">\(x = 0\)</span> then <span class="math inline">\(y = 0\)</span> also.</p>
+<p>Most software packages, including  ,
+provide the option to set the intercept term to zero.
+However, there are few cases in linear regression where a zero intercept
+can be justified.</p>
+<p>To use a zero intercept you need to:</p>
+<ul>
+<li><p>have a good reason for assuming that <span class="math inline">\(y = 0\)</span> when <span class="math inline">\(x = 0\)</span></p></li>
+<li><p>have a good reason to assume that the same linear relationship exists
+around <span class="math inline">\(x = 0\)</span> and for other values of <span class="math inline">\(x\)</span></p></li>
+</ul>
+
+<div class="example">
+<p><span id="exm:mailshot" class="example"><strong>Example 2.3  (Mail-shot data)  </strong></span>Consider the following data.</p>
+<p><span class="math inline">\(\{y_{i}\}_{i = 1}^{10}\)</span> are the number of orders from a mail-shot, and <span class="math inline">\(\{x_{i}\}_{i = 1}^{n}\)</span> the number of mail-shots posted (in thousands):</p>
+</div>
+
+<p>The data plot in Figure <a href="slr.html#fig:mailshotlms">2.13</a> indicates a linear relationship is appropriate. </p>
+<div class="figure" style="text-align: center"><span id="fig:mailshotlms"></span>
+<img src="MA30234_files/figure-html/mailshotlms-1.png" alt="Regression lines for \texttt{mailshot} data with intercept equal to zero (solid line) and with unconstrained intercept (dashed line)." width="70%" />
+<p class="caption">
+Figure 2.13: Regression lines for  data with intercept equal to zero (solid line) and with unconstrained intercept (dashed line).
+</p>
+</div>
+<p>If we fit linear regressions with an unconstrained intercept (dashed line in Figure <a href="slr.html#fig:mailshotlms">2.13</a>) and also with a zero intercept (solid line) we see a much better fit with an unconstrained intercept.</p>
+<p>With an unconstrained intercept <span class="math inline">\(\sum_{i = 1}^{10}({\hat{y}}_{i} - y_{i})^{2} = 1179\)</span>;</p>
+<p>if the intercept is zero, <span class="math inline">\(\sum_{i = 1}^{10}({\hat{y}}_{i} - y_{i})^{2} = 12129\)</span>!</p>
+<p>Clearly, over the range of <span class="math inline">\(\left\{ x_{i} \right\}\)</span> we have available to us, using an intercept gives a better fit to our data.</p>
+<p>Recall also that from Section <a href="slr.html#testreg">2.3.2</a>, the estimate <span class="math inline">\({\hat{\sigma}}^{2}\)</span>
+for <span class="math inline">\(\sigma^{2}\)</span>is given by
+<span class="math display">\[{\hat{\sigma}}^{2} = \ \frac{1}{n - 2}\sum_{i = 1}^{n}\left( y_{i} - {\hat{y}}_{i} \right)^{2}\]</span></p>
+<p>and that
+<span class="math display">\[\hat{\beta}\sim N \left(\beta,\ \frac{\sigma^{2}}{S\left( x,x \right)} \right)\]</span></p>
+<p>In other words, the standard error of the slope parameter <span class="math inline">\(\beta\)</span> is
+proportional to
+<span class="math inline">\(\sum_{i = 1}^{n}\left( y_{i} - {\hat{y}}_{i} \right)^{2}\)</span>. So, not
+only is the fit (as measured by <span class="math inline">\(\sum_{i = 1}^{n}\left( y_{i} - {\hat{y}}_{i} \right)^{2}\)</span> ) worsened by
+restraining to a zero intercept, it also reduces our ability to reject
+the null hypothesis <span class="math inline">\(H_{0}:\beta = 0\)</span>, and hence showing the
+regression is significant.</p>
+<p>In this particular instance, it may be that the response rate is higher
+if <span class="math inline">\(x_{i}\)</span> is less than 270,000 (the lowest value of our observed
+<span class="math inline">\(x_{i}\)</span> ) e.g. because the company chooses its potentially most
+responsive customers first. If we were to include lower values of
+<span class="math inline">\(x_{i}\)</span>, a linear regression would then not be appropriate without a
+transformation.</p>
+<div style="page-break-after: always;"></div>
+<p>If we do constrain to a zero intercept, we find the value of
+<span class="math inline">\(\hat{\beta}\)</span> which minimises the sum of squares as follows:</p>
+<p>With a zero intercept, <span class="math inline">\(\alpha = 0,\)</span> so
+<span class="math display">\[S(\beta) = \ \sum_{i = 1}^{n}{(y_{i} - \beta x_{i})^{2}}\]</span></p>
+<p><span class="math display">\[\frac{\partial S}{\partial\beta} = \ \sum_{i = 1}^{n}{2(y_{i} - \beta x_{i})\ {( - x_{i})}^{}}\]</span></p>
+<p>which equals 0 when
+<span class="math display">\[\sum_{i = 1}^{n}{x_{i}y_{i}} - \ \beta\sum_{i = 1}^{n}{x_{i}^{2} = 0.}\]</span></p>
+<p>i.e
+<span class="math display">\[\hat{\beta} = \frac{\sum_{i = 1}^{n}{x_{i}y_{i}}}{\sum_{i = 1}^{n}x_{i}^{2}}\]</span></p>
+<p>We will not consider confidence intervals for <span class="math inline">\(\beta\)</span> nor the
+appropriate test of significance for zero-intercept regression in this
+course.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Source: <a href="http://www.merriam-webster.com/dictionary/regression" class="uri">http://www.merriam-webster.com/dictionary/regression</a>.<a href="slr.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="revision.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mlr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["MA30234.pdf", "MA30234.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

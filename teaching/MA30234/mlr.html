@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Multiple Linear Regression | MA30234.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Multiple Linear Regression | MA30234.utf8" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Multiple Linear Regression | MA30234.utf8" />
+  
+  
+  
+
+<meta name="author" content="Matt Nunes" />
+
+
+<meta name="date" content="2020-10-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="slr.html"/>
+<link rel="next" href="timeseries.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mlr" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Multiple Linear Regression</h1>
+<div id="mlrmotivation" class="section level2">
+<h2><span class="header-section-number">3.1</span> Motivation and regression model</h2>
+<p>It is natural to consider the extension of simple linear regression into the case where we have more than one possible predictor variable. Some examples of such modelling situations are given in the table below.</p>
+
+<p>In each of these examples, there may or may not be a relationship
+between the response variable and each potential explanatory variable.
+We start by considering a model containing all of the potential
+explanatory variables, and then investigate whether we can obtain a good
+fit without some of them.</p>
+<div id="mlrmodel" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> The multiple regression model</h3>
+<p>In multiple regression, we again assume a linear model, similar to
+the model used in simple linear regression. The assumed model for <span class="math inline">\(k\)</span> predictor variables
+<span class="math inline">\(\left\{x_{1}, x_{2}, \ldots, x_{k}\right\}\)</span> is:
+<span class="math display">\[Y\ \sim\ N(\alpha + \ \beta_{1}x_{1} + \ \beta_{2}x_{2} + ...\  + \ \beta_{k}x_{k}, \sigma^{2})\]</span></p>
+<p>We make no distributional assumptions about the explanatory variables
+<span class="math inline">\(\left\{x_{1}, x_{2}, \ldots, x_{k}\right\}\)</span>. In fact, some of
+these variables could be functions of the others e.g.
+<span class="math inline">\(x_{2} = x_{1}^{2}\)</span> or <span class="math inline">\(x_{3} = \log{(x_{1})}\)</span> or
+<span class="math inline">\(x_{4} = \frac{x_{1}}{x_{3}}\)</span>.</p>
+<p>In this chapter we look at how to fit such models, assessing the model
+fit, and how to ensure we avoid building over-complicated models.</p>
+<p>We assume that we have <span class="math inline">\(n\)</span> observations and <span class="math inline">\(k\)</span> predictor variables –
+i.e. our data consists of:
+<span class="math display">\[
+\begin{pmatrix}
+y_{1}\\
+y_{2}\\
+\vdots\\
+\vdots\\
+y_{n}\\
+\end{pmatrix}, \qquad
+\begin{pmatrix}
+x_{11} &amp; x_{21} &amp; \ldots &amp; x_{k1} \\
+x_{12} &amp; x_{22} &amp; \ldots &amp; x_{k2} \\
+\vdots &amp; \ldots &amp; \ldots &amp; \vdots \\
+\vdots &amp; \ldots &amp; \ldots &amp; \vdots \\
+x_{1n} &amp; x_{2n} &amp; \ldots &amp; x_{kn} \\
+\end{pmatrix}
+ \]</span></p>
+<p>where <span class="math inline">\(x_{ij}\)</span> is the <span class="math inline">\(j^{th}\)</span> (<span class="math inline">\(j=1,\ldots, n\)</span>) observation on the
+<span class="math inline">\(i^{th}\)</span> explanatory variable (<span class="math inline">\(i=1,\ldots, k\)</span>).</p>
+</div>
+</div>
+<div id="mlrexplore" class="section level2">
+<h2><span class="header-section-number">3.2</span> Exploratory analysis</h2>
+<div id="mlrlin" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Examining linearity</h3>
+<p>It is always recommended to plot the response variable <span class="math inline">\(Y\)</span> against each of
+the explanatory variables <span class="math inline">\(x_i\)</span> in turn, in particular to identify where a
+linear relationship is not appropriate.</p>
+<p>For instance, Figure <a href="mlr.html#fig:mlrlin1">3.1</a> suggests a linear relationship is appropriate between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(Y\)</span>, while the relationship between <span class="math inline">\(x_2\)</span> and <span class="math inline">\(Y\)</span> shown in
+Figure <a href="mlr.html#fig:mlrlin2">3.2</a> seems to be non-linear.</p>
+<div class="figure" style="text-align: center"><span id="fig:mlrlin1"></span>
+<img src="MA30234_files/figure-html/mlrlin1-1.png" alt="Data indicating a linear relationship." width="70%" />
+<p class="caption">
+Figure 3.1: Data indicating a linear relationship.
+</p>
+</div>
+
+<div class="figure" style="text-align: center"><span id="fig:mlrlin2"></span>
+<img src="MA30234_files/figure-html/mlrlin2-1.png" alt="Data indicating a non-linear relationship." width="70%" />
+<p class="caption">
+Figure 3.2: Data indicating a non-linear relationship.
+</p>
+</div>
+
+<p>If a linear relationship is not appropriate (e.g. in Figure <a href="mlr.html#fig:mlrlin2">3.2</a>), then we consider transforming the explanatory variable and
+re-plotting to check if the linear relationship is improved. Common useful transformations, are <span class="math inline">\(x_{i}^{2}\)</span>, <span class="math inline">\(\log(x_{i}),\)</span>
+<span class="math inline">\(e^{x_{i}}\)</span>.</p>
+<p>Note: even if for one or more explanatory variables there is no apparent
+relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(x_{i}\)</span>, we should not decide to omit
+the explanatory variable(s) from the model – the relationship between
+the explanatory variable and <span class="math inline">\(Y\)</span> may be masked by the effects of other
+explanatory variables.</p>
+</div>
+<div id="mlrmulticol" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Identifying multicollinearity</h3>
+<p>It is also advised to plot the explanatory variables against each other,
+pairwise (<span class="math inline">\(x_{1}\)</span> against <span class="math inline">\(x_{2}\)</span>, <span class="math inline">\(x_{1}\)</span> against <span class="math inline">\(x_{3}\)</span>,
+<span class="math inline">\(x_{2}\)</span> against <span class="math inline">\(x_{3}\)</span> etc) to identify a phenomenon called
+multicollinearity (or sometimes just collinearity) – when two or more
+of the predictor variables are very highly correlated. If
+multicollinearity occurs it can have major implications for estimating
+the parameters of the model.</p>
+<p>As an extreme example, consider the following case. Suppose we are
+fitting a model
+<span class="math display">\[Y = \ \alpha + \ \beta_{1}x_{1} + \ \beta_{2}x_{2}\]</span></p>
+<p>but that <span class="math inline">\(x_{1} = 2x_{2}\)</span> (i.e there is perfect correlation between
+<span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(x_{2}\)</span>).</p>
+<p>If <span class="math inline">\(\ x_{1} = 2x_{2}\)</span>, then <span class="math inline">\(x_{1} - 2x_{2} = 0\)</span>.</p>
+<p>Therefore, I can add any multiple of <span class="math inline">\(x_{1} - 2x_{2}\)</span> to the model without making any difference to it.</p>
+<p>For instance:
+<span class="math display">\[Y = \ \alpha + \ \beta_{1}x_{1} + \ \beta_{2}x_{2} + \ \gamma(x_{1} - 2x_{2})\]</span>
+<span class="math display">\[= \ \alpha + \ {(\beta}_{1} - \gamma)x_{1} + \ {(\beta}_{2} - 2\gamma)x_{2}\]</span></p>
+<p>So, two different models with different sets of coefficients give
+exactly the same result, so estimating the coefficients is an impossible
+task! However, multicollinearity is only a potential problem if we need
+to estimate the slope parameters of the model (e.g. <span class="math inline">\(\beta_{1}\)</span> and
+<span class="math inline">\(\beta_{2}\)</span> in the example above) – if we are only interested in
+forecasting the value of <span class="math inline">\(Y\)</span> for a given <span class="math inline">\(x_{1},x_{2},\ldots,x_{k}\)</span>,
+but not interested in the parameters of the model, then
+multicollinearity does not hinder us.</p>
+<div id="common-causes-of-multicollinearity" class="section level4 unnumbered">
+<h4>Common causes of multicollinearity</h4>
+<p>There are many reasons why multicollinearity may come about. Some of these reasons are:</p>
+<ul>
+<li><p>Improper use of dummy variables e.g. if we are using a dummy variable
+to indicate 4 different regions, use only 3 dummy variables – the
+4 variable would be correlated with a combination
+of the first 3</p></li>
+<li><p>Including variables computed from other variables in the equation
+(e.g. husband’s income, wife’s income, household income)</p></li>
+<li><p>Effectively including the same variable twice e.g. height above
+sea-level in metres and in in feet</p></li>
+</ul>
+<p>But sometimes, it’s just that two or more variables are highly
+correlated, and the results are large standard errors (and hence
+difficult to obtain significant results) and coefficient estimates which
+can vary substantially from one sample to the next – sometimes even
+swapping sign!</p>
+</div>
+<div id="methods-of-detecting-multicollinearity" class="section level4 unnumbered">
+<h4>Methods of detecting multicollinearity</h4>
+<p>We can examine data for multicollinearity in the following ways:</p>
+<ul>
+<li><p>Checking stability of coefficients in two different samples (
+e.g. dividing your sample in 2). If the estimates of the coefficients are
+very different, this may indicate multicollinearity</p></li>
+<li><p>If the test for individual coefficients show they are not significant,
+but the test for the regression is significant, multicollinearity may
+be a cause</p></li>
+<li><p>Trying a slightly different, ``innocuous’’ model (e.g. adding or
+dropping a variable) and noting large shifts in the estimates of the
+coefficients.</p></li>
+<li><p>Examining correlations between variables</p></li>
+</ul>
+<p>We detect potential multicollinearity by looking at correlation
+coefficients. If we define:</p>
+<p><span class="math display">\[S_{yy} = \ \sum_{j = 1}^{n}{y_{j}^{2}} - \ \frac{1}{n}\left({\sum_{j = 1}^{n}y_{j}}\right)^{2}\]</span>
+<span class="math display">\[S_{x_{i}x_{i}} = \ \sum_{j = 1}^{n}{x_{ij}^{2}} - \ \frac{1}{n}\left({\sum_{j = 1}^{n}x_{ij}}\right)^{2}\]</span>
+<span class="math display">\[S_{yx_{i}} = \ \sum_{j = 1}^{n}{y_{j}x_{ij}} - \ \frac{1}{n}\left(\sum_{j = 1}^{n}{y_{j}}\right)\left(\sum_{j = 1}^{n}x_{ij}\right)\]</span>
+<span class="math display">\[S_{x_{i}x_{k}} = \ \sum_{j = 1}^{n}{x_{ij}x_{kj}} - \ \frac{1}{n}\left(\sum_{j = 1}^{n}{x_{ij}}\right)\left(\sum_{j = 1}^{n}x_{kj}\right)\]</span></p>
+<p>then the correlation between the two predictor variables <span class="math inline">\(X_{i}\)</span> and <span class="math inline">\(X_{k}\)</span> can be estimated as:
+<span class="math display">\[\text{Corr}(x_{i}, x_{k}) = \ \frac{S_{x_{i}x_{k}}}{\sqrt{S_{x_{i},x_{i}}\times S_{x_{k},x_{k}}}}\]</span></p>
+<p>There are various proposed tests for detecting collinearity using
+correlation coefficients, but a useful rule of thumb is that a
+correlation between two predictor variables greater than 0.75 or below
+-0.75 are exhibiting worrying levels of collinearity. This is not a
+foolproof test, however, because:</p>
+<ul>
+<li><p>Smaller samples probably need a smaller cut-off than 0.75 or -0.75</p></li>
+<li><p>One independent variable may be a linear combination of several other
+independent variables (and hence producing the problems of
+multicollinearity), but is not highly correlated with any single one
+of them</p></li>
+</ul>
+</div>
+<div id="reacting-to-multicollinearity" class="section level4 unnumbered">
+<h4>Reacting to multicollinearity</h4>
+<p>If you are interested in estimates of the regression parameters, and
+multicollinearity is a problem, you have several options available:</p>
+<ul>
+<li><p>check for improper use of dummy variables</p></li>
+<li><p>collect more data, as this reduces coefficients’ standard errors</p></li>
+<li><p>remove one of the correlated variables – perhaps by fitting the model
+with each of the 2 correlated variables omitted, and choosing the
+variable which alone provides the best fit.</p></li>
+<li><p>accept that multicollinearity is a problem, and be aware of the
+consequences</p></li>
+</ul>
+</div>
+</div>
+<div id="mlrfitting" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Fitting the model</h3>
+<p>As with the simple linear regression model, we choose the values of
+parameters of the model which minimise the sum of squared differences
+between the observed <span class="math inline">\(\left\{ y_{i} \right\}\)</span> and the fitted
+<span class="math inline">\(\{{\hat{y}}_{i}\}\)</span>, i.e. we minimise:
+<span class="math display">\[S(\alpha,\beta_1,\ldots,\beta_k) = \sum_{i = 1}^{n}(y_{i} - {\hat{y}}_{i})^{2} = \sum_{i = 1}^{n}\left(y_{i} - \left(\hat{\alpha} + {\hat{\beta}}_{1}x_{1i} + \ldots + {\hat{\beta}}_{k}x_{ki}\right)\right)^{2}\]</span></p>
+<p>Again, we find these values by differentiating S with respect to each of
+the parameters in turn, and solving the resulting equations.</p>
+<p>With <span class="math inline">\(k\)</span> predictor variables, minimising <span class="math inline">\(S\)</span> is the equivalent of solving the
+following <span class="math inline">\(k+1\)</span> :
+<span class="math display">\[\tag{n.e. 1} \hat{\alpha} + {\hat{\beta}}_{1}{\bar{x}}_{1} + {\hat{\beta}}_{2}{\bar{x}}_{2} + \ldots + {\hat{\beta}}_{k}{\bar{x}}_{k} = \bar{y}\]</span>
+<span class="math display">\[\tag{n.e. 2}{\hat{\beta}}_{1}S_{x_{1}x_{1}} + {\hat{\beta}}_{2}S_{x_{1}x_{2}}+\ldots + {\hat{\beta}}_{k}S_{x_{1}x_{k}} = S_{x_{1}y}\]</span>
+<span class="math display">\[\tag{n.e. 3}{\hat{\beta}}_{1}S_{x_{2}x_{1}} + {\hat{\beta}}_{2}S_{x_{2}x_{2}}+\ldots + {\hat{\beta}}_{k}S_{x_{2}x_{k}} = S_{x_{2}y}\]</span>
+<span class="math display">\[\vdots \quad \quad \quad \vdots \quad \quad \quad \vdots \quad \quad \quad \vdots \quad \quad \quad \vdots \]</span>
+<span class="math display">\[\tag{n.e. k+1}{\hat{\beta}}_{1}S_{x_{k}x_{1}} + {\hat{\beta}}_{2}S_{x_{k}x_{2}}+\ldots + {\hat{\beta}}_{k}S_{x_{k}x_{k}} = S_{x_{k}y}\]</span></p>
+<p>(remembering that <span class="math inline">\(S_{x_{i}x_{j}} = S_{x_{j}x_{i}}\)</span>)</p>
+<p>When <span class="math inline">\(k=1\)</span>, these normal equations are exactly equivalent to the two
+equations used to solve for <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> in the
+case of simple linear regression. In this case, the solutions are:
+<span class="math display">\[{\hat{\beta}}_{1} = \frac{S_{x_{1}y}}{S_{x_{1}x_{1}}}\]</span>
+<span class="math display">\[\hat{\alpha} = \bar{y} - {\hat{\beta}}_{1}{\bar{x}}_{1}\]</span></p>
+<p>When <span class="math inline">\(k=2\)</span>, the normal equations can be solved to give:
+<span class="math display">\[{\hat{\beta}}_{2} = \frac{S_{x_{2}y}S_{x_{1}x_{1}} - S_{x_{1}y}S_{x_{1}x_{2}}}{S_{x_{1}x_{1}}S_{x_{2}x_{2}} - S_{x_{1}x_{2}}^{2}}\]</span>
+<span class="math display">\[{\hat{\beta}}_{1} = \frac{S_{x_{1}y} - {\hat{\beta}}_{2}S_{x_{1}x_{2}}}{S_{x_{1}x_{1}}}\]</span>
+<span class="math display">\[\hat{\alpha} = \bar{y} - {\hat{\beta}}_{1}{\bar{x}}_{1} - {\hat{\beta}}_{2}{\bar{x}}_{2}\]</span>
+If <span class="math inline">\(k &gt; 2\)</span>, the formulae for <span class="math inline">\(\hat{\alpha},\ {\hat{\beta}}_{1},\ {\hat{\beta}}_{2},\ldots,\ {\hat{\beta}}_{k}\)</span>
+become unmanageable, and we rely on estimating the parameters
+computationally.</p>
+<p>In order to estimate the variance <span class="math inline">\(\sigma^{2}\)</span>, we use the sum of
+squared residuals
+<span class="math display">\[{\hat{\sigma}}^{2} = \frac{1}{n - (k + 1)}\sum_{}^{}{(y_{i} - {\hat{y}}_{i})^{2}}\]</span>
+where
+<span class="math display">\[{\hat{y}}_{i} = \hat{\alpha} + {\hat{\beta}}_{1}x_{1i} + \ldots + {\hat{\beta}}_{k}x_{ki}\]</span>
+Again, note here that the denominator of the fraction is <span class="math inline">\(n\)</span>, the
+number of data points, minus <span class="math inline">\((k + 1)\)</span>, the number of parameters
+estimated.</p>
+<p>The calculation of the <span class="math inline">\(\left\{ {\hat{y}}_{i} \right\}\)</span> can be
+tedious, especially if <span class="math inline">\(k\)</span> is large – so, unless we are specifically
+interested in the values of <span class="math inline">\(\left\{ {\hat{y}}_{i} \right\}\)</span>, we will
+delay estimating <span class="math inline">\({\hat{\sigma}}^{2}\)</span> until we have completed an ANOVA
+table for assessing the significance of the model.</p>
+</div>
+<div id="mlrtesting" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> Testing</h3>
+<p>Our primary interest is to answer the question: ``Is the regression of
+<span class="math inline">\(Y\)</span> on <span class="math inline">\(x_{1}, x_{2}, \ldots, x_{k}\)</span> significant?’’</p>
+<p>In statistical terminology, we want to test:
+<span class="math display">\[H_{0}:\beta_{1} = \beta_{2} = \ldots = \beta_{k} = 0 \quad vs. \quad H_{1}:\mbox{at least one}\ \beta_{j} \neq 0\]</span></p>
+<p>As before, we construct a test statistic by examining the sum of squares in an ANOVA table:</p>
+
+<p>But,
+<span class="math display">\[\sum_{i = 1}^{n}{(y_{i} - \bar{y})}^{2} = S_{yy}\]</span></p>
+<p>and
+<span class="math display">\[\sum_{i = 1}^{n}{({\hat{y}}_{i} - \bar{y})}^{2} = \ \sum_{j = 1}^{k}{{\hat{\beta}}_{j}S_{x_{j}y}}, \]</span></p>
+<p>which is easier to calculate.
+</p>
+
+<p>Since the Sum of Squares have to add up, we can easily calculate the
+Residual Sum of Squares using:
+<span class="math display">\[\mbox{Residual Sum of Squares} = \mbox{Total Sum of Squares} - \mbox{Regression Sum of Squares}\]</span></p>
+<p>Our test statistic is the regression mean square divided by the residual
+mean square:
+<span class="math display">\[ F_{obs} = \frac{\sum_{i = 1}^{n}{(\hat{y}_{i} - {\bar{y}}_{i})}^{2}/(k)}{\sum_{i = 1}^{n}{(y_{i} - {\hat{y}}_{i})}^{2}/(n - (k+1))}\]</span></p>
+<p>This statistic follows an <span class="math inline">\(F_{k,n - (k + 1)}\)</span> distribution under the null hypothesis, so we reject <span class="math inline">\(H_{0}\)</span> when <span class="math inline">\(F_{obs} &gt; F_{1-\alpha, k,n - (k + 1)}\)</span>.</p>
+</div>
+<div id="mlrworkedex" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> A worked example</h3>
+
+<div class="example">
+<p><span id="exm:mlrex" class="example"><strong>Example 3.1  </strong></span>The data below show the measured values for the response variable <span class="math inline">\(Y\)</span> and the <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> variables. In this example <span class="math inline">\(k=2\)</span> and <span class="math inline">\(n=10\)</span>.</p>
+</div>
+
+<p>We start by looking at plots of <span class="math inline">\(Y\)</span> against <span class="math inline">\(x_{1}\)</span> (Figure <a href="mlr.html#fig:workedexlin1">3.3</a>) and
+against <span class="math inline">\(x_{2}\)</span> (Figure <a href="mlr.html#fig:workedexlin2">3.4</a>). From the plots, a linear relationship seems appropriate – perhaps more
+clearly for <span class="math inline">\(x_{1}\)</span> than for <span class="math inline">\(x_{2}\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:workedexlin1"></span>
+<img src="MA30234_files/figure-html/workedexlin1-1.png" alt="The relationship between $x_1$ and $Y$." width="70%" />
+<p class="caption">
+Figure 3.3: The relationship between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(Y\)</span>.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:workedexlin2"></span>
+<img src="MA30234_files/figure-html/workedexlin2-1.png" alt="The relationship between $x_2$ and $Y$." width="70%" />
+<p class="caption">
+Figure 3.4: The relationship between <span class="math inline">\(x_2\)</span> and <span class="math inline">\(Y\)</span>.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:workedexlin3"></span>
+<img src="MA30234_files/figure-html/workedexlin3-1.png" alt="The relationship between $x_1$ and $x_2$." width="70%" />
+<p class="caption">
+Figure 3.5: The relationship between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>.
+</p>
+</div>
+<p>We also produce a plot of <span class="math inline">\(x_{1}\)</span> against <span class="math inline">\(x_{2}\)</span> (Figure <a href="mlr.html#fig:workedexlin3">3.5</a>) to investigate
+collinearity. There is evidence of some linear relationship between the two predictor
+variables, which we can quantify by calculating the correlation between
+them.</p>
+
+<p>The expanded data table which allows us to calculate this correlation, the estimates of the parameters, and compile the ANOVA table is also given below.</p>
+
+<p>So,
+<span class="math display">\[\begin{eqnarray*}
+\bar{y} &amp;=&amp; 3.62,\ {\bar{x}}_{1} = 2.4,{\bar{x}}_{2} = 2.4\\
+S_{x_{1}x_{1}} &amp;=&amp; 68 - \frac{24\times 24}{10} = 10.4\ \\
+S_{x_{2}x_{2}} &amp;=&amp; 68 - \frac{24\times 24}{10} = 10.4\\
+S_{y,y} &amp;=&amp; 147.96 - \frac{36.2\times 36.2}{10} = 16.916\\
+S_{x_{1}y} &amp;=&amp; 98.7 - \frac{24\times 36.2}{10} = 11.82\\
+S_{x_{2}y} &amp;=&amp; 96.3 - \frac{24\times 36.2}{10} = 9.42\\
+S_{x_{1}x_{2}} &amp;=&amp; 61 - \frac{24\times 24}{10} = 3.4\\
+\end{eqnarray*}\]</span></p>
+<p>(Note that here <span class="math inline">\(S_{x_{1}x_{1}} = \ S_{x_{2}x_{2}}\)</span> – this
+only occurs in the very exceptional case where the <span class="math inline">\(n\)</span> values of <span class="math inline">\(x_{1}\)</span>
+and the <span class="math inline">\(n\)</span> values of <span class="math inline">\(x_{2}\)</span> are the same values, but in a different
+order. Normally,
+<span class="math inline">\(S_{x_{1}x_{1}} \neq \ S_{x_{2}x_{2}}\)</span>.)</p>
+<p>The correlation of <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(x_{2}\)</span> is therefore:
+<span class="math display">\[\frac{S_{x_{1}x_{2}}}{\sqrt{S_{x_{1}x_{1}}\times S_{x_{2}x_{2}}}} = 0.327 \]</span></p>
+<p>which is well within the limits of <span class="math inline">\(\pm\)</span> 0.75, our rule-of-thumb collinearity cut-offs. To fit the model
+<span class="math display">\[Y_{i}\sim N(\alpha + \beta_{1}x_{1i} + \beta_{2}x_{2i},\sigma^{2})\]</span></p>
+<p>using our normal equations, we calculate:
+<span class="math display">\[{\hat{\beta}}_{2} = \frac{9.42\times 10.4 - 11.82\times 3.4}{10.4\times 10.4 - \ {3.4}^{2}} = 0.598\]</span>
+<span class="math display">\[{\hat{\beta}}_{1} = \frac{11.82 - 0.598\times 3.4}{10.4} = 0.941\]</span>
+<span class="math display">\[\hat{\alpha} = 3.62 - 0.941\times 2.4 - 0.598\times 2.4 = \  - 0.074\]</span></p>
+<p>We leave estimating <span class="math inline">\(\sigma^{2}\)</span> until we compile the ANOVA table, for
+which we calculate:
+<span class="math display">\[\mbox{Total Sum of Squares} = S_{yy} = 16.916\]</span>
+<span class="math display">\[\mbox{Regression Sum of Squares} = {\hat{\beta}}_{1}S_{x_{1},y} + {\hat{\beta}}_{2}S_{x_{2}y}\]</span>
+<span class="math display">\[= 0.941\times 11.82 + 0.598\times 9.42 = 16.756\]</span>
+<span class="math display">\[\mbox{Residual Sum of Squares} = \mbox{Total Sum of Squares} - \mbox{Regression Sum of Squares}\]</span>
+<span class="math display">\[= 16.916 - 16.756\ = \ 0.160\]</span></p>
+<p>So our ANOVA table is:</p>
+
+<p>Our observed test statistic is therefore <span class="math inline">\(\frac{8.378}{0.023}\)</span> =
+366.6.
+Is this unusually large for an <span class="math inline">\(F_{2,7}\)</span> distribution?
+<span class="math inline">\(F_{0.995, 2,7} = 12.40,\)</span> so yes, our observed test statistic IS
+unusually large. We therefore have very good evidence to reject
+<span class="math inline">\(H_{0}\)</span> and to conclude that the regression of <span class="math inline">\(Y\)</span> on
+<span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(x_{2}\)</span> is statistically significant.</p>
+
+<p>As well as the model validation techniques for checking the model
+assumptions, as described in Section <a href="slr.html#slrvalidate">2.5</a>, there is an additional layer
+of model choice required for multiple regression – if we have shown
+that the model including <span class="math inline">\(k\)</span> predictor variables is statistically
+significant, do we need all <span class="math inline">\(k\)</span> predictors or can we manage with fewer?
+Fewer variables can mean reduced costs in data collection, and can
+enable easier interpretation of our fitted model.</p>
+<p>There are three main types of iterative procedures for helping you to
+decide which predictor variables to keep in a multiple regression model:</p>
+
+
+</div>
+</div>
+<div id="backwardelim" class="section level2">
+<h2><span class="header-section-number">3.3</span> Backward elimination</h2>
+<p>Here, we describe the process of Backward Elimination, and carry out the
+calculations for our Example <a href="mlr.html#mlrworkedex">3.2.5</a>.
+Backward elimination involves partitioning the sum of squares due to the
+regression on all <span class="math inline">\(k\)</span> variables into the sum of squares due to the
+regression on <span class="math inline">\((k-1)\)</span> variables, and a remainder which we can think of as
+being the extra explained by the variable we are ``eliminating’’. If this
+remainder is sufficiently small, we can omit this variable from the
+model and repeat the process for the variable with the next lowest
+correlation with the response variable.</p>
+
+<p>If we decide to omit <span class="math inline">\(x_{j}\)</span> from the model, we then repeat the
+process to see if we should remove another variable – don’t forget that
+in this subsequent check, the <em>reduced</em> model from above now becomes the
+<em>total</em> model against which we compare our ``reduced-even-more’’ model.</p>
+<p>For the Example <a href="mlr.html#exm:mlrex">3.1</a>, returning to our <em>full model</em> ANOVA Table:</p>
+
+<p>Should we first investigate excluding <span class="math inline">\(x_{1}\)</span> or <span class="math inline">\(x_{2}\)</span> from the
+model? To decide, we calculate correlations:
+<span class="math display">\[\text{Corr}(Y,x_{1}) = \frac{S_{x_{1}Y}}{\sqrt{S_{x_{1}x_{1}}S_{YY}}} = 0.891 \]</span>
+<span class="math display">\[\text{Corr}(Y,x_{2}) = \frac{S_{x_{2}Y}}{\sqrt{S_{x_{2}x_{2}}S_{YY}}} = 0.710\]</span></p>
+<p>So, we consider dropping <span class="math inline">\(x_{2}\)</span> from the model, leaving a model of
+the form:
+<span class="math display">\[Y_{i}\sim N(\alpha + \beta_{1}x_{1i},\sigma^{2})\]</span></p>
+<p>for which the ANOVA table is:</p>
+
+<p>with <span class="math inline">\({\hat{\beta}}_{1} = 1.137\)</span> and <span class="math inline">\(\hat{\alpha} = 0.892.\)</span>
+</p>
+
+<p>Hence, the increase in the sum of squares caused by including <span class="math inline">\(x_{2}\)</span>
+in our model is 16.757 – 13.434 = 3.322.</p>
+<p>Our ANOVA table for testing whether <span class="math inline">\(x_{2}\)</span> should be included in
+the model is:</p>
+
+<p>To test:
+<span class="math display">\[H_{0}: \text{Not worth including} \ x_{2}\ \text{in the model}\]</span>
+<span class="math display">\[H_{1}: \text{It IS worth including} \ x_{2}\ \text{in the model}\]</span></p>
+<p>we calculate the test statistic
+<span class="math display">\[F_{obs} = \ \frac{\text{Additional\ }x_{2}\ \text{Mean Square}}{\text{Residual\ Mean\ Square}}\]</span>
+<span class="math display">\[= \ \frac{3.322}{0.023} = 144.4\]</span></p>
+<p><span class="math inline">\(F_{0.995,1,7}\)</span> = 16.24, so this value of <span class="math inline">\(F_{obs}\)</span> is highly significant. We
+therefore have strong evidence to suggest that the model with both <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(x_{2}\)</span>
+gives a significantly better fit to the data than a model with only <span class="math inline">\(x_{1}\)</span>.</p>
+</div>
+<div id="mlrusingr" class="section level2">
+<h2><span class="header-section-number">3.4</span> Multiple regression Using R</h2>
+<p>As with linear regression, we can easily use  to perform the multiple linear regression model fitting and producing residual plots.</p>
+<p>Adding a trend line to a plot, of course, is not appropriate for multiple
+regression analysis but can still be used with bivariate plots to check
+for linear relationships and perhaps high correlation between
+independent variables.</p>
+<p>Calculating coefficients etc using formulae and functions can be done
+but is repetitive and unnecessary.</p>
+<p>The <code>lm</code> command can fit multiple linear regression models as below; this will be demonstrated in more detail in the problem classes.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">x1 =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">x2 =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">Y =<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.6</span>, <span class="fl">2.1</span>, <span class="fl">2.4</span>, <span class="fl">2.8</span>, <span class="fl">3.6</span>, <span class="fl">3.8</span>, <span class="fl">4.3</span>, <span class="fl">4.9</span>, <span class="fl">5.7</span>, <span class="fl">5.0</span>)</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">mlrmodel =<span class="st"> </span><span class="kw">lm</span>(Y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2)</a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">mlrmodel</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Y ~ x1 + x2)
+## 
+## Coefficients:
+## (Intercept)           x1           x2  
+##    -0.07391      0.94099      0.59814</code></pre>
+<div id="mlrindividual" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Evaluating individual regression coefficients</h3>
+<p>In section <a href="mlr.html#mlrtesting">3.2.4</a> we tested whether at least one (but not necessarily
+all) regression coefficients are not equal to zero, and thus useful for
+inclusion in the regression model. Our hypotheses were:
+<span class="math display">\[H_{0}:\beta_{1} = \beta_{2} = \ldots = \beta_{k} = 0\]</span>
+<span class="math display">\[H_{1}:\mbox{at least one } \beta_{j} \neq 0\]</span></p>
+<p>We can also test the independent variables individually to identify
+which coefficients may be equal to 0 and which are not. If one
+regression coefficient <span class="math inline">\((\beta_{1},\beta_{2},\ldots, \beta_{k})\)</span> could equal 0,
+then we can assume that particular variable is of no value in explaining
+variation in the predicted variable.</p>
+<p>With <span class="math inline">\(k\)</span> independent variables, we therefore conduct <span class="math inline">\(k\)</span> separate tests of hypothesis:
+<span class="math display">\[H_{0}:\beta_{1} = 0, H_{0}:\beta_{2} = 0 \ldots{}\ldots{}, H_{0}:\beta_{k} = 0\]</span>
+<span class="math display">\[H_{1}:\beta_{1} \neq 0, H_{1}:\beta_{2} \neq 0 \ldots{}\ldots{}, H_{1}:\beta_{k} \neq 0\]</span></p>
+<p>In order to test these <span class="math inline">\(k\)</span> hypotheses, we need the sampling distribution of each estimate.</p>
+<p>The derivation of these distributions are beyond the scope of this course, so we will use the output from the  <code>lm</code> output, using the <code>summary</code> command.</p>
+<p>For our worked Example <a href="mlr.html#exm:mlrex">3.1</a> discussed above, the  output is shown below.</p>
+<div style="page-break-after: always;"></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">summary</span>(mlrmodel)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Y ~ x1 + x2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.20435 -0.10776  0.00559  0.08370  0.21553 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -0.07391    0.14572  -0.507    0.628    
+## x1           0.94099    0.04945  19.028 2.75e-07 ***
+## x2           0.59814    0.04945  12.095 6.03e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.1507 on 7 degrees of freedom
+## Multiple R-squared:  0.9906, Adjusted R-squared:  0.9879 
+## F-statistic: 368.9 on 2 and 7 DF,  p-value: 8.052e-08</code></pre>
+
+<p>To test the <span class="math inline">\(k\)</span> null hypotheses, we compute the t-statistic for each
+coefficient and compare it with the appropriate critical value from the
+t-distribution with <span class="math inline">\(n-(k+1)\)</span> degrees freedom. For instance, in our
+example, for a two-tailed test with 7 degrees of freedom, using the 0.05
+significance level, the critical value is 2.365.</p>
+<p>For our 2 variables, the t-statistics are</p>
+<p><span class="math display">\[t_{1} = \frac{0.940994}{0.049452} = 19.02833\]</span>
+<span class="math display">\[t_{2} = \frac{0.598137}{0.049452} = 12.09523\]</span></p>
+<p>Both are larger than the critical value of 2.365, so we have evidence
+to reject both null hypotheses, and assume that both
+<span class="math inline">\(\beta_{1} \neq 0\)</span> and <span class="math inline">\(\beta_{2} \neq 0\)</span>. Notice that these test statistics feature in the  output for the worked example above.</p>
+<p>Notice that if we were to compute the 95% confidence intervals for the <span class="math inline">\(\beta_1\)</span> and the <span class="math inline">\(\beta_2\)</span> parameters, they would not contain 0 as a value.</p>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="adjustedr2" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> The (adjusted) coefficient of multiple determination</h3>
+<p>In multiple regression, the coefficient of multiple determination is the
+proportion of variation in the dependent variable, <span class="math inline">\(Y\)</span>, explained by
+the set of independent variables <span class="math inline">\(x_{1},x_{2},\ldots,x_{k}\)</span>. It is
+also known as , and is calculated as:
+<span class="math display">\[R^{2} = \frac{\mbox{Sum of Squares (Regression)}}{\mbox{Sum of Squares (Total)}} = 1 - \frac{\mbox{Sum of Squares (Residual)}}{\mbox{Sum of Squares (Total)}}\]</span>
+or
+<span class="math display">\[1 - R^{2} = \frac{\mbox{Sum of Squares (Residual)}}{\mbox{Sum of Squares (Total)}}\]</span></p>
+<p>In multiple regression, each additional independent variable can only
+make the regression more accurate and hence increase the coefficient of
+multiple determination. So the coefficient of multiple determination
+increases just because a new variable has been added, regardless of
+whether the added variable is a good predictor of the dependent
+variable. Therefore, the coefficient of multiple determination needs to
+be adjusted for the number of variables within the regression model.</p>
+<p>The  is given by
+<span class="math display">\[R_{\text{adj}}^{2} = 1 - \frac{\frac{\mbox{Sum of Squares (Residual)}}{n - (k + 1)}}{\frac{\mbox{Sum of Squares (Total)}}{n - 1}}\]</span></p>
+</div>
+</div>
+<div id="mlrevaluate" class="section level2">
+<h2><span class="header-section-number">3.5</span> Evaluating the assumptions of multiple regression</h2>
+<p>Graphical residual analysis, similar to that used for Linear Regression,
+can be used to evaluate the appropriateness of our multiple regression
+assumptions, namely:</p>
+<ul>
+<li><p>The residuals are independent (i.e. that successive observations of
+the predicted variable are not correlated)</p></li>
+<li><p>There is a linear relationship between the predicted variable and each
+of the predictor variables</p></li>
+<li><p>The variation in the residuals do not vary with the size of the
+predicted variable.</p></li>
+<li><p>The residuals are normally distributed</p></li>
+</ul>
+<p>In addition, in multiple regression we need to check for
+multicollinearity i.e. the high correlation between two or more
+predictor variables.</p>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="mlrcategories" class="section level2">
+<h2><span class="header-section-number">3.6</span> Qualitative independent variables</h2>
+<p>To date, we have investigated only quantitative independent variables –
+in other words, numerical in nature. Multiple regression can also
+accommodate qualitative variables such as gender. We do this by
+introducing dummy variables with only two possible outcomes – coded <code>0</code>
+for one outcome, <code>1</code> for the other outcome (e.g. <code>male=0</code>, <code>female=1</code>).
+Analysis with a mixture of qualitative and quantitative variables is
+carried out in exactly the same way as model with only qualitative
+predictor variables.</p>
+</div>
+<div id="mlrinteraction" class="section level2">
+<h2><span class="header-section-number">3.7</span> Multiple regression models with interaction</h2>
+<p>It is feasible that two or more independent variables can interact. For
+instance, we may wish to regress weight loss for a sample of subjects
+based on whether the subjects follow a diet (<span class="math inline">\(x_{1}\)</span>, yes or no), and
+their exercise regime (<span class="math inline">\(x_{2}\)</span>, none, low, medium, high). If subjects
+follow their diet and follow a high exercise regime, weight loss may be
+more than the sum of loss due to the diet effect and loss due to the
+exercise effect.</p>
+<p>We examine interaction by including an additional, interaction term
+which is the product of the two predictor variable. In the weight loss
+example, the two-variable model with interaction would be:
+<span class="math display">\[Y = \alpha + \beta_{1}x_{1} + \beta_{2}x_{2} + \beta_{3}x_{1}x_{2}\]</span>
+We treat the interaction variable <span class="math inline">\(x_{1}x_{2}\)</span> in the same way as any
+other predictor variable. The significance of the interaction term can
+be tested as described in section <a href="mlr.html#mlrtesting">3.2.4</a>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="slr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="timeseries.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["MA30234.pdf", "MA30234.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

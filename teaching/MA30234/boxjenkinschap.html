@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 The Box-Jenkins Methodology | MA30234.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 The Box-Jenkins Methodology | MA30234.utf8" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 The Box-Jenkins Methodology | MA30234.utf8" />
+  
+  
+  
+
+<meta name="author" content="Matt Nunes" />
+
+
+<meta name="date" content="2020-10-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="timeseries.html"/>
+<link rel="next" href="tables.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="boxjenkinschap" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> The Box-Jenkins Methodology</h1>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">5.1</span> Introduction</h2>
+<p>Suppose we have a series of <span class="math inline">\(n\)</span> observations of a time series,
+<span class="math inline">\(\left\{ X_{t},\ t = 1,2,\ldots,n \right\}\)</span>. In general, the
+successive observations will be correlated - each observation will
+depend on the previous observations. We say the series is
+autocorrelated - i.e. it is correlated with itself.</p>
+<p>The Box-Jenkins methodology is an iterative model-building process
+involving the following steps:</p>
+<ol style="list-style-type: decimal">
+<li><p>Analysis to identify a possible time series model from a general class
+of linear models.</p></li>
+<li><p>Estimate the parameters of the proposed model.</p></li>
+<li><p>Diagnostic checking, checking the model against historical data, to
+see if it accurately describes the series.</p></li>
+<li><p>If the model does not fit well, the process is repeated using a new,
+improved model.</p></li>
+</ol>
+<p>The process is designed for <em>stationary</em> time series, i.e. time series
+where the distribution of the observations <span class="math inline">\(\left\{ X_{t} \right\}\)</span>
+does not depend on <span class="math inline">\(t\)</span>. This implies that the series has:</p>
+<ul>
+<li><p>a constant mean, <span class="math inline">\(\mu\)</span></p></li>
+<li><p>a constant variance, <span class="math inline">\(\sigma^{2}\)</span></p></li>
+<li><p>a constant autocorrelation function
+<span class="math inline">\(\rho(k) = Corr(X_{t},X_{t + k})\)</span> i.e. the correlation depends only
+on <span class="math inline">\(k\)</span>, not on <span class="math inline">\(t\)</span>.</p></li>
+</ul>
+<div id="statbydiff" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Achieving stationarity through differencing</h3>
+<p>In order to use the Box-Jenkins Methodology, the time series needs to be
+stationary – many are not! Careful use of the technique of differencing
+can induce , allowing us to subsequently use the Box-Jenkins
+methodology on the differenced series.</p>
+<div id="differencing" class="section level4 unnumbered">
+<h4>Differencing</h4>
+<p>The backward difference is a finite difference defined by
+<span class="math display">\[\nabla_{k}X_{t} = X_{t} - X_{t - k}\]</span>
+(Finite differencing is the discrete version of differentiation)</p>
+<p>Most commonly, <span class="math inline">\(\nabla X_{t} = X_{t} - X_{t - 1}\)</span>
+<span class="math display">\[\begin{align*}
+\nabla^{2}X_{t} &amp; = \nabla\left( \nabla X_{t} \right)\ \  = \ \ \nabla\left( X_{t} - X_{t - 1} \right) 
+= \nabla X_{t} - \nabla X_{t - 1} \\
+                &amp; = X_{t} - X_{t - 1} - X_{t - 1} + X_{t - 2}\  = \ X_{t} - 2X_{t - 1} + X_{t - 2}
+\end{align*}\]</span></p>
+</div>
+<div id="backward-shift-operator-notation" class="section level4 unnumbered">
+<h4>Backward shift operator notation</h4>
+<p>An alternative to the <span class="math inline">\(\nabla\)</span> backward difference operator is the <span class="math inline">\(B\)</span> backward shift operator.
+<span class="math display">\[B\left( X_{t} \right) = X_{t - 1}\]</span></p>
+<p>and <span class="math inline">\(B^{2}\left( X_{t} \right) = X_{t - 2}\)</span>
+<span class="math display">\[B^{k}\left( X_{t} \right) = X_{t - k}\]</span></p>
+<p>Hence, <span class="math inline">\(\nabla X_{t} = X_{t} - X_{t - 1} = (1 - B)X_{t}\)</span></p>
+<p>The backward shift operator makes complex calculations on time series
+operations simpler - note for instance, that to determine the second
+difference of <span class="math inline">\(X_{t}\)</span> i.e. <span class="math inline">\(\nabla^{2}X_{t}\)</span> (see above), we have to
+carry out two differencing processes. But if we note that
+<span class="math inline">\(\nabla^{2}X_{t} = (1 - B)^{2}X_{t}\)</span> and that
+<span class="math inline">\((1 - B)^{2} = (1 - 2B + B^{2})\)</span>, then we can quickly see that
+<span class="math display">\[\ \nabla^{2}X_{t} = (1 - B)^{2}X_{t} = (1 - 2B + B^{2})X_{t} = X_{t} - 2X_{t - 1} + X_{t - 2}\]</span>
+In this course, we mainly use the difference operator <span class="math inline">\(\nabla\)</span>.</p>
+</div>
+<div id="to-remove-seasonality" class="section level4 unnumbered">
+<h4>To remove seasonality</h4>
+<p>We might use:
+<span class="math display">\[\nabla_{4}X_{t} = X_{t} - X_{t - 4}\]</span></p>
+<p>if the data is quarterly or
+<span class="math display">\[\nabla_{12}X_{t} = X_{t} - X_{t - 12}\]</span></p>
+<p>if the data is monthly.</p>
+</div>
+<div id="to-remove-linear-trend" class="section level4 unnumbered">
+<h4>To remove linear trend</h4>
+<p>If there is a linear trend in the time series (and the linear trend is the only non-random part of the
+variability in the data), then
+<span class="math inline">\(X_{t} = \beta_{0} + \beta_{1}t + I_{t}\)</span> for some
+<span class="math inline">\(\beta_{0},\beta_{1}.\)</span>
+<span class="math display">\[\begin{align}
+\nabla X_{t} &amp; = X_{t} - X_{t - 1} = \left\{ \beta_{0} + \beta_{1}t + I_{t} \right\} - \left\{ 
+\beta_{0} + \beta_{1}\left( t - 1 \right) + I_{t - 1} \right\}  \\
+             &amp; = \beta_{1} + I_{t} - I_{t - 1}
+\end{align}\]</span></p>
+<p>Since the error terms <span class="math inline">\(I_{t}\)</span> and <span class="math inline">\(\ I_{t - 1}\)</span> are assumed to be
+random with zero mean and constant variance, their difference is still a random process with mean zero.
+Since <span class="math inline">\(\beta_{1}\)</span> is a
+constant, <span class="math inline">\(\nabla X_{t}\)</span> does not depend on <span class="math inline">\(t\)</span> and is therefore
+stationary.</p>
+<p>The difference operator <span class="math inline">\(\nabla\)</span> can therefore be used to remove any
+linear trend in the time series, making the time series stationary.
+It can be shown that a second order differencing (i.e.
+<span class="math inline">\(\nabla^{2}\)</span>) can be used to remove quadratic trend.</p>
+</div>
+</div>
+</div>
+<div id="boxjenkins" class="section level2">
+<h2><span class="header-section-number">5.2</span> Box-Jenkins Models for (stationary) time series</h2>
+<div id="aracf" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Autoregressive models and autocorrelation</h3>
+<p>In an autoregressive model, values of the time series are regressed on
+one or more previous values. We expect to find a pattern of correlation
+between the values <span class="math inline">\(X_{t}\)</span> and <span class="math inline">\(X_{t - k}\)</span> for various values of <span class="math inline">\(k\)</span>
+– such a correlation is called the .</p>
+<p>A , denoted <span class="math inline">\(AR(1)\)</span>, is
+given by
+<span class="math display">\[X_{t} = \gamma + \varphi_{1}X_{t - 1} + \varepsilon_{t}\]</span></p>
+<p>where <span class="math inline">\(\gamma,\ \varphi_{1}\)</span> are fixed with <span class="math inline">\(- 1 &lt; \varphi_{1} &lt; 1\)</span>
+and <span class="math inline">\(\left\{ \varepsilon_{t} \right\} = \left\{ \varepsilon_{1},\varepsilon_{2},\ldots \right\}\)</span>
+is a sequence of uncorrelated random variables with zero mean and
+constant variance.</p>
+<p>In an <span class="math inline">\(\text{AR}\left( 1 \right)\)</span> model,
+<span class="math display">\[\text{Corr}\left( X_{t},X_{t - 1} \right) = \text{Corr}(\gamma + \varphi_{1}X_{t - 1} + 
+\varepsilon_{t},X_{t - 1}) = \varphi_{1}\]</span></p>
+<p>imilarly,
+<span class="math display">\[\text{Corr}\left( X_{t},X_{t - 2} \right) = \text{Corr}\left( \gamma + \varphi_{1}\left( \gamma +
+\varphi_{1}X_{t - 2} + \varepsilon_{t - 1} \right) + \varepsilon_{t},X_{t - 2} \right) = 
+\varphi_{1}^{2}\]</span></p>
+<p>And similarly,
+<span class="math display">\[\text{Corr}\left( X_{t},X_{t - k} \right) = \varphi_{1}^{k} \quad \mbox{ for k = 1,2,3,\ldots}\]</span></p>
+<p>In other words, since <span class="math inline">\(- 1 &lt; \varphi_{1} &lt; 1,\)</span> the autocorrelation
+function for an AR(1) models decreases exponentially (for
+<span class="math inline">\(\varphi_{1} &gt; 0\)</span>) or sinusoidally (for <span class="math inline">\(\varphi_{1} &lt; 0\)</span>).</p>
+<p>The , denoted <span class="math inline">\(AR(p)\)</span>, is
+written:
+<span class="math display">\[X_{t} = \gamma + \varphi_{1}X_{t - 1} + \varphi_{2}X_{t - 2} + \ldots + \varphi_{p}X_{t - p} +
+\varepsilon_{t}\]</span></p>
+<p>where <span class="math inline">\(\gamma,\varphi_{1},\ldots,\varphi_{p}\)</span> are fixed, and
+<span class="math inline">\(\left\{ \varepsilon_{t} \right\} = \left\{ \varepsilon_{1},\varepsilon_{2},\ldots \right\}\)</span>
+is a sequence of uncorrelated random variables with zero mean and
+constant variance.</p>
+<p>It can be shown that the autocorrelation function of  AR(p)
+model <span class="math inline">\(p \geq 1\)</span> decreases exponentially or sinusoidally.</p>
+</div>
+<div id="mamodels" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Moving average models</h3>
+<p>In a moving average model, the present observation is a linear function
+(or weighted average) of past and present errors. The number of past
+errors used in the model is known as the order of the model.</p>
+<p>The , <span class="math inline">\(MA(q)\)</span>, is written:
+<span class="math display">\[X_{t} = \gamma + \theta_{1}\varepsilon_{t - 1} + \theta_{2}\varepsilon_{t - 2} + 
+\ldots + \theta_{q}\varepsilon_{t - q}\]</span></p>
+<p>where <span class="math inline">\(\gamma,\theta_{1},\ldots,\theta_{p}\)</span> are fixed, and
+<span class="math inline">\(\left\{ \varepsilon_{t} \right\} = \left\{ \varepsilon_{1},\varepsilon_{2},\ldots \right\}\)</span>
+is a sequence of uncorrelated random variables with zero mean and
+constant variance.</p>
+<p>Notice that if <span class="math inline">\(k &gt; q,\)</span> then
+<span class="math display">\[X_{t + k} = \gamma + \theta_{1}\varepsilon_{t + k - 1} + \theta_{2}\varepsilon_{t - 2} + \ldots + \theta_{q}\varepsilon_{t + k - q}\]</span></p>
+<p>shares no terms with <span class="math inline">\(X_{t}\)</span>. Hence,
+<span class="math display">\[\rho\left( k \right) = \text{Corr} \left( X_{t},X_{t + k} \right) = 0.\]</span></p>
+<p>In other words, the autocorrelation function of an <span class="math inline">\(MA(q)\)</span> model can
+be expected to be zero for a lag greater than <span class="math inline">\(q\)</span>.</p>
+</div>
+<div id="armamodels" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> ARMA(p,q) models</h3>
+<p>In the ARMA model, <span class="math inline">\(X_{t}\)</span> is a combination of an autoregressive and a
+moving average model i.e. it is a linear function of past observations
+and past and present error terms.</p>
+<p>The  is of the form:
+<span class="math display">\[X_{t} = \gamma + \varphi_{1}X_{t - 1} + \ldots + \varphi_{p}X_{t - p} + \varepsilon_{t} + \theta_{1}\varepsilon_{t - 1} + \ldots + \theta_{q}\varepsilon_{t - q}\]</span></p>
+</div>
+<div id="arimamodels" class="section level3">
+<h3><span class="header-section-number">5.2.4</span> ARIMA(p,d,q) models</h3>
+<p>Let <span class="math inline">\(X_{t}\)</span> be a time series. Suppose that after <span class="math inline">\(d\)</span> differencing passes
+have been made, the series is stationary and a suitable <span class="math inline">\(ARMA(p,q)\)</span>
+model is fitted. The resulting model is called an , <span class="math inline">\(\left( p,d,q \right).\)</span></p>
+<p>In other words, an <span class="math inline">\(ARIMA\left( p,d,q \right)\)</span> model consists
+of an <span class="math inline">\(AR(p)\)</span> model,  differences, and a <span class="math inline">\(MA(q)\)</span> model.</p>
+<div id="example" class="section level4 unnumbered">
+<h4>Example</h4>
+<p>An <span class="math inline">\(ARIMA(p,1,q )\)</span> model is an
+<span class="math inline">\(ARMA(p,q)\)</span> model fitted to
+<span class="math inline">\(W_{t} = \nabla X_{t}\text{\ i.e.}\)</span>
+<span class="math display">\[W_{t} = \gamma + \varphi_{1}W_{t - 1} + \ldots + \varphi_{p}W_{t - p} + \varepsilon_{t} + \theta_{1}\varepsilon_{t - 1} + \ldots + \theta_{q}\varepsilon_{t - q}\]</span></p>
+<p>This can then be translated into
+<span class="math display">\[\nabla X_{t} = \gamma + \varphi_{1} \nabla X_{t - 1}  + \ldots + \varphi_{p} \nabla X_{t - p} + \varepsilon_{t} + \theta_{1} \varepsilon_{t - 1} + \ldots + \theta_{q} \varepsilon_{t - q} \]</span></p>
+<p>Note that MA and ARMA models are sometimes (equivalently) written with
+negative <span class="math inline">\(\theta_{1},\theta_{2}, \ldots\)</span> coefficients.</p>
+</div>
+</div>
+</div>
+<div id="bjidentification" class="section level2">
+<h2><span class="header-section-number">5.3</span> Box-Jenkins model identification</h2>
+<p>In order to identify a potential Box-Jenkins ARMA model, we examine two
+functions, the  (sometimes
+called the correlogram) and the </p>
+<p>The  measures the correlation
+between a set of observations and observations at a particular lag. Given the time
+series <span class="math inline">\(\left\{ X_{s}:s = 1,\ldots,t \right\}\)</span>
+then the autocorrelation coefficient <span class="math inline">\(\rho(k)\)</span> measures the
+autocorrelation between the pairs
+<span class="math inline">\(\left\{ X_{1},X_{k + 1} \right\},\left\{ X_{2},X_{k + 2} \right\},\ldots,\left\{ X_{t},X_{t - k} \right\}.\)</span></p>
+<p>An estimate of <span class="math inline">\(\rho(k)\)</span> is the 
+<span class="math display">\[r_{k} = \frac{\sum_{s}^{}{(X_{s} - \overset{\overline{}}{X})(X_{s + k} - \overset{\overline{}}{X})}}{\sum_{s}^{}{(X_{s} -}\overset{\overline{}}{X})^{2}}\]</span></p>
+<p>where <span class="math inline">\(X_{s}\)</span> is the data from the stationary time series <span class="math inline">\(X_{s + k}\)</span> is the data <span class="math inline">\(k\)</span> time periods ahead <span class="math inline">\(\bar{X}\)</span> is the mean of the stationary time series.</p>
+<p>When the sample autocorrelation coefficients are computed for lag 1, lag
+2, etc and <span class="math inline">\(r_{k}\)</span> plotted against <span class="math inline">\(k,\)</span> the plot is called the
+sample autocorrelation function or .</p>
+<p>The  <span class="math inline">\((\rho_{kk})\)</span> is a measure
+of the correlation between <span class="math inline">\(X_{s}\)</span> and <span class="math inline">\(X_{s + k}\)</span> when the effect
+of all the intervening observations
+(<span class="math inline">\(X_{s + 1},X_{s + 2},\ldots,X_{s + k - 1})\)</span> has been removed. We
+estimate the partial autocorrelation function by the , denoted <span class="math inline">\(r_{kk}\)</span>.</p>
+<p>Software such as  provide estimates of the ACF
+and PACF for several lags. The ACF and PACF together are used to
+identify the orders (<span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>) in the ARIMA model, using the
+following summary table.</p>
+
+<ul>
+<li><p>If the ACF persists at high levels for larger values, this may indicate
+non-stationarity.</p></li>
+<li><p>For an MA(q) process, the acf at lags <span class="math inline">\(&gt; q\)</span> are approximately
+independent Normal random variables with mean zero and variance
+approaching <span class="math inline">\(\frac{1}{n}\)</span>. Thus, if
+<span class="math inline">\(\left| r_{k} \right| &gt; \frac{1.96}{\sqrt{n}}\)</span> for <span class="math inline">\(k \leq q\)</span> , and
+<span class="math inline">\(\left| r_{k} \right| \leq \frac{1.96}{\sqrt{n}}\)</span> for <span class="math inline">\(k &gt; q\)</span>, then
+an <span class="math inline">\(\text{MA}\left( q \right)\)</span> may be appropriate.</p></li>
+<li><p>For an <span class="math inline">\(\text{AR}\left( p \right)\)</span> process, the PACF at lags
+$ &gt; p$ are approximately independent Normal random
+variables with mean zero and variance approaching
+<span class="math inline">\(\frac{1}{\text{n.}}\)</span> Thus, if
+<span class="math inline">\(\left| r_{\text{kk}} \right| &gt; \frac{1.96}{\sqrt{n}}\)</span> for
+<span class="math inline">\(k \leq p,\)</span> and
+<span class="math inline">\(\left| r_{\text{kk}} \right| \leq \frac{1.96}{\sqrt{n}}\)</span> for
+<span class="math inline">\(k &gt; p\)</span>, then an <span class="math inline">\(\text{AR}\left( p \right)\)</span> may be appropriate.</p></li>
+</ul>
+<div id="arimaparest" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Estimating the parameters of an ARIMA model</h3>
+<p>Other than for very low order ARIMA models, parameter estimation is a
+very complex process, carried out using least squares or simulation
+techniques. We do not cover parameter estimation in this course.</p>
+</div>
+</div>
+<div id="arimafore" class="section level2">
+<h2><span class="header-section-number">5.4</span> Forecasting</h2>
+<p>Once an appropriate model has been identified and parameters estimated, we may wish to forecast from the end of the series. We do this by using the following rules:</p>
+<ul>
+<li><p>use the parameter estimates <span class="math inline">\(\hat{\gamma},\hat{\varphi},\hat{\theta}\)</span>
+instead of the actual parameters <span class="math inline">\(\gamma, \varphi , \theta\)</span></p></li>
+<li><p>use the known values of <span class="math inline">\(\left\{ X_{s},\ s \leq t \right\}\)</span> if we have them; use forecast values
+<span class="math inline">\(\left\{ {\hat{X}}_{t + n},\ n = 1,2,\ldots \right\}\)</span> if we do not</p></li>
+<li><p>use the residual <span class="math inline">\({\hat{\varepsilon}}_{s} = X_{s} - {\hat{X}}_{s}\)</span> (where <span class="math inline">\({\hat{X}}_{s}\)</span> is our forecast for <span class="math inline">\(X_{s}\)</span> using the fitted model) if the residual <span class="math inline">\(\varepsilon_{s}\)</span> appears in the equation</p></li>
+<li><p>set <span class="math inline">\(\varepsilon_{t + n} = 0\ for\ n &gt; 0\)</span> if it appears in the equation</p></li>
+<li><p>forecast ahead one step at a time, so that all estimates are available when needed</p></li>
+</ul>
+
+<div class="example">
+<p><span id="exm:arimaforex" class="example"><strong>Example 5.1  (ARIMA(0,2,2) forecast)  </strong></span>
+Suppose we have an <span class="math inline">\(ARIMA(0,2,2)\)</span> model:
+<span class="math display">\[W_{t} = \nabla^{2}X_{t} = \varepsilon_{t} - 0.9\varepsilon_{t - 1} + 0.5\varepsilon_{t - 2}\]</span></p>
+<p>i.e. we have fitted an <span class="math inline">\(ARMA(0,2)\)</span> model to the second difference of
+our time series <span class="math inline">\(W_{t} = \nabla^{2}X_{t}\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li>we firstly express the model in the form <span class="math inline">\(X_{t} = ...\)</span>
+<span class="math display">\[\nabla^{2}X_{t} = X_{t} - 2X_{t - 1} + X_{t - 2}\]</span></li>
+</ol>
+<p>so our model is:
+<span class="math display">\[X_{t} - 2X_{t - 1} + X_{t - 2} = \varepsilon_{t} - 0.9\varepsilon_{t - 1} + 0.5\varepsilon_{t - 2}\]</span></p>
+<p>or
+<span class="math display">\[X_{t} = 2X_{t - 1} - X_{t - 2} + \varepsilon_{t} - 0.9\varepsilon_{t - 1} + 0.5\varepsilon_{t - 2}\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Using the rules above:
+<span class="math display">\[{\hat{X}}_{t + 1} = 2X_{t} - X_{t - 1} - 0.9{\hat{\varepsilon}}_{t} + 0.5{\hat{\varepsilon}}_{t - 1}\]</span></li>
+</ol>
+<p>since we use 0 as our estimate <span class="math inline">\(\hat{\varepsilon}_{t + 1}\)</span>.</p>
+<p><span class="math inline">\(\hat{\varepsilon}_{t}\)</span> and <span class="math inline">\(\hat{\varepsilon}_{t - 1}\)</span> are estimated as <span class="math inline">\(\left( X_{t} - {\hat{X}}_{t} \right)\)</span> and <span class="math inline">\((X_{t - 1} - {\hat{X}}_{t - 1})\)</span> respectively.</p>
+Similarly, we have
+<span class="math display">\[\begin{align*}
+\hat{X}_{t + 2} &amp; = 2 \ \hat{X}_{t + 1} - X_{t} + 0.5\hat{\varepsilon}_{t} \\
+\hat{X}_{t + 3} &amp; = 2 \ \hat{X}_{t + 2} - \hat{X}_{t + 1}\\
+\hat{X}_{t + k} &amp; = 2 \ \hat{X}_{t + k - 1} - X_{t+k-2} \quad \mbox{(for $k \geq$ 3)} \\
+\end{align*}\]</span>
+</div>
+
+</div>
+<div id="arimadiag" class="section level2">
+<h2><span class="header-section-number">5.5</span> Diagnostics</h2>
+<p>Just when fitting a regression model, it is important that we analyse
+the residuals from the model to ensure that any assumptions made were
+valid. In summary, those assumptions were that the error terms are
+independently normally distributed, with constant variance. These
+assumptions can be checked as follows:</p>
+<ul>
+<li><p>Ordered residual plot: plot of residuals from the fitted model in observation order should
+demonstrate no structure</p></li>
+<li><p>ACF of residuals should show no correlation (using <span class="math inline">\(2/\sqrt{n}\)</span>) confidence intervals</p></li>
+<li><p>Box-Ljung test for autocorrelation being zero</p></li>
+</ul>
+<p>In  , we can use the <code>tsdiag</code> function to produce these plots.</p>
+
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="timeseries.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["MA30234.pdf", "MA30234.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
